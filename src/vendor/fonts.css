@@ -30,3 +30,11 @@
   font-weight: 400;
   font-display: swap;
 }
+
+@font-face {
+  font-family: "Funnel Display";
+  src: url(./fonts/FunnelDisplay-Medium.woff2) format("woff2"),
+    url(./fonts/FunnelDisplay-Medium.woff) format("woff");
+  font-weight: 500;
+  font-display: swap;
+}
