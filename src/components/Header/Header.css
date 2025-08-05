@@ -1,3 +1,42 @@
 .header {
   border-bottom: #f3f4f0 solid 1px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__left {
+  display: flex;
+  align-items: center;
+}
+
+.header__unauthorized-view {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 15px;
+  margin: 0;
+}
+
+.header__unauthorized-item {
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+
+.header__unauthorized-btn {
+  border: none;
+  padding: 0;
+  background: transparent;
+  font-size: 20px;
+  color: #f3f4f0;
+  margin: 0;
+}
+
+.header__unauthorized-btn:hover {
+  opacity: 0.7;
+  transform: scale(1.05);
+  cursor: pointer;
 }
