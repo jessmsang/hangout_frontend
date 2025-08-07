@@ -1,0 +1,384 @@
+{
+  "activities": [
+    {
+      "id": "pickleball",
+      "name": "Pickleball",
+      "description": "Grab some paddles and play either doubles or singles! Great for all skill levels.",
+      "seasons": ["summer", "fall", "spring", "winter"],
+      "location": ["outdoor", "indoor"],
+      "category": ["active"],
+      "groupSize": { "min": "2", "max": "4" },
+      "cost": { "min": "$", "max": "$$" }
+    },
+    {
+      "id": "kayaking",
+      "name": "Kayaking",
+      "description": "Enjoy some time on a nearby body of water! Stay safe - always wear a lifejacket.",
+      "seasons": ["summer"],
+      "location": ["outdoor"],
+      "category": ["active", "adventure"],
+      "groupSize": { "min": "1", "max": "10" },
+      "cost": { "min": "$", "max": "$$" }
+    },
+    {
+      "id": "movie",
+      "name": "Movie",
+      "description": "Have a relaxing night in or out, and watch a movie you've been meaning to see.",
+      "seasons": ["summer", "fall", "spring", "winter"],
+      "location": ["indoor"],
+      "category": ["low-key"],
+      "groupSize": { "min": "1", "max": "10" },
+      "cost": { "min": "$", "max": "$$" }
+    },
+    {
+      "id": "snowboarding",
+      "name": "Snowboarding",
+      "description": "Looking for a fun winter activity? Try out snowboarding!",
+      "seasons": ["winter"],
+      "location": ["outdoor"],
+      "category": ["active"],
+      "groupSize": { "min": "1", "max": "6" },
+      "cost": { "min": "$$", "max": "$$$" }
+    },
+    {
+      "id": "board-game",
+      "name": "Board Game",
+      "description": "Host a board game night!",
+      "seasons": ["summer", "fall", "spring", "winter"],
+      "location": ["indoor"],
+      "category": ["low-key"],
+      "groupSize": { "min": "2", "max": "10" },
+      "cost": { "min": "$", "max": "$$" }
+    },
+    {
+      "id": "cook-together",
+      "name": "Cook Together",
+      "description": "Cook a meal together. Choose something from your travels, or something brand new! This can be as challenging or relaxing as you please.",
+      "seasons": ["summer", "fall", "spring", "winter"],
+      "location": ["indoor"],
+      "category": ["creative", "foodie", "romantic"],
+      "groupSize": { "min": "2", "max": "4" },
+      "cost": { "min": "$", "max": "$$" }
+    },
+    {
+      "id": "pumpkin-patch",
+      "name": "Pumpkin Patch",
+      "description": "Get into the fall season and head on over to a nearby pumpkin patch!",
+      "seasons": ["fall"],
+      "location": ["outdoor"],
+      "category": ["festive"],
+      "groupSize": { "min": "1", "max": "10" },
+      "cost": { "min": "$", "max": "$$" }
+    },
+    {
+      "id": "picnic",
+      "name": "Picnic",
+      "description": "Enjoy some good weather and prepare a picnic!",
+      "seasons": ["summer", "fall", "spring"],
+      "location": ["outdoor"],
+      "category": ["romantic", "foodie"],
+      "groupSize": { "min": "1", "max": "8" },
+      "cost": { "min": "$", "max": "$$" }
+    },
+    {
+      "id": "polar-plunge",
+      "name": "Polar Plunge",
+      "description": "Challenge yourself to a polar plunge. Share this experience with people you love, and stay safe!",
+      "seasons": ["winter"],
+      "location": ["outdoor"],
+      "category": ["romantic", "adventure"],
+      "groupSize": { "min": "1", "max": "8" },
+      "cost": { "min": "$", "max": "$" }
+    },
+    {
+      "id": "crafts-night",
+      "name": "Crafts Night",
+      "description": "Host a crafts night! Create something as challenging or simple as you'd like.",
+      "seasons": ["summer", "fall", "spring", "winter"],
+      "location": ["indoor"],
+      "category": ["creative", "romantic"],
+      "groupSize": { "min": "2", "max": "8" },
+      "cost": { "min": "$", "max": "$$" }
+    },
+    {
+      "id": "swimming",
+      "name": "Swimming",
+      "description": "Enjoy the summer heat and head to the pool, lake, or river!",
+      "seasons": ["summer"],
+      "location": ["outdoor"],
+      "category": ["active"],
+      "groupSize": { "min": "1", "max": "8" },
+      "cost": { "min": "$", "max": "$" }
+    },
+    {
+      "id": "slumber-party",
+      "name": "Slumber Party",
+      "description": "Host a slumber party in your living room with your significant other or friends! Stay up late, watch a movie, play some games - the options are endless!",
+      "seasons": ["summer", "fall", "spring", "winter"],
+      "location": ["indoor"],
+      "category": ["romantic", "low-key"],
+      "groupSize": { "min": "2", "max": "8" },
+      "cost": { "min": "$", "max": "$" }
+    },
+    {
+      "id": "karaoke",
+      "name": "Karaoke",
+      "description": "You can either host an at-home karaoke sesh, or find a local karaoke spot, and sing some tunes together!",
+      "seasons": ["summer", "fall", "spring", "winter"],
+      "location": ["indoor"],
+      "category": ["romantic", "adventure"],
+      "groupSize": { "min": "1", "max": "10" },
+      "cost": { "min": "$", "max": "$" }
+    },
+    {
+      "id": "homemade-dumplings",
+      "name": "Homemade Dumplings",
+      "description": "Try making some homemade dumplings!",
+      "seasons": ["summer", "fall", "spring", "winter"],
+      "location": ["indoor"],
+      "category": ["foodie", "creative", "romantic"],
+      "groupSize": { "min": "1", "max": "4" },
+      "cost": { "min": "$", "max": "$$" }
+    },
+    {
+      "id": "homemade-spring-rolls",
+      "name": "Homemade Spring Rolls",
+      "description": "Try making some homemade spring rolls!",
+      "seasons": ["summer", "fall", "spring", "winter"],
+      "location": ["indoor"],
+      "category": ["foodie", "creative", "romantic"],
+      "groupSize": { "min": "1", "max": "4" },
+      "cost": { "min": "$", "max": "$$" }
+    },
+    {
+      "id": "baking-roulette",
+      "name": "Baking Roulette",
+      "description": "Use a baking cookbook, website, or instagram account and randomly select something to bake!",
+      "seasons": ["summer", "fall", "spring", "winter"],
+      "location": ["indoor"],
+      "category": ["foodie", "creative", "romantic"],
+      "groupSize": { "min": "1", "max": "4" },
+      "cost": { "min": "$", "max": "$" }
+    },
+    {
+      "id": "book-club",
+      "name": "Book Club",
+      "description": "Start a book club with your significant other or a small group of friends.",
+      "seasons": ["summer", "fall", "spring", "winter"],
+      "location": ["indoor"],
+      "category": ["creative", "romantic", "low-key"],
+      "groupSize": { "min": "2", "max": "6" },
+      "cost": { "min": "$", "max": "$" }
+    },
+    {
+      "id": "puzzle-night",
+      "name": "Puzzle Night",
+      "description": "Host a puzzle-making party with a small group of friends.",
+      "seasons": ["summer", "fall", "spring", "winter"],
+      "location": ["indoor"],
+      "category": ["creative", "low-key"],
+      "groupSize": { "min": "2", "max": "4" },
+      "cost": { "min": "$", "max": "$" }
+    },
+    {
+      "id": "video-games",
+      "name": "Video Games",
+      "description": "Organize a night of playing some video games with friends.",
+      "seasons": ["summer", "fall", "spring", "winter"],
+      "location": ["indoor"],
+      "category": ["low-key"],
+      "groupSize": { "min": "2", "max": "4" },
+      "cost": { "min": "$", "max": "$$" }
+    },
+    {
+      "id": "topgolf",
+      "name": "Topgolf",
+      "description": "Head to your nearest Topgolf location and have some fun hitting some balls with friends.",
+      "seasons": ["summer", "fall", "spring"],
+      "location": ["outdoor"],
+      "category": ["active"],
+      "groupSize": { "min": "2", "max": "6" },
+      "cost": { "min": "$$", "max": "$$" }
+    },
+    {
+      "id": "fondue-night",
+      "name": "Fondue Night",
+      "description": "This fondue night can be savory or sweet - or both! Make cheese fondue or chocolate fondue.",
+      "seasons": ["summer", "fall", "spring", "winter"],
+      "location": ["indoor"],
+      "category": ["foodie", "low-key", "romantic"],
+      "groupSize": { "min": "2", "max": "4" },
+      "cost": { "min": "$", "max": "$$" }
+    },
+    {
+      "id": "backyard-bbq",
+      "name": "Backyard BBQ",
+      "description": "Enjoy a backyard party for two with your significant other, or host some friends! Put on some tunes, grill out, play some backyard games. Enjoy some time outside in the comfort of your own home!",
+      "seasons": ["summer", "fall", "spring"],
+      "location": ["outdoor"],
+      "category": ["foodie", "romantic"],
+      "groupSize": { "min": "1", "max": "12" },
+      "cost": { "min": "$", "max": "$$" }
+    },
+    {
+      "id": "patio-coffee-date",
+      "name": "Patio Coffee Date",
+      "description": "Choose a morning to enjoy coffee on your front or back porch together! Make sure to be fully present - make a rule to be phone-free during this time",
+      "seasons": ["summer", "fall", "spring"],
+      "location": ["outdoor"],
+      "category": ["romantic", "low-key"],
+      "groupSize": { "min": "2", "max": "4" },
+      "cost": { "min": "$", "max": "$" }
+    },
+    {
+      "id": "homemade-pizza",
+      "name": "Homemade Pizza",
+      "description": "This can be as simple or difficult as you please! Pre-made dough, handmade dough - it's up to you! You could even make it a half-half pizza if you like different toppings. But enjoy creating this pizza TOGETHER!",
+      "seasons": ["summer", "fall", "spring", "winter"],
+      "location": ["indoor"],
+      "category": ["foodie", "low-key", "romantic", "creative"],
+      "groupSize": { "min": "2", "max": "4" },
+      "cost": { "min": "$", "max": "$$" }
+    },
+    {
+      "id": "camping",
+      "name": "Camping",
+      "description": "Plan a weekend to be in nature together. Tent camp, car camp, hammock camp - as long as you're not indoors! Be one with nature and find beauty in disconnecting from technology.",
+      "seasons": ["summer", "fall", "spring"],
+      "location": ["outdoor"],
+      "category": ["romantic", "adventure"],
+      "groupSize": { "min": "2", "max": "6" },
+      "cost": { "min": "$", "max": "$$" }
+    },
+    {
+      "id": "play-dress-up",
+      "name": "Play Dress-Up",
+      "description": "Dress each other for a night out together! Can be casual, can be fancy - or both if you want to do this more than once!",
+      "seasons": ["summer", "fall", "spring", "winter"],
+      "location": ["outdoor", "indoor"],
+      "category": ["romantic"],
+      "groupSize": { "min": "2", "max": "2" },
+      "cost": { "min": "$", "max": "$" }
+    },
+    {
+      "id": "play-tourist",
+      "name": "Play Tourist",
+      "description": "Explore your city together! Pick one or more activities you know your city to be known for.",
+      "seasons": ["summer", "fall", "spring", "winter"],
+      "location": ["outdoor", "indoor"],
+      "category": ["romantic", "creative", "adventure"],
+      "groupSize": { "min": "2", "max": "4" },
+      "cost": { "min": "$", "max": "$$" }
+    },
+    {
+      "id": "zoo",
+      "name": "Zoo",
+      "description": "Lean into your inner child and have some fun at the zoo!",
+      "seasons": ["summer", "fall", "spring"],
+      "location": ["outdoor"],
+      "category": ["adventure", "romantic"],
+      "groupSize": { "min": "1", "max": "8" },
+      "cost": { "min": "$$", "max": "$$" }
+    },
+    {
+      "id": "byow",
+      "name": "BYOW - Bring Your Own Wheels",
+      "description": "Go biking, skateboarding, rollerskating, or any other form of wheels.",
+      "seasons": ["summer", "fall", "spring"],
+      "location": ["outdoor"],
+      "category": ["active", "adventure"],
+      "groupSize": { "min": "1", "max": "8" },
+      "cost": { "min": "$", "max": "$" }
+    },
+    {
+      "id": "rock-climbing",
+      "name": "Rock Climbing",
+      "description": "Go rock climbing at a local rock climbing gym.",
+      "seasons": ["summer", "fall", "spring", "winter"],
+      "location": ["indoor"],
+      "category": ["active"],
+      "groupSize": { "min": "2", "max": "4" },
+      "cost": { "min": "$", "max": "$$" }
+    },
+    {
+      "id": "trader-joes-dinner-date",
+      "name": "Trader Joe's dinner date",
+      "description": "Play rock, paper, scissors to pick each item for a 3-course meal + a beverage",
+      "seasons": ["summer", "fall", "spring", "winter"],
+      "location": ["indoor"],
+      "category": ["foodie", "romantic"],
+      "groupSize": { "min": "2", "max": "4" },
+      "cost": { "min": "$", "max": "$$" }
+    },
+    {
+      "id": "christmas-tree-shopping",
+      "name": "Christmas Tree Shopping",
+      "description": "Pick out a christmas tree.",
+      "seasons": ["winter"],
+      "location": ["indoor", "outdoor"],
+      "category": ["festive", "romantic"],
+      "groupSize": { "min": "1", "max": "2" },
+      "cost": { "min": "$$", "max": "$$$" }
+    },
+    {
+      "id": "christmas-decorating",
+      "name": "Christmas Decorating",
+      "description": "Get into the Christmas spirit and begin decorating your home!",
+      "seasons": ["winter"],
+      "location": ["indoor"],
+      "category": ["festive", "romantic"],
+      "groupSize": { "min": "1", "max": "6" },
+      "cost": { "min": "$", "max": "$$" }
+    },
+    {
+      "id": "ice-skating",
+      "name": "Ice Skating",
+      "description": "Find an ice rink to go ice skating at.",
+      "seasons": ["winter"],
+      "location": ["indoor", "outdoor"],
+      "category": ["festive", "romantic", "active"],
+      "groupSize": { "min": "1", "max": "6" },
+      "cost": { "min": "$", "max": "$$" }
+    },
+    {
+      "id": "snow-day",
+      "name": "Snow Day",
+      "description": "Take advantage of the snowy weather and go sledding, build a snow man, make snow angels, have a snowball fight, or simply take a walk in the snow.",
+      "seasons": ["winter"],
+      "location": ["outdoor"],
+      "category": ["festive", "active", "romantic", "adventure"],
+      "groupSize": { "min": "1", "max": "6" },
+      "cost": { "min": "$", "max": "$" }
+    },
+    {
+      "id": "water-fight",
+      "name": "Water Fight",
+      "description": "Take advantage of the warm weather and have a water fight!",
+      "seasons": ["summer"],
+      "location": ["outdoor"],
+      "category": ["romantic", "active", "adventure"],
+      "groupSize": { "min": "1", "max": "6" },
+      "cost": { "min": "$", "max": "$$" }
+    },
+    {
+      "id": "winter-lights",
+      "name": "Winter Lights",
+      "description": "Find a light display this winter - weather walking or driving.",
+      "seasons": ["winter"],
+      "location": ["outdoor"],
+      "category": ["festive", "romantic", "adventure"],
+      "groupSize": { "min": "1", "max": "8" },
+      "cost": { "min": "$", "max": "$$" }
+    },
+    {
+      "id": "drive-in-movie",
+      "name": "Drive-in Movie",
+      "description": "Find a nearby drive-in movie and share this timeless experience with someone you love.",
+      "seasons": ["summer", "spring", "fall"],
+      "location": ["outdoor"],
+      "category": ["adventure", "low-key", "romantic"],
+      "groupSize": { "min": "1", "max": "4" },
+      "cost": { "min": "$", "max": "$$" }
+    }
+  ]
+}

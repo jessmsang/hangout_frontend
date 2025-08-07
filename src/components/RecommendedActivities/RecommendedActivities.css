@@ -1,0 +1,13 @@
+.recommended-activities {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: #f3f4f0 solid 1px;
+  background-color: #a45f50;
+  height: 20rem;
+}
+.recommended-activities__title {
+  margin: 0;
+  font-size: 1rem;
+}

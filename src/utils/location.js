@@ -1,9 +1,9 @@
-export const fetchCoordinatesByCity = async (cityName, APIkey) => {
+export const fetchCoordinatesByCity = async (cityName, weatherAPIkey) => {
   try {
     const response = await fetch(
       `https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(
         cityName
-      )}&limit=1&appid=${APIkey}`
+      )}&limit=1&appid=${weatherAPIkey}`
     );
 
     const data = await response.json();

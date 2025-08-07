@@ -1,0 +1,27 @@
+.card {
+  display: flex;
+  list-style-type: none;
+  border: none;
+  border-radius: 8px;
+  background-color: #f3f4f0;
+  padding: 15px;
+  width: 8rem;
+  height: 10rem;
+  color: #000;
+  box-shadow: 5px 5px 5px #00000034;
+}
+
+/* .card:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+  cursor: pointer;
+} */
+
+.card__name {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.card__description {
+  font-size: 0.8rem;
+}

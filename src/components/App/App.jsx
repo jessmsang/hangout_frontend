@@ -3,12 +3,13 @@ import { useEffect, useState } from "react";
 import "./App.css";
 
 import Header from "../Header/Header";
+import Main from "../Main/Main";
 
 import UserContext from "../../contexts/UserContext";
 
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import { fetchCoordinatesByCity } from "../../utils/location";
-import { APIkey } from "../../utils/constants";
+import { weatherAPIkey } from "../../constants/apiEndpoints";
 
 export default function App() {
   const [weatherData, setWeatherData] = useState({
@@ -18,30 +19,30 @@ export default function App() {
     isDay: true,
     temp: { F: 999, C: 999 },
     // TODO: see if i can change "type" to "season"
-    type: "",
+    season: "",
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [activeModal, setActiveModal] = useState("");
 
-  const handleSignupClick = () => {
-    setActiveModal("register-modal");
-    setIsMobileMenuActive(false);
-  };
+  // const handleSignupClick = () => {
+  //   setActiveModal("register-modal");
+  //   setIsMobileMenuActive(false);
+  // };
 
-  const handleLoginClick = () => {
-    setActiveModal("login-modal");
-    setIsMobileMenuActive(false);
-  };
+  // const handleLoginClick = () => {
+  //   setActiveModal("login-modal");
+  //   setIsMobileMenuActive(false);
+  // };
 
-  const closeActiveModal = () => {
-    setActiveModal("");
-  };
+  // const closeActiveModal = () => {
+  //   setActiveModal("");
+  // };
 
   useEffect(() => {
-    fetchCoordinatesByCity("Cincinnati", APIkey)
+    fetchCoordinatesByCity("Cincinnati", weatherAPIkey)
       .then((coordinates) => {
         console.log(coordinates);
-        return getWeather(coordinates, APIkey);
+        return getWeather(coordinates, weatherAPIkey);
       })
       .then((data) => {
         const filteredData = filterWeatherData(data);
@@ -80,9 +81,10 @@ export default function App() {
       <div className="page">
         <div className="page__content">
           <Header
-            handleSignupClick={handleSignupClick}
+            // handleSignupClick={handleSignupClick}
             weatherData={weatherData}
           />
+          <Main />
         </div>
       </div>
     </UserContext.Provider>
