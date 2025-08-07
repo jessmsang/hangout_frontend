@@ -11,11 +11,10 @@
   box-shadow: 5px 5px 5px #00000034;
 }
 
-/* .card:hover {
-  opacity: 0.8;
+.card:hover {
   transform: scale(1.05);
   cursor: pointer;
-} */
+}
 
 .card__name {
   margin: 0;
