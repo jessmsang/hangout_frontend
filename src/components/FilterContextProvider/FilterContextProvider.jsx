@@ -7,8 +7,10 @@ export default function FilterContextProvider({ children }) {
   const [seasons, setSeasons] = useState([]);
   const [location, setLocation] = useState([]);
   const [category, setCategory] = useState([]);
-  const [groupSize, setGroupSize] = useState({ min: "", max: "" });
-  const [cost, setCost] = useState({ min: "", max: "" });
+  const [groupSize, setGroupSize] = useState({ min: 1, max: 12 });
+  const [cost, setCost] = useState({ min: "$", max: "$$$" });
+  const [isExactGroupSize, setIsExactGroupSize] = useState(false);
+  const [isExactCost, setIsExactCost] = useState(false);
 
   const activities = useContext(ActivitiesContext);
   const { weatherData } = useContext(WeatherContext);
@@ -44,22 +46,35 @@ export default function FilterContextProvider({ children }) {
       );
     }
 
-    // TODO: add category/groupSize/cost filters here
+    const costLevels = ["$", "$$", "$$$"];
+
+    if (isExactCost && cost.min) {
+      const selectedCostIndex = costLevels.indexOf(cost.min);
+      filtered = filtered.filter((activity) => {
+        const activityMinIndex = costLevels.indexOf(activity.cost.min || "$");
+        // Include activities with min cost <= selected cost
+        return activityMinIndex <= selectedCostIndex;
+      });
+    } else if (cost.min && cost.max) {
+      // Range filter, include activities that overlap with the range
+      const minIndex = costLevels.indexOf(cost.min);
+      const maxIndex = costLevels.indexOf(cost.max);
+      filtered = filtered.filter((activity) => {
+        const activityMinIndex = costLevels.indexOf(activity.cost.min || "$");
+        const activityMaxIndex = costLevels.indexOf(activity.cost.max || "$$$");
+        // Check if activity cost range overlaps filter cost range
+        return activityMaxIndex >= minIndex && activityMinIndex <= maxIndex;
+      });
+    }
+
+    // TODO: ADD CATEGORY/GROUP SIZE FILTER LOGIC
+
     // if (groupSize.min || groupSize.max) {
     //   filtered = filtered.filter((activity) => {
     //     const size = activity.groupSize || 0;
     //     return (
     //       (!groupSize.min || size >= groupSize.min) &&
     //       (!groupSize.max || size <= groupSize.max)
-    //     );
-    //   });
-    // }
-
-    // if (cost.min || cost.max) {
-    //   filtered = filtered.filter((activity) => {
-    //     const price = activity.cost || 0;
-    //     return (
-    //       (!cost.min || price >= cost.min) && (!cost.max || price <= cost.max)
     //     );
     //   });
     // }
@@ -80,6 +95,10 @@ export default function FilterContextProvider({ children }) {
         setGroupSize,
         cost,
         setCost,
+        isExactGroupSize,
+        setIsExactGroupSize,
+        isExactCost,
+        setIsExactCost,
         filteredActivities,
       }}
     >
