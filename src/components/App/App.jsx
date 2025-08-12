@@ -4,8 +4,13 @@ import "./App.css";
 
 import Header from "../Header/Header";
 import Main from "../Main/Main";
+import FilterContextProvider from "../FilterContextProvider/FilterContextProvider";
 
 import UserContext from "../../contexts/UserContext";
+import WeatherContext from "../../contexts/WeatherContext";
+import ActivitiesContext from "../../contexts/ActivitiesContext";
+
+import activitiesData from "../../../db.json";
 
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import { fetchCoordinatesByCity } from "../../utils/location";
@@ -14,12 +19,14 @@ import { weatherAPIkey } from "../../constants/apiEndpoints";
 export default function App() {
   const [weatherData, setWeatherData] = useState({
     city: "",
-    condition: "",
-    icon: "",
-    isDay: true,
     temp: { F: 999, C: 999 },
-    // TODO: see if i can change "type" to "season"
+    latitude: "",
     season: "",
+    isOutdoor: false,
+    condition: "",
+    id: "",
+    isDay: true,
+    icon: "",
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [activeModal, setActiveModal] = useState("");
@@ -69,24 +76,29 @@ export default function App() {
   }, [activeModal]);
 
   return (
-    <UserContext.Provider
-      value={{
-        // currentUser,
-        isLoggedIn,
-        // isAuthenticating,
-        // handleLogout,
-        // handleLogin,
-      }}
-    >
-      <div className="page">
-        <div className="page__content">
-          <Header
-            // handleSignupClick={handleSignupClick}
-            weatherData={weatherData}
-          />
-          <Main />
-        </div>
-      </div>
-    </UserContext.Provider>
+    <WeatherContext.Provider value={{ weatherData }}>
+      <UserContext.Provider
+        value={{
+          // currentUser,
+          isLoggedIn,
+          // isAuthenticating,
+          // handleLogout,
+          // handleLogin,
+        }}
+      >
+        <ActivitiesContext.Provider value={activitiesData.activities}>
+          <FilterContextProvider>
+            <div className="page">
+              <div className="page__content">
+                <Header
+                // handleSignupClick={handleSignupClick}
+                />
+                <Main />
+              </div>
+            </div>
+          </FilterContextProvider>
+        </ActivitiesContext.Provider>
+      </UserContext.Provider>
+    </WeatherContext.Provider>
   );
 }

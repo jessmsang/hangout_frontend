@@ -4,20 +4,18 @@ import "./Header.css";
 
 import WeatherDisplay from "../WeatherDisplay/WeatherDisplay";
 import Logo from "../Logo/Logo";
+
 import UserContext from "../../contexts/UserContext";
 
-export default function Header({
-  handleSignupClick,
-  handleLoginClick,
-  weatherData,
-}) {
+export default function Header({ handleSignupClick, handleLoginClick }) {
   const { isLoggedIn } = useContext(UserContext);
 
   return (
     <header className="header">
       <div className="header__left">
         <Logo />
-        <WeatherDisplay weatherData={weatherData} />
+        <WeatherDisplay />
+        {/* TODO: Create Location Component: CurrentLocation, SelectLocation */}
       </div>
       {!isLoggedIn && (
         <ul className="header__unauthorized-view">

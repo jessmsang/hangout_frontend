@@ -1,6 +1,10 @@
 import "./WeatherDisplay.css";
+import WeatherContext from "../../contexts/WeatherContext";
+import { useContext } from "react";
 
-export default function WeatherDisplay({ weatherData }) {
+export default function WeatherDisplay() {
+  const { weatherData } = useContext(WeatherContext);
+
   const icon = weatherData.icon;
   const iconUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`;
   const celsiusTemperature = weatherData.temp["C"];
@@ -8,12 +12,19 @@ export default function WeatherDisplay({ weatherData }) {
 
   return (
     <div className="weather-display">
-      <img src={iconUrl} alt="weather icon" className="weather-display__icon" />
-      <p className="weather-display__temperature">
-        {celsiusTemperature}&deg;C/
-        {fahrenheitTemperature}
-        &deg;F
-      </p>
+      <p className="weather-display__title">Current weather:</p>
+      <div className="weather-display__container">
+        <img
+          src={iconUrl}
+          alt="weather icon"
+          className="weather-display__icon"
+        />
+        <p className="weather-display__temperature">
+          {celsiusTemperature}&deg;C/
+          {fahrenheitTemperature}
+          &deg;F
+        </p>
+      </div>
     </div>
   );
 }

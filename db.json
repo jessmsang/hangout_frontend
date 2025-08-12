@@ -7,7 +7,7 @@
       "seasons": ["summer", "fall", "spring", "winter"],
       "location": ["outdoor", "indoor"],
       "category": ["active"],
-      "groupSize": { "min": "2", "max": "4" },
+      "groupSize": { "min": 2, "max": 4 },
       "cost": { "min": "$", "max": "$$" }
     },
     {
@@ -17,7 +17,7 @@
       "seasons": ["summer"],
       "location": ["outdoor"],
       "category": ["active", "adventure"],
-      "groupSize": { "min": "1", "max": "10" },
+      "groupSize": { "min": 1, "max": 10 },
       "cost": { "min": "$", "max": "$$" }
     },
     {
@@ -27,7 +27,7 @@
       "seasons": ["summer", "fall", "spring", "winter"],
       "location": ["indoor"],
       "category": ["low-key"],
-      "groupSize": { "min": "1", "max": "10" },
+      "groupSize": { "min": 1, "max": 10 },
       "cost": { "min": "$", "max": "$$" }
     },
     {
@@ -37,7 +37,7 @@
       "seasons": ["winter"],
       "location": ["outdoor"],
       "category": ["active"],
-      "groupSize": { "min": "1", "max": "6" },
+      "groupSize": { "min": 1, "max": 6 },
       "cost": { "min": "$$", "max": "$$$" }
     },
     {
@@ -47,7 +47,7 @@
       "seasons": ["summer", "fall", "spring", "winter"],
       "location": ["indoor"],
       "category": ["low-key"],
-      "groupSize": { "min": "2", "max": "10" },
+      "groupSize": { "min": 2, "max": 10 },
       "cost": { "min": "$", "max": "$$" }
     },
     {
@@ -56,8 +56,8 @@
       "description": "Cook a meal together. Choose something from your travels, or something brand new! This can be as challenging or relaxing as you please.",
       "seasons": ["summer", "fall", "spring", "winter"],
       "location": ["indoor"],
-      "category": ["creative", "foodie", "romantic"],
-      "groupSize": { "min": "2", "max": "4" },
+      "category": ["creative", "dining", "romantic"],
+      "groupSize": { "min": 2, "max": 4 },
       "cost": { "min": "$", "max": "$$" }
     },
     {
@@ -67,7 +67,7 @@
       "seasons": ["fall"],
       "location": ["outdoor"],
       "category": ["festive"],
-      "groupSize": { "min": "1", "max": "10" },
+      "groupSize": { "min": 1, "max": 10 },
       "cost": { "min": "$", "max": "$$" }
     },
     {
@@ -76,8 +76,8 @@
       "description": "Enjoy some good weather and prepare a picnic!",
       "seasons": ["summer", "fall", "spring"],
       "location": ["outdoor"],
-      "category": ["romantic", "foodie"],
-      "groupSize": { "min": "1", "max": "8" },
+      "category": ["romantic", "dining"],
+      "groupSize": { "min": 1, "max": 8 },
       "cost": { "min": "$", "max": "$$" }
     },
     {
@@ -86,8 +86,8 @@
       "description": "Challenge yourself to a polar plunge. Share this experience with people you love, and stay safe!",
       "seasons": ["winter"],
       "location": ["outdoor"],
-      "category": ["romantic", "adventure"],
-      "groupSize": { "min": "1", "max": "8" },
+      "category": ["adventure", "romantic"],
+      "groupSize": { "min": 1, "max": 8 },
       "cost": { "min": "$", "max": "$" }
     },
     {
@@ -97,7 +97,7 @@
       "seasons": ["summer", "fall", "spring", "winter"],
       "location": ["indoor"],
       "category": ["creative", "romantic"],
-      "groupSize": { "min": "2", "max": "8" },
+      "groupSize": { "min": 2, "max": 8 },
       "cost": { "min": "$", "max": "$$" }
     },
     {
@@ -107,7 +107,7 @@
       "seasons": ["summer"],
       "location": ["outdoor"],
       "category": ["active"],
-      "groupSize": { "min": "1", "max": "8" },
+      "groupSize": { "min": 1, "max": 8 },
       "cost": { "min": "$", "max": "$" }
     },
     {
@@ -117,17 +117,17 @@
       "seasons": ["summer", "fall", "spring", "winter"],
       "location": ["indoor"],
       "category": ["romantic", "low-key"],
-      "groupSize": { "min": "2", "max": "8" },
+      "groupSize": { "min": 2, "max": 8 },
       "cost": { "min": "$", "max": "$" }
     },
     {
       "id": "karaoke",
       "name": "Karaoke",
-      "description": "You can either host an at-home karaoke sesh, or find a local karaoke spot, and sing some tunes together!",
+      "description": "Either host an at-home karaoke sesh, or find a local karaoke spot, and sing some tunes together!",
       "seasons": ["summer", "fall", "spring", "winter"],
       "location": ["indoor"],
-      "category": ["romantic", "adventure"],
-      "groupSize": { "min": "1", "max": "10" },
+      "category": ["adventure", "creative", "romantic"],
+      "groupSize": { "min": 1, "max": 10 },
       "cost": { "min": "$", "max": "$" }
     },
     {
@@ -136,8 +136,8 @@
       "description": "Try making some homemade dumplings!",
       "seasons": ["summer", "fall", "spring", "winter"],
       "location": ["indoor"],
-      "category": ["foodie", "creative", "romantic"],
-      "groupSize": { "min": "1", "max": "4" },
+      "category": ["dining", "creative", "romantic"],
+      "groupSize": { "min": 1, "max": 4 },
       "cost": { "min": "$", "max": "$$" }
     },
     {
@@ -146,8 +146,8 @@
       "description": "Try making some homemade spring rolls!",
       "seasons": ["summer", "fall", "spring", "winter"],
       "location": ["indoor"],
-      "category": ["foodie", "creative", "romantic"],
-      "groupSize": { "min": "1", "max": "4" },
+      "category": ["dining", "creative", "romantic"],
+      "groupSize": { "min": 1, "max": 4 },
       "cost": { "min": "$", "max": "$$" }
     },
     {
@@ -156,8 +156,8 @@
       "description": "Use a baking cookbook, website, or instagram account and randomly select something to bake!",
       "seasons": ["summer", "fall", "spring", "winter"],
       "location": ["indoor"],
-      "category": ["foodie", "creative", "romantic"],
-      "groupSize": { "min": "1", "max": "4" },
+      "category": ["dining", "creative", "romantic"],
+      "groupSize": { "min": 1, "max": 4 },
       "cost": { "min": "$", "max": "$" }
     },
     {
@@ -166,8 +166,8 @@
       "description": "Start a book club with your significant other or a small group of friends.",
       "seasons": ["summer", "fall", "spring", "winter"],
       "location": ["indoor"],
-      "category": ["creative", "romantic", "low-key"],
-      "groupSize": { "min": "2", "max": "6" },
+      "category": ["low-key", "romantic"],
+      "groupSize": { "min": 2, "max": 6 },
       "cost": { "min": "$", "max": "$" }
     },
     {
@@ -176,8 +176,8 @@
       "description": "Host a puzzle-making party with a small group of friends.",
       "seasons": ["summer", "fall", "spring", "winter"],
       "location": ["indoor"],
-      "category": ["creative", "low-key"],
-      "groupSize": { "min": "2", "max": "4" },
+      "category": ["low-key", "creative"],
+      "groupSize": { "min": 2, "max": 4 },
       "cost": { "min": "$", "max": "$" }
     },
     {
@@ -187,7 +187,7 @@
       "seasons": ["summer", "fall", "spring", "winter"],
       "location": ["indoor"],
       "category": ["low-key"],
-      "groupSize": { "min": "2", "max": "4" },
+      "groupSize": { "min": 2, "max": 4 },
       "cost": { "min": "$", "max": "$$" }
     },
     {
@@ -197,7 +197,7 @@
       "seasons": ["summer", "fall", "spring"],
       "location": ["outdoor"],
       "category": ["active"],
-      "groupSize": { "min": "2", "max": "6" },
+      "groupSize": { "min": 2, "max": 6 },
       "cost": { "min": "$$", "max": "$$" }
     },
     {
@@ -206,18 +206,18 @@
       "description": "This fondue night can be savory or sweet - or both! Make cheese fondue or chocolate fondue.",
       "seasons": ["summer", "fall", "spring", "winter"],
       "location": ["indoor"],
-      "category": ["foodie", "low-key", "romantic"],
-      "groupSize": { "min": "2", "max": "4" },
+      "category": ["dining", "low-key", "romantic"],
+      "groupSize": { "min": 2, "max": 4 },
       "cost": { "min": "$", "max": "$$" }
     },
     {
       "id": "backyard-bbq",
       "name": "Backyard BBQ",
-      "description": "Enjoy a backyard party for two with your significant other, or host some friends! Put on some tunes, grill out, play some backyard games. Enjoy some time outside in the comfort of your own home!",
+      "description": "Enjoy a backyard party for two with your significant other, or host some friends. Put on some tunes, grill out, play some backyard games. Enjoy time outside in the comfort of your own home!",
       "seasons": ["summer", "fall", "spring"],
       "location": ["outdoor"],
-      "category": ["foodie", "romantic"],
-      "groupSize": { "min": "1", "max": "12" },
+      "category": ["dining", "romantic"],
+      "groupSize": { "min": 1, "max": 12 },
       "cost": { "min": "$", "max": "$$" }
     },
     {
@@ -227,27 +227,27 @@
       "seasons": ["summer", "fall", "spring"],
       "location": ["outdoor"],
       "category": ["romantic", "low-key"],
-      "groupSize": { "min": "2", "max": "4" },
+      "groupSize": { "min": 2, "max": 4 },
       "cost": { "min": "$", "max": "$" }
     },
     {
       "id": "homemade-pizza",
       "name": "Homemade Pizza",
-      "description": "This can be as simple or difficult as you please! Pre-made dough, handmade dough - it's up to you! You could even make it a half-half pizza if you like different toppings. But enjoy creating this pizza TOGETHER!",
+      "description": "This can be as simple or difficult as you please - handmade dough, pre-made dough, and as many toppings as you'd like!",
       "seasons": ["summer", "fall", "spring", "winter"],
       "location": ["indoor"],
-      "category": ["foodie", "low-key", "romantic", "creative"],
-      "groupSize": { "min": "2", "max": "4" },
+      "category": ["dining", "romantic", "creative"],
+      "groupSize": { "min": 2, "max": 4 },
       "cost": { "min": "$", "max": "$$" }
     },
     {
       "id": "camping",
       "name": "Camping",
-      "description": "Plan a weekend to be in nature together. Tent camp, car camp, hammock camp - as long as you're not indoors! Be one with nature and find beauty in disconnecting from technology.",
+      "description": "Plan a weekend to be in nature together. Tent camp, car camp, hammock camp - as long as you're not indoors! Be one with nature and disconnect from technology.",
       "seasons": ["summer", "fall", "spring"],
       "location": ["outdoor"],
-      "category": ["romantic", "adventure"],
-      "groupSize": { "min": "2", "max": "6" },
+      "category": ["adventure", "romantic"],
+      "groupSize": { "min": 2, "max": 6 },
       "cost": { "min": "$", "max": "$$" }
     },
     {
@@ -257,7 +257,7 @@
       "seasons": ["summer", "fall", "spring", "winter"],
       "location": ["outdoor", "indoor"],
       "category": ["romantic"],
-      "groupSize": { "min": "2", "max": "2" },
+      "groupSize": { "min": 2, "max": 2 },
       "cost": { "min": "$", "max": "$" }
     },
     {
@@ -267,7 +267,7 @@
       "seasons": ["summer", "fall", "spring", "winter"],
       "location": ["outdoor", "indoor"],
       "category": ["romantic", "creative", "adventure"],
-      "groupSize": { "min": "2", "max": "4" },
+      "groupSize": { "min": 2, "max": 4 },
       "cost": { "min": "$", "max": "$$" }
     },
     {
@@ -277,7 +277,7 @@
       "seasons": ["summer", "fall", "spring"],
       "location": ["outdoor"],
       "category": ["adventure", "romantic"],
-      "groupSize": { "min": "1", "max": "8" },
+      "groupSize": { "min": 1, "max": 8 },
       "cost": { "min": "$$", "max": "$$" }
     },
     {
@@ -287,7 +287,7 @@
       "seasons": ["summer", "fall", "spring"],
       "location": ["outdoor"],
       "category": ["active", "adventure"],
-      "groupSize": { "min": "1", "max": "8" },
+      "groupSize": { "min": 1, "max": 8 },
       "cost": { "min": "$", "max": "$" }
     },
     {
@@ -297,7 +297,7 @@
       "seasons": ["summer", "fall", "spring", "winter"],
       "location": ["indoor"],
       "category": ["active"],
-      "groupSize": { "min": "2", "max": "4" },
+      "groupSize": { "min": 2, "max": 4 },
       "cost": { "min": "$", "max": "$$" }
     },
     {
@@ -306,8 +306,8 @@
       "description": "Play rock, paper, scissors to pick each item for a 3-course meal + a beverage",
       "seasons": ["summer", "fall", "spring", "winter"],
       "location": ["indoor"],
-      "category": ["foodie", "romantic"],
-      "groupSize": { "min": "2", "max": "4" },
+      "category": ["dining", "romantic"],
+      "groupSize": { "min": 2, "max": 4 },
       "cost": { "min": "$", "max": "$$" }
     },
     {
@@ -317,7 +317,7 @@
       "seasons": ["winter"],
       "location": ["indoor", "outdoor"],
       "category": ["festive", "romantic"],
-      "groupSize": { "min": "1", "max": "2" },
+      "groupSize": { "min": 1, "max": 2 },
       "cost": { "min": "$$", "max": "$$$" }
     },
     {
@@ -327,7 +327,7 @@
       "seasons": ["winter"],
       "location": ["indoor"],
       "category": ["festive", "romantic"],
-      "groupSize": { "min": "1", "max": "6" },
+      "groupSize": { "min": 1, "max": 6 },
       "cost": { "min": "$", "max": "$$" }
     },
     {
@@ -337,7 +337,7 @@
       "seasons": ["winter"],
       "location": ["indoor", "outdoor"],
       "category": ["festive", "romantic", "active"],
-      "groupSize": { "min": "1", "max": "6" },
+      "groupSize": { "min": 1, "max": 6 },
       "cost": { "min": "$", "max": "$$" }
     },
     {
@@ -347,7 +347,7 @@
       "seasons": ["winter"],
       "location": ["outdoor"],
       "category": ["festive", "active", "romantic", "adventure"],
-      "groupSize": { "min": "1", "max": "6" },
+      "groupSize": { "min": 1, "max": 6 },
       "cost": { "min": "$", "max": "$" }
     },
     {
@@ -357,7 +357,7 @@
       "seasons": ["summer"],
       "location": ["outdoor"],
       "category": ["romantic", "active", "adventure"],
-      "groupSize": { "min": "1", "max": "6" },
+      "groupSize": { "min": 1, "max": 6 },
       "cost": { "min": "$", "max": "$$" }
     },
     {
@@ -367,7 +367,7 @@
       "seasons": ["winter"],
       "location": ["outdoor"],
       "category": ["festive", "romantic", "adventure"],
-      "groupSize": { "min": "1", "max": "8" },
+      "groupSize": { "min": 1, "max": 8 },
       "cost": { "min": "$", "max": "$$" }
     },
     {
@@ -377,7 +377,7 @@
       "seasons": ["summer", "spring", "fall"],
       "location": ["outdoor"],
       "category": ["adventure", "low-key", "romantic"],
-      "groupSize": { "min": "1", "max": "4" },
+      "groupSize": { "min": 1, "max": 4 },
       "cost": { "min": "$", "max": "$$" }
     }
   ]

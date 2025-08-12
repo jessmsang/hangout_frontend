@@ -1,16 +1,16 @@
+import { useContext } from "react";
 import "./RecommendedActivities.css";
 
-import activitiesData from "../../../db.json";
-import ActivityCard from "../ActivityCard/ActivityCard";
-import Carousel from "../Carousel/Carousel";
+import FilterContext from "../../contexts/FilterContext";
+import ActivitiesCarousel from "../ActivitiesCarousel/ActivitiesCarousel";
 
 export default function RecommendedActivities() {
-  const activities = activitiesData.activities;
+  const { filteredActivities } = useContext(FilterContext);
 
   return (
-    <div className="recommended-activities">
+    <section className="recommended-activities">
       <h2 className="recommended-activities__title">Recommended Activities</h2>
-      <Carousel />
-    </div>
+      <ActivitiesCarousel activities={filteredActivities} />
+    </section>
   );
 }

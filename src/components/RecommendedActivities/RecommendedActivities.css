@@ -3,10 +3,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-bottom: #f3f4f0 solid 1px;
   background-color: #a45f50;
-  height: 20rem;
+  /* height: 20rem; */
+  padding: 3rem 0;
+  max-width: 100%;
+  margin: 0 auto;
 }
+
 .recommended-activities__title {
   margin: 0;
   font-size: 1rem;

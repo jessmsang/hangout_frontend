@@ -1,17 +1,19 @@
 export const activityCategories = [
   "active",
   "adventure",
-  "creative",
-  "foodie",
   "low-key",
+  "creative",
+  "dining",
+  "festive",
   "romantic",
 ];
 
 export const activityCategoryLabels = {
   active: "Active",
   adventure: "Adventure",
-  creative: "Creative",
-  foodie: "Foodie",
   "low-key": "Low-Key",
+  creative: "Creative",
+  dining: "Dining",
+  festive: "Festive",
   romantic: "Romantic",
 };

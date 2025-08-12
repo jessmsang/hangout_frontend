@@ -1,29 +1,66 @@
 import { useContext } from "react";
 import "./ActivityCard.css";
 
-import UserContext from "../../contexts/UserContext";
+// import UserContext from "../../contexts/UserContext";
 
-// TO COMPLETE AFTER MEETING:
-// import {
-//   activityCategories,
-//   activityCategoryLabels,
-// } from "../../constants/activityCategories";
-// import { categoryIcons } from "../../constants/categoryIcons";
+import { activityCategoryLabels } from "../../constants/activityCategories";
+import { categoryIcons } from "../../constants/categoryIcons";
 
 export default function ActivityCard({ activity }) {
-  const { currentUser, isLoggedIn } = useContext(UserContext);
+  // TODO: ADD USER CONTEXT
+  // const { currentUser, isLoggedIn } = useContext(UserContext);
 
-  // TO COMPLETE AFTER MEETING:
-  //   const Icon = categoryIcons[activity.activityCategory];
+  const categories = Array.isArray(activity.category)
+    ? activity.category
+    : [activity.category];
 
-  //   const categories = Array.isArray(activity.category)
-  //     ? activity.category
-  //     : [activity.category];
+  const categoriesAlphabetical = categories.sort();
 
-  //   const categoryLabel = activityCategoryLabels[activity.category] || "Unknown";
+  const groupSize = activity.groupSize;
 
-  //   const activityIcon = categoryIcons[activity.activityCategory] || DefaultIcon;
+  function formatGroupSize(groupSize) {
+    const { min, max } = groupSize || {};
+    if (min && max) {
+      if (min === max) {
+        return min === 1 ? "1 person" : `${min} people`;
+      }
+      return `${min}-${max} people`;
+    }
+    if (min) {
+      return min === 1 ? "1+ person" : `${min}+ people`;
+    }
+    if (max) {
+      return `Up to ${max} people`;
+    }
+    return "Any group size";
+  }
+  const groupSizeLabel = formatGroupSize(groupSize);
 
+  const cost = activity.cost;
+
+  function formatCost(cost) {
+    if (!cost) return "Cost unknown";
+
+    const { min, max } = cost;
+
+    if (min && max) {
+      if (min === max) {
+        return min; // exact cost like "$$"
+      } else {
+        return `${min} - ${max}`; // range like "$ - $$"
+      }
+    }
+
+    // If only min or max is present, just show that value:
+    if (min) return min;
+    if (max) return max;
+
+    return "Cost unknown";
+  }
+
+  const costLabel = formatCost(cost);
+
+  // TODO: HANDLE CARD LIKES
   // const handleCardClick = () => {
   //     onCardClick(activity);
   //   };
@@ -32,42 +69,51 @@ export default function ActivityCard({ activity }) {
   //     onCardLike({ id: activity._id, isLiked });
   //   };
 
-  const isLiked = currentUser
-    ? activity.likes.some((id) => id === currentUser._id)
-    : false;
+  //   const isLiked = currentUser
+  //     ? activity.likes.some((id) => id === currentUser._id)
+  //     : false;
 
-  const activityLikeBtnClassName = isLiked
-    ? "card__like-filled"
-    : "card__like-empty";
+  //   const activityLikeBtnClassName = isLiked
+  //     ? "card__like-filled"
+  //     : "card__like-empty";
 
   return (
     <li className="card">
       <div className="card__container">
         <div className="card__header">
-          <img src="null" alt="" className="card__icon" />
-          <h3 className="card__name">{activity.name}</h3>
-          {currentUser && isLoggedIn && (
+          <div className="card__categories-container">
+            {categoriesAlphabetical.map((category) => {
+              const Icon = categoryIcons[category] || categoryIcons.default;
+              const label = activityCategoryLabels[category] || "Unknown";
+              return (
+                <div key={category} className="card__category-item">
+                  {Icon && (
+                    <img
+                      src={Icon}
+                      alt={label}
+                      className="card__category-icon"
+                    />
+                  )}
+                  <span className="card__category-label">{label}</span>
+                </div>
+              );
+            })}
+          </div>
+          {/*TODO: ADD USER CONTEXT
+           {currentUser && isLoggedIn && (
             <button
               className={activityLikeBtnClassName}
               //   onClick={handleLike}
             ></button>
-          )}
+          )} */}
         </div>
-        {/* TO COMPLETE AFTER MEETING: */}
-        {/* <div className="card__category-list">
-          {categories.map((category) => {
-            //   const Icon = categoryIcons[category];
-            const label = activityCategoryLabels[category] || "Unknown";
-            return (
-              <div key={category} className="category-item">
-                {Icon && <Icon className="category-icon" />}
-                <span>{label}</span>
-              </div>
-            );
-          })}
-        </div> */}
-        <div className="card__description-container">
+        <div className="card__text-container">
+          <h3 className="card__name">{activity.name}</h3>
           <p className="card__description">{activity.description}</p>
+        </div>
+        <div className="card__footer">
+          <div className="card__cost">{costLabel}</div>
+          <div className="card__group-size">{groupSizeLabel}</div>
         </div>
       </div>
     </li>

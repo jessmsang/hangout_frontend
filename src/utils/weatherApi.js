@@ -12,44 +12,49 @@ export const getWeather = ({ latitude, longitude }, weatherAPIkey) => {
 };
 
 export const filterWeatherData = (data) => {
-  const result = {};
-  result.city = data.name;
-  result.temp = {
-    C: Math.round(data.main.temp),
-    F: Math.round((data.main.temp * 9) / 5 + 32),
+  const tempC = Math.round(data.main.temp);
+  const id = data.weather[0].id;
+
+  const result = {
+    city: data.name,
+    temp: {
+      C: tempC,
+      F: Math.round((tempC * 9) / 5 + 32),
+    },
+    latitude: data.coord.lat,
+    season: getSeasonType(Math.round(tempC), data.coord.lat),
+    isOutdoor: isOutdoor(id, tempC),
+    condition: data.weather[0].main.toLowerCase(),
+    id,
+    isDay: isDay(data.sys, Date.now()),
+    icon: data.weather[0].icon,
   };
-  result.latitude = data.coord.lat;
-  result.season = getSeasonType(result.temp.C, result.latitude);
-  result.condition = data.weather[0].main.toLowerCase();
-  result.id = data.weather[0].id;
-  result.isDay = isDay(data.sys, Date.now());
-  result.icon = data.weather[0].icon;
+
   return result;
 };
 
-export const filterOutdoor = (id) => {
-  if (id >= 800 && id <= 804) {
-    return true;
-  } else {
-    return false;
-  }
+export const isOutdoor = (id, tempC) => {
+  const goodWeatherCodes = [701, 711, 721, 731, 741];
+  const goodWeather = (id >= 800 && id <= 804) || goodWeatherCodes.includes(id);
+  const comfortableTemp = tempC >= -5 && tempC <= 35;
+  return goodWeather && comfortableTemp;
 };
 
 export const isDay = ({ sunrise, sunset }, now) => {
   return sunrise * 1000 < now && now < sunset * 1000;
 };
 
-export const getSeasonType = (temp, latitude) => {
+export const getSeasonType = (tempC, latitude) => {
   const month = new Date().getMonth(); // 0 = Jan, 11 = Dec
 
   // Determine hemisphere
   const isNorthern = latitude >= 0;
 
-  if (temp >= 22) {
+  if (tempC >= 22) {
     return "summer";
-  } else if (temp <= 8) {
+  } else if (tempC <= 8) {
     return "winter";
-  } else if (temp > 8 && temp < 22) {
+  } else if (tempC > 8 && tempC < 22) {
     if (
       (isNorthern && month >= 2 && month <= 4) || // March–May
       (!isNorthern && month >= 8 && month <= 10) // Sept–Nov
