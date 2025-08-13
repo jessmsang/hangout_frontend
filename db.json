@@ -97,7 +97,7 @@
       "seasons": ["summer", "fall", "spring", "winter"],
       "location": ["indoor"],
       "category": ["creative", "romantic"],
-      "groupSize": { "min": 2, "max": 8 },
+      "groupSize": { "min": 1, "max": 8 },
       "cost": { "min": "$", "max": "$$" }
     },
     {
@@ -117,7 +117,7 @@
       "seasons": ["summer", "fall", "spring", "winter"],
       "location": ["indoor"],
       "category": ["romantic", "low-key"],
-      "groupSize": { "min": 2, "max": 8 },
+      "groupSize": { "min": 1, "max": 8 },
       "cost": { "min": "$", "max": "$" }
     },
     {
@@ -177,7 +177,7 @@
       "seasons": ["summer", "fall", "spring", "winter"],
       "location": ["indoor"],
       "category": ["low-key", "creative"],
-      "groupSize": { "min": 2, "max": 4 },
+      "groupSize": { "min": 1, "max": 4 },
       "cost": { "min": "$", "max": "$" }
     },
     {
@@ -187,7 +187,7 @@
       "seasons": ["summer", "fall", "spring", "winter"],
       "location": ["indoor"],
       "category": ["low-key"],
-      "groupSize": { "min": 2, "max": 4 },
+      "groupSize": { "min": 1, "max": 4 },
       "cost": { "min": "$", "max": "$$" }
     },
     {
@@ -197,7 +197,7 @@
       "seasons": ["summer", "fall", "spring"],
       "location": ["outdoor"],
       "category": ["active"],
-      "groupSize": { "min": 2, "max": 6 },
+      "groupSize": { "min": 1, "max": 6 },
       "cost": { "min": "$$", "max": "$$" }
     },
     {
@@ -207,7 +207,7 @@
       "seasons": ["summer", "fall", "spring", "winter"],
       "location": ["indoor"],
       "category": ["dining", "low-key", "romantic"],
-      "groupSize": { "min": 2, "max": 4 },
+      "groupSize": { "min": 1, "max": 4 },
       "cost": { "min": "$", "max": "$$" }
     },
     {
@@ -237,7 +237,7 @@
       "seasons": ["summer", "fall", "spring", "winter"],
       "location": ["indoor"],
       "category": ["dining", "romantic", "creative"],
-      "groupSize": { "min": 2, "max": 4 },
+      "groupSize": { "min": 1, "max": 4 },
       "cost": { "min": "$", "max": "$$" }
     },
     {
@@ -247,7 +247,7 @@
       "seasons": ["summer", "fall", "spring"],
       "location": ["outdoor"],
       "category": ["adventure", "romantic"],
-      "groupSize": { "min": 2, "max": 6 },
+      "groupSize": { "min": 1, "max": 6 },
       "cost": { "min": "$", "max": "$$" }
     },
     {
@@ -267,7 +267,7 @@
       "seasons": ["summer", "fall", "spring", "winter"],
       "location": ["outdoor", "indoor"],
       "category": ["romantic", "creative", "adventure"],
-      "groupSize": { "min": 2, "max": 4 },
+      "groupSize": { "min": 1, "max": 4 },
       "cost": { "min": "$", "max": "$$" }
     },
     {
@@ -297,7 +297,7 @@
       "seasons": ["summer", "fall", "spring", "winter"],
       "location": ["indoor"],
       "category": ["active"],
-      "groupSize": { "min": 2, "max": 4 },
+      "groupSize": { "min": 1, "max": 4 },
       "cost": { "min": "$", "max": "$$" }
     },
     {
@@ -357,7 +357,7 @@
       "seasons": ["summer"],
       "location": ["outdoor"],
       "category": ["romantic", "active", "adventure"],
-      "groupSize": { "min": 1, "max": 6 },
+      "groupSize": { "min": 2, "max": 6 },
       "cost": { "min": "$", "max": "$$" }
     },
     {

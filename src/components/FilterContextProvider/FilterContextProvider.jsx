@@ -81,8 +81,8 @@ export default function FilterContextProvider({ children }) {
     if (isExactGroupSize && groupSize.min) {
       filtered = filtered.filter(
         (activity) =>
-          activity.groupSize.min === groupSize.min &&
-          activity.groupSize.max === groupSize.min
+          activity.groupSize.min <= groupSize.min &&
+          activity.groupSize.max >= groupSize.min
       );
     } else if (groupSize.min || groupSize.max) {
       filtered = filtered.filter(
