@@ -18,10 +18,11 @@ export default function FilterActivitiesForm() {
     setIsExactGroupSize,
     isExactCost,
     setIsExactCost,
-    filteredActivities,
   } = useContext(FilterContext);
 
   const [hasGroupSizeError, setHasGroupSizeError] = useState(false);
+
+  const costLevels = ["$", "$$", "$$$"];
 
   const toggleIsExactCost = () => {
     setIsExactCost((prev) => !prev);
@@ -37,6 +38,16 @@ export default function FilterActivitiesForm() {
 
   const toggleIsExactGroupSize = () => {
     setIsExactGroupSize(!isExactGroupSize);
+  };
+
+  const handleFormReset = () => {
+    setSeasons([]);
+    setLocation([]);
+    setCategory([]);
+    setIsExactCost(false);
+    setIsExactGroupSize(false);
+    setCost({ min: "$", max: "$$$" });
+    setGroupSize({ min: 1, max: 12 });
   };
 
   return (
@@ -136,13 +147,20 @@ export default function FilterActivitiesForm() {
                     setCost({
                       ...cost,
                       min: e.target.value,
+                      max:
+                        costLevels.indexOf(cost.max) <
+                        costLevels.indexOf(e.target.value)
+                          ? e.target.value
+                          : cost.max,
                     })
                   }
                   className="form__input form__input_cost"
                 >
-                  <option value="$">$</option>
-                  <option value="$$">$$</option>
-                  <option value="$$$">$$$</option>
+                  {costLevels.map((level) => (
+                    <option key={level} value={level}>
+                      {level}
+                    </option>
+                  ))}
                 </select>
               </label>
 
@@ -159,9 +177,17 @@ export default function FilterActivitiesForm() {
                   }
                   className="form__input form__input_cost"
                 >
-                  <option value="$">$</option>
-                  <option value="$$">$$</option>
-                  <option value="$$$">$$$</option>
+                  {costLevels
+                    .filter(
+                      (level) =>
+                        costLevels.indexOf(level) >=
+                        costLevels.indexOf(cost.min)
+                    )
+                    .map((level) => (
+                      <option key={level} value={level}>
+                        {level}
+                      </option>
+                    ))}
                 </select>
               </label>
 
@@ -195,9 +221,11 @@ export default function FilterActivitiesForm() {
                   }
                   className="form__input form__input_cost"
                 >
-                  <option value="$">$</option>
-                  <option value="$$">$$</option>
-                  <option value="$$$">$$$</option>
+                  {costLevels.map((level) => (
+                    <option key={level} value={level}>
+                      {level}
+                    </option>
+                  ))}
                 </select>
               </label>
 
@@ -215,37 +243,6 @@ export default function FilterActivitiesForm() {
             </div>
           )}
         </fieldset>
-
-        {/* <fieldset className="form__section">
-          <legend className="form__title">Cost</legend>
-          <label className="form__label">
-            <input
-              type="checkbox"
-              name="cost"
-              value="$"
-              className="form__input"
-            />
-            $
-          </label>
-          <label className="form__label">
-            <input
-              type="checkbox"
-              name="cost"
-              value="$$"
-              className="form__input"
-            />
-            $$
-          </label>
-          <label className="form__label">
-            <input
-              type="checkbox"
-              name="cost"
-              value="$$$"
-              className="form__input"
-            />
-            $$$
-          </label>
-        </fieldset> */}
 
         <fieldset className="form__section form__section_group">
           <legend className="form__title">Group Size</legend>
@@ -335,6 +332,13 @@ export default function FilterActivitiesForm() {
 
         <span className="form__error"></span>
       </form>
+      <button
+        type="button"
+        className="form__reset-btn"
+        onClick={handleFormReset}
+      >
+        Reset Filters
+      </button>
     </div>
   );
 }

@@ -64,17 +64,16 @@ export default function FilterContextProvider({ children }) {
       const selectedCostIndex = costLevels.indexOf(cost.min);
       filtered = filtered.filter((activity) => {
         const activityMinIndex = costLevels.indexOf(activity.cost.min || "$");
-        // Include activities with min cost <= selected cost
+
         return activityMinIndex <= selectedCostIndex;
       });
     } else if (cost.min && cost.max) {
-      // Range filter, include activities that overlap with the range
       const minIndex = costLevels.indexOf(cost.min);
       const maxIndex = costLevels.indexOf(cost.max);
       filtered = filtered.filter((activity) => {
         const activityMinIndex = costLevels.indexOf(activity.cost.min || "$");
         const activityMaxIndex = costLevels.indexOf(activity.cost.max || "$$$");
-        // Check if activity cost range overlaps filter cost range
+
         return activityMaxIndex >= minIndex && activityMinIndex <= maxIndex;
       });
     }
