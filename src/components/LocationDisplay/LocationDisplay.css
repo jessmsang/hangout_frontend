@@ -1,0 +1,14 @@
+.location-display {
+  border-left: #f3f4f0 solid 1px;
+  border-right: #f3f4f0 solid 1px;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.location-display__title {
+  font-size: 0.6rem;
+  margin: 0;
+}

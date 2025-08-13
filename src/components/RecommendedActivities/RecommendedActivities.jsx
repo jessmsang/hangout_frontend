@@ -5,12 +5,12 @@ import FilterContext from "../../contexts/FilterContext";
 import ActivitiesCarousel from "../ActivitiesCarousel/ActivitiesCarousel";
 
 export default function RecommendedActivities() {
-  const { filteredActivities } = useContext(FilterContext);
+  const { activitiesFilteredByWeather } = useContext(FilterContext);
 
   return (
     <section className="recommended-activities">
       <h2 className="recommended-activities__title">Recommended Activities</h2>
-      <ActivitiesCarousel activities={filteredActivities} />
+      <ActivitiesCarousel activities={activitiesFilteredByWeather} />
     </section>
   );
 }

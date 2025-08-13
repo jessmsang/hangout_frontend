@@ -3,6 +3,7 @@ import { useContext } from "react";
 import "./Header.css";
 
 import WeatherDisplay from "../WeatherDisplay/WeatherDisplay";
+import LocationDisplay from "../LocationDisplay/LocationDisplay";
 import Logo from "../Logo/Logo";
 
 import UserContext from "../../contexts/UserContext";
@@ -14,8 +15,8 @@ export default function Header({ handleSignupClick, handleLoginClick }) {
     <header className="header">
       <div className="header__left">
         <Logo />
+        <LocationDisplay />
         <WeatherDisplay />
-        {/* TODO: Create Location Component: CurrentLocation, SelectLocation */}
       </div>
       {!isLoggedIn && (
         <ul className="header__unauthorized-view">

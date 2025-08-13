@@ -1,11 +1,17 @@
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .logo__btn {
   font-family: "Funnel Display";
   margin: 0;
-  font-size: 25px;
+  font-size: 1.3rem;
   background-color: transparent;
   border: none;
   color: #f3f4f0;
-  padding: 15px;
+  padding: 0.9rem;
 }
 
 .logo__btn:hover {

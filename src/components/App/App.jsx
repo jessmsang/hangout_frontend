@@ -76,7 +76,9 @@ export default function App() {
   }, [activeModal]);
 
   return (
-    <WeatherContext.Provider value={{ weatherData }}>
+    <WeatherContext.Provider
+      value={{ weatherData, setWeatherData, weatherAPIkey }}
+    >
       <UserContext.Provider
         value={{
           // currentUser,

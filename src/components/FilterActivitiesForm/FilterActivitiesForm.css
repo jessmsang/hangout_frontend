@@ -29,7 +29,7 @@
   font-size: 0.6rem;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .form__label_exact {
@@ -41,6 +41,19 @@
   padding: 0.1rem 0;
 }
 
+.form__input {
+  margin: 0 0.15rem;
+}
+
+.form__input_cost {
+  margin: 0.1rem;
+}
+
 .form__input_group {
   width: 2rem;
+  margin: 0.1rem;
+}
+
+.form__input_exact {
+  margin-left: 0;
 }

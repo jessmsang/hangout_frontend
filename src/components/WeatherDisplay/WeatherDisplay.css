@@ -1,5 +1,4 @@
 .weather-display {
-  border-left: #f3f4f0 solid 1px;
   border-right: #f3f4f0 solid 1px;
   display: flex;
   flex-direction: column;

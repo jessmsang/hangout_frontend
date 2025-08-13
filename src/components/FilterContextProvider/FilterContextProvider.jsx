@@ -15,7 +15,7 @@ export default function FilterContextProvider({ children }) {
   const activities = useContext(ActivitiesContext);
   const { weatherData } = useContext(WeatherContext);
 
-  const filteredActivities = useMemo(() => {
+  const activitiesFilteredByWeather = useMemo(() => {
     let filtered = activities;
 
     const currentSeason = weatherData?.season;
@@ -34,6 +34,12 @@ export default function FilterContextProvider({ children }) {
       });
     }
 
+    return filtered;
+  }, [activities, weatherData, seasons, location]);
+
+  const filteredActivities = useMemo(() => {
+    let filtered = activities;
+
     if (seasons.length > 0) {
       filtered = filtered.filter((activity) =>
         seasons.some((season) => activity.seasons.includes(season))
@@ -43,6 +49,12 @@ export default function FilterContextProvider({ children }) {
     if (location.length > 0) {
       filtered = filtered.filter((activity) =>
         location.some((loc) => activity.location.includes(loc))
+      );
+    }
+
+    if (category.length > 0) {
+      filtered = filtered.filter((activity) =>
+        category.some((cat) => activity.category.includes(cat))
       );
     }
 
@@ -67,20 +79,31 @@ export default function FilterContextProvider({ children }) {
       });
     }
 
-    // TODO: ADD CATEGORY/GROUP SIZE FILTER LOGIC
-
-    // if (groupSize.min || groupSize.max) {
-    //   filtered = filtered.filter((activity) => {
-    //     const size = activity.groupSize || 0;
-    //     return (
-    //       (!groupSize.min || size >= groupSize.min) &&
-    //       (!groupSize.max || size <= groupSize.max)
-    //     );
-    //   });
-    // }
+    if (isExactGroupSize && groupSize.min) {
+      filtered = filtered.filter(
+        (activity) =>
+          activity.groupSize.min === groupSize.min &&
+          activity.groupSize.max === groupSize.min
+      );
+    } else if (groupSize.min || groupSize.max) {
+      filtered = filtered.filter(
+        (activity) =>
+          activity.groupSize.max >= groupSize.min &&
+          activity.groupSize.min <= groupSize.max
+      );
+    }
 
     return filtered;
-  }, [activities, weatherData, seasons, category, location, groupSize, cost]);
+  }, [
+    activities,
+    seasons,
+    category,
+    location,
+    groupSize,
+    isExactGroupSize,
+    cost,
+    isExactCost,
+  ]);
 
   return (
     <FilterContext.Provider
@@ -100,6 +123,7 @@ export default function FilterContextProvider({ children }) {
         isExactCost,
         setIsExactCost,
         filteredActivities,
+        activitiesFilteredByWeather,
       }}
     >
       {children}
