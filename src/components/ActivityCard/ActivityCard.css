@@ -6,7 +6,7 @@
   background-color: #f3f4f0;
   padding: 0.5rem;
   width: 8.5rem;
-  height: 11rem;
+  height: 11.5rem;
   color: #000;
   box-shadow: 5px 5px 5px #00000034;
   flex: 0 0 auto;
@@ -20,6 +20,85 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  width: 100%;
+}
+
+.card__header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.card__header-list {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.card__header-list-item {
+  list-style-type: none;
+}
+
+.card__like-btn-not-liked {
+  background: transparent url(../../assets/heart-gray.svg) no-repeat center;
+  border: none;
+  background-size: contain;
+  width: 1rem;
+  height: 1rem;
+  object-fit: contain;
+  padding: 0;
+  margin: 0;
+}
+
+.card__like-btn-not-liked:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.card__like-btn-liked {
+  background: transparent url(../../assets/heart-green.svg) no-repeat center;
+  border: none;
+  background-size: contain;
+  width: 1rem;
+  height: 1rem;
+  object-fit: contain;
+  padding: 0;
+  margin: 0;
+}
+
+.card__like-btn-liked:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.card__complete-btn-not-completed {
+  background: transparent url(../../assets/tick-gray.svg) no-repeat center;
+  border: none;
+  background-size: contain;
+  width: 1rem;
+  height: 1rem;
+  object-fit: contain;
+  padding: 0;
+  margin: 0;
+}
+
+.card__complete-btn-not-completed:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.card__complete-btn-completed {
+  background: transparent url(../../assets/tick-green.svg) no-repeat center;
+  border: none;
+  background-size: contain;
+  width: 1rem;
+  height: 1rem;
+  object-fit: contain;
+  padding: 0;
+  margin: 0;
+}
+
+.card__complete-btn-completed:hover {
+  opacity: 0.8;
+  cursor: pointer;
 }
 
 .card__name {

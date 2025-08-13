@@ -9,8 +9,11 @@ export default function FilterContextProvider({ children }) {
   const [category, setCategory] = useState([]);
   const [groupSize, setGroupSize] = useState({ min: 1, max: 12 });
   const [cost, setCost] = useState({ min: "$", max: "$$$" });
+
   const [isExactGroupSize, setIsExactGroupSize] = useState(false);
   const [isExactCost, setIsExactCost] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+  const [isCompleted, setIsCompleted] = useState(false);
 
   const activities = useContext(ActivitiesContext);
   const { weatherData } = useContext(WeatherContext);
@@ -123,6 +126,10 @@ export default function FilterContextProvider({ children }) {
         setIsExactCost,
         filteredActivities,
         activitiesFilteredByWeather,
+        isLiked,
+        setIsLiked,
+        isCompleted,
+        setIsCompleted,
       }}
     >
       {children}

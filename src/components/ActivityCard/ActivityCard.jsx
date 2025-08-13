@@ -1,12 +1,24 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import "./ActivityCard.css";
 
 // import UserContext from "../../contexts/UserContext";
 
 import { activityCategoryLabels } from "../../constants/activityCategories";
 import { categoryIcons } from "../../constants/categoryIcons";
+import FilterContext from "../../contexts/FilterContext";
 
 export default function ActivityCard({ activity }) {
+  const { isLiked, setIsLiked, isCompleted, setIsCompleted } =
+    useContext(FilterContext);
+
+  const toggleIsLiked = () => {
+    setIsLiked((prev) => !prev);
+  };
+
+  const toggleIsCompleted = () => {
+    setIsCompleted((prev) => !prev);
+  };
+
   // TODO: ADD USER CONTEXT
   // const { currentUser, isLoggedIn } = useContext(UserContext);
 
@@ -45,13 +57,12 @@ export default function ActivityCard({ activity }) {
 
     if (min && max) {
       if (min === max) {
-        return min; // exact cost like "$$"
+        return min;
       } else {
-        return `${min} - ${max}`; // range like "$ - $$"
+        return `${min} - ${max}`;
       }
     }
 
-    // If only min or max is present, just show that value:
     if (min) return min;
     if (max) return max;
 
@@ -60,52 +71,56 @@ export default function ActivityCard({ activity }) {
 
   const costLabel = formatCost(cost);
 
-  // TODO: HANDLE CARD LIKES
-  // const handleCardClick = () => {
-  //     onCardClick(activity);
-  //   };
-  //
-  //   const handleLike = () => {
-  //     onCardLike({ id: activity._id, isLiked });
-  //   };
+  // const handleLike = () => {
+  //   onCardLike({ id: activity._id, isLiked });
+  // };
 
-  //   const isLiked = currentUser
-  //     ? activity.likes.some((id) => id === currentUser._id)
-  //     : false;
+  // const isLiked = currentUser
+  //   ? activity.likes.some((id) => id === currentUser._id)
+  //   : false;
 
-  //   const activityLikeBtnClassName = isLiked
-  //     ? "card__like-filled"
-  //     : "card__like-empty";
+  // const activityLikeBtnClassName = isLiked
+  //   ? "card__like-btn-liked"
+  //   : "card__like-btn-not-liked";
 
   return (
     <li className="card">
       <div className="card__container">
         <div className="card__header">
-          <div className="card__categories-container">
-            {categoriesAlphabetical.map((category) => {
-              const Icon = categoryIcons[category] || categoryIcons.default;
-              const label = activityCategoryLabels[category] || "Unknown";
-              return (
-                <div key={category} className="card__category-item">
-                  {Icon && (
-                    <img
-                      src={Icon}
-                      alt={label}
-                      className="card__category-icon"
-                    />
-                  )}
-                  <span className="card__category-label">{label}</span>
-                </div>
-              );
-            })}
-          </div>
-          {/*TODO: ADD USER CONTEXT
-           {currentUser && isLoggedIn && (
-            <button
-              className={activityLikeBtnClassName}
-              //   onClick={handleLike}
-            ></button>
-          )} */}
+          <ul className="card__header-list">
+            <li className="card__header-list-item">
+              <button
+                className={`${
+                  !isLiked ? "card__like-btn-not-liked" : "card__like-btn-liked"
+                }`}
+                onClick={toggleIsLiked}
+              ></button>
+            </li>
+            <li className="card__header-list-item">
+              <button
+                className={`${
+                  !isCompleted
+                    ? "card__complete-btn-not-completed"
+                    : "card__complete-btn-completed"
+                }`}
+                onClick={toggleIsCompleted}
+              ></button>
+            </li>
+          </ul>
+        </div>
+        <div className="card__categories-container">
+          {categoriesAlphabetical.map((category) => {
+            const Icon = categoryIcons[category] || categoryIcons.default;
+            const label = activityCategoryLabels[category] || "Unknown";
+            return (
+              <div key={category} className="card__category-item">
+                {Icon && (
+                  <img src={Icon} alt={label} className="card__category-icon" />
+                )}
+                <span className="card__category-label">{label}</span>
+              </div>
+            );
+          })}
         </div>
         <div className="card__text-container">
           <h3 className="card__name">{activity.name}</h3>

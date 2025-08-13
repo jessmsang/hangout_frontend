@@ -37,7 +37,7 @@ export default function FilterActivitiesForm() {
   //   };
 
   const toggleIsExactGroupSize = () => {
-    setIsExactGroupSize(!isExactGroupSize);
+    setIsExactGroupSize((prev) => !prev);
   };
 
   const handleFormReset = () => {

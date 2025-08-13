@@ -48,12 +48,12 @@ export default function App() {
   useEffect(() => {
     fetchCoordinatesByCity("Cincinnati", weatherAPIkey)
       .then((coordinates) => {
-        console.log(coordinates);
+        // console.log(coordinates);
         return getWeather(coordinates, weatherAPIkey);
       })
       .then((data) => {
         const filteredData = filterWeatherData(data);
-        console.log(filteredData);
+        // console.log(filteredData);
         setWeatherData(filteredData);
       })
       .catch(console.error);
