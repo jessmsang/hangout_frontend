@@ -1,7 +1,6 @@
 .location-selector__form {
   display: flex;
   flex-direction: column;
-  padding: 0.15rem 0;
 }
 
 .location-selector__label {

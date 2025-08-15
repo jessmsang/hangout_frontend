@@ -5,6 +5,9 @@ import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import FilterContextProvider from "../FilterContextProvider/FilterContextProvider";
+import AddActivityButton from "../AddActivityButton/AddActivityButton";
+import AddActivityFormModal from "../AddActivityFormModal/AddActivityFormModal";
+import Footer from "../Footer/Footer";
 
 import UserContext from "../../contexts/UserContext";
 import WeatherContext from "../../contexts/WeatherContext";
@@ -28,22 +31,25 @@ export default function App() {
     isDay: true,
     icon: "",
   });
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [activeModal, setActiveModal] = useState("");
 
-  // const handleSignupClick = () => {
-  //   setActiveModal("register-modal");
-  //   setIsMobileMenuActive(false);
-  // };
+  const openModal = (modalName) => setActiveModal(modalName);
+  const closeActiveModal = () => setActiveModal("");
 
-  // const handleLoginClick = () => {
-  //   setActiveModal("login-modal");
-  //   setIsMobileMenuActive(false);
-  // };
+  useEffect(() => {
+    if (!activeModal) return;
 
-  // const closeActiveModal = () => {
-  //   setActiveModal("");
-  // };
+    const handleEscClose = (evt) => {
+      if (evt.key === "Escape") {
+        closeActiveModal();
+      }
+    };
+    document.addEventListener("keydown", handleEscClose);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscClose);
+    };
+  }, [activeModal]);
 
   useEffect(() => {
     fetchCoordinatesByCity("Cincinnati", weatherAPIkey)
@@ -59,21 +65,18 @@ export default function App() {
       .catch(console.error);
   }, []);
 
-  useEffect(() => {
-    if (!activeModal) return;
+  // TODO: SET UP USER CONTEXT
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    const handleEscClose = (evt) => {
-      if (evt.key === "Escape") {
-        closeActiveModal();
-      }
-    };
+  // const handleSignupClick = () => {
+  //   setActiveModal("register-modal");
+  //   setIsMobileMenuActive(false);
+  // };
 
-    document.addEventListener("keydown", handleEscClose);
-
-    return () => {
-      document.removeEventListener("keydown", handleEscClose);
-    };
-  }, [activeModal]);
+  // const handleLoginClick = () => {
+  //   setActiveModal("login-modal");
+  //   setIsMobileMenuActive(false);
+  // };
 
   return (
     <WeatherContext.Provider
@@ -96,6 +99,14 @@ export default function App() {
                 // handleSignupClick={handleSignupClick}
                 />
                 <Main />
+                <AddActivityButton onClick={() => openModal("add-activity")} />
+                {activeModal === "add-activity" && (
+                  <AddActivityFormModal isOpen onClose={closeActiveModal} />
+                )}
+                {/* Future: */}
+                {/* {activeModal === "login" && <LoginModal isOpen onClose={closeActiveModal} />} */}
+                {/* {activeModal === "signup" && <SignupModal isOpen onClose={closeActiveModal} />} */}
+                <Footer />
               </div>
             </div>
           </FilterContextProvider>

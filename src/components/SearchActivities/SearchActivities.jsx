@@ -2,16 +2,43 @@ import { useContext, useState } from "react";
 import "./SearchActivities.css";
 import ActivitiesCarousel from "../ActivitiesCarousel/ActivitiesCarousel";
 import FilterContext from "../../contexts/FilterContext";
-import FilterActivitiesForm from "../FilterActivitiesForm/FilterActivitiesForm";
+import ActivityCriteriaForm from "../ActivityCriteriaForm/ActivityCriteriaForm";
 
 export default function SearchActivities() {
-  const { filteredActivities } = useContext(FilterContext);
+  const {
+    seasons,
+    setSeasons,
+    location,
+    setLocation,
+    category,
+    setCategory,
+    groupSize,
+    setGroupSize,
+    cost,
+    setCost,
+    isExactGroupSize,
+    setIsExactGroupSize,
+    isExactCost,
+    setIsExactCost,
+    filteredActivities,
+  } = useContext(FilterContext);
+
+  const handleReset = () => {
+    setSeasons([]);
+    setLocation([]);
+    setCategory([]);
+    setCost({ min: "$", max: "$$$" });
+    setGroupSize({ min: 1, max: 12 });
+    setIsExactCost(false);
+    setIsExactGroupSize(false);
+  };
 
   const [formIsVisible, setFormIsVisible] = useState(false);
 
-  const toggleDisplayActivitiesForm = () => {
+  const toggleDisplayFilterForm = () => {
     setFormIsVisible(!formIsVisible);
   };
+
   return (
     <section className="search-activities">
       <div
@@ -22,10 +49,29 @@ export default function SearchActivities() {
         <h2 className="search-activities__title">Search for Activities</h2>
         <button
           className="search-activities__filter-btn"
-          onClick={toggleDisplayActivitiesForm}
+          onClick={toggleDisplayFilterForm}
         ></button>
       </div>
-      {formIsVisible && <FilterActivitiesForm />}
+      {formIsVisible && (
+        <ActivityCriteriaForm
+          variant="search"
+          seasons={seasons}
+          setSeasons={setSeasons}
+          location={location}
+          setLocation={setLocation}
+          category={category}
+          setCategory={setCategory}
+          groupSize={groupSize}
+          setGroupSize={setGroupSize}
+          cost={cost}
+          setCost={setCost}
+          isExactGroupSize={isExactGroupSize}
+          setIsExactGroupSize={setIsExactGroupSize}
+          isExactCost={isExactCost}
+          setIsExactCost={setIsExactCost}
+          onReset={handleReset}
+        />
+      )}
       <ActivitiesCarousel activities={filteredActivities} />
     </section>
   );

@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import "./ActivityCard.css";
 
-// import UserContext from "../../contexts/UserContext";
+import UserContext from "../../contexts/UserContext";
 
 import { activityCategoryLabels } from "../../constants/activityCategories";
 import { categoryIcons } from "../../constants/categoryIcons";
@@ -20,7 +20,7 @@ export default function ActivityCard({ activity }) {
   };
 
   // TODO: ADD USER CONTEXT
-  // const { currentUser, isLoggedIn } = useContext(UserContext);
+  const { currentUser, isLoggedIn } = useContext(UserContext);
 
   const categories = Array.isArray(activity.category)
     ? activity.category
@@ -86,28 +86,32 @@ export default function ActivityCard({ activity }) {
   return (
     <li className="card">
       <div className="card__container">
-        <div className="card__header">
-          <ul className="card__header-list">
-            <li className="card__header-list-item">
-              <button
-                className={`${
-                  !isLiked ? "card__like-btn-not-liked" : "card__like-btn-liked"
-                }`}
-                onClick={toggleIsLiked}
-              ></button>
-            </li>
-            <li className="card__header-list-item">
-              <button
-                className={`${
-                  !isCompleted
-                    ? "card__complete-btn-not-completed"
-                    : "card__complete-btn-completed"
-                }`}
-                onClick={toggleIsCompleted}
-              ></button>
-            </li>
-          </ul>
-        </div>
+        {isLoggedIn && (
+          <div className="card__header">
+            <ul className="card__header-list">
+              <li className="card__header-list-item">
+                <button
+                  className={`${
+                    !isLiked
+                      ? "card__like-btn-not-liked"
+                      : "card__like-btn-liked"
+                  }`}
+                  onClick={toggleIsLiked}
+                ></button>
+              </li>
+              <li className="card__header-list-item">
+                <button
+                  className={`${
+                    !isCompleted
+                      ? "card__complete-btn-not-completed"
+                      : "card__complete-btn-completed"
+                  }`}
+                  onClick={toggleIsCompleted}
+                ></button>
+              </li>
+            </ul>
+          </div>
+        )}
         <div className="card__categories-container">
           {categoriesAlphabetical.map((category) => {
             const Icon = categoryIcons[category] || categoryIcons.default;

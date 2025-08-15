@@ -9,7 +9,11 @@ export default function RecommendedActivities() {
 
   return (
     <section className="recommended-activities">
-      <h2 className="recommended-activities__title">Recommended Activities</h2>
+      <div className="recommended-activities__header">
+        <h2 className="recommended-activities__title">
+          Recommended Activities
+        </h2>
+      </div>
       <ActivitiesCarousel activities={activitiesFilteredByWeather} />
     </section>
   );

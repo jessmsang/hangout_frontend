@@ -5,7 +5,7 @@
   overflow-x: auto;
   align-items: center;
   justify-content: center;
-  padding: 2rem 0;
+  padding: 2rem 0 0;
 }
 
 .activities-carousel__track {
@@ -14,7 +14,7 @@
   overflow-x: auto;
   overflow-y: hidden;
   scroll-behavior: smooth;
-  padding: 0.5rem 1rem;
+  padding: 2rem 1rem;
   list-style: none;
   margin: 0;
   scrollbar-width: none;
@@ -22,6 +22,7 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  background-color: #a45f50;
 }
 
 .activities-carousel__track::-webkit-scrollbar {

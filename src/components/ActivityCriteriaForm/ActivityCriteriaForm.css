@@ -1,6 +1,24 @@
-.form__container {
+.form__container_modal {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "seasons category"
+    "seasons category"
+    "seasons category"
+    "location category"
+    "location cost"
+    "group cost"
+    "group reset";
+  gap: 1rem;
+  align-items: start;
+}
+
+.form__container_search {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  justify-content: center;
 }
 
 .form {
@@ -11,9 +29,28 @@
 .form__section {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
   gap: 0.15rem;
+  margin: 0;
+}
+
+.form__section_seasons {
+  grid-area: seasons;
+}
+
+.form__section_location {
+  grid-area: location;
+}
+
+.form__section_category {
+  grid-area: category;
+}
+
+.form__section_group {
+  grid-area: group;
+}
+
+.form__section_cost {
+  grid-area: cost;
 }
 
 .form__section_range-view {
@@ -64,12 +101,14 @@
 }
 
 .form__reset-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  grid-area: reset;
+  justify-self: end;
+  align-self: end;
   font-size: 0.65rem;
-  margin-top: 0.5rem;
-  padding: 0.2rem;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  width: 100%;
+  border: none;
 }
 
 .form__reset-btn:hover {

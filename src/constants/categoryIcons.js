@@ -1,11 +1,11 @@
-import ActiveIcon from "../assets/icons/active.svg";
-import AdventureIcon from "../assets/icons/adventure.svg";
-import LowkeyIcon from "../assets/icons/low-key.svg";
-import CreativeIcon from "../assets/icons/creative.svg";
-import DiningIcon from "../assets/icons/dining.svg";
-import FestiveIcon from "../assets/icons/festive.svg";
-import RomanticIcon from "../assets/icons/romantic.svg";
-import DefaultIcon from "../assets/icons/default.svg";
+import ActiveIcon from "../assets/categoryIcons/active.svg";
+import AdventureIcon from "../assets/categoryIcons/adventure.svg";
+import LowkeyIcon from "../assets/categoryIcons/low-key.svg";
+import CreativeIcon from "../assets/categoryIcons/creative.svg";
+import DiningIcon from "../assets/categoryIcons/dining.svg";
+import FestiveIcon from "../assets/categoryIcons/festive.svg";
+import RomanticIcon from "../assets/categoryIcons/romantic.svg";
+import DefaultIcon from "../assets/categoryIcons/default.svg";
 
 export const categoryIcons = {
   active: ActiveIcon,

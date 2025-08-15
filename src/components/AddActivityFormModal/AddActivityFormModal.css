@@ -1,0 +1,16 @@
+.add-activity-form {
+  font-size: 0.65rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.add-activity-form__label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin: 0.3rem 0;
+}
+
+.add-activity-form__textarea {
+  margin-bottom: 0.5rem;
+}

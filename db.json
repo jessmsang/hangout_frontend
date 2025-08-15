@@ -379,6 +379,16 @@
       "category": ["adventure", "low-key", "romantic"],
       "groupSize": { "min": 1, "max": 4 },
       "cost": { "min": "$", "max": "$$" }
+    },
+    {
+      "id": "tennis",
+      "name": "Tennis",
+      "description": "Grab a racket and play some tennis with some friends or your significant other. Have some fun with it!",
+      "seasons": ["summer", "fall", "spring"],
+      "location": ["outdoor"],
+      "category": ["active"],
+      "groupSize": { "min": "2", "max": "4" },
+      "cost": { "min": "$", "max": "$$" }
     }
   ]
 }
