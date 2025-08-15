@@ -8,7 +8,9 @@
       "location": ["outdoor", "indoor"],
       "category": ["active"],
       "groupSize": { "min": 2, "max": 4 },
-      "cost": { "min": "$", "max": "$$" }
+      "cost": { "min": "$", "max": "$$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "kayaking",
@@ -18,7 +20,9 @@
       "location": ["outdoor"],
       "category": ["active", "adventure"],
       "groupSize": { "min": 1, "max": 10 },
-      "cost": { "min": "$", "max": "$$" }
+      "cost": { "min": "$", "max": "$$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "movie",
@@ -28,7 +32,9 @@
       "location": ["indoor"],
       "category": ["low-key"],
       "groupSize": { "min": 1, "max": 10 },
-      "cost": { "min": "$", "max": "$$" }
+      "cost": { "min": "$", "max": "$$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "snowboarding",
@@ -38,7 +44,9 @@
       "location": ["outdoor"],
       "category": ["active"],
       "groupSize": { "min": 1, "max": 6 },
-      "cost": { "min": "$$", "max": "$$$" }
+      "cost": { "min": "$$", "max": "$$$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "board-game",
@@ -48,7 +56,9 @@
       "location": ["indoor"],
       "category": ["low-key"],
       "groupSize": { "min": 2, "max": 10 },
-      "cost": { "min": "$", "max": "$$" }
+      "cost": { "min": "$", "max": "$$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "cook-together",
@@ -58,7 +68,9 @@
       "location": ["indoor"],
       "category": ["creative", "dining", "romantic"],
       "groupSize": { "min": 2, "max": 4 },
-      "cost": { "min": "$", "max": "$$" }
+      "cost": { "min": "$", "max": "$$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "pumpkin-patch",
@@ -68,7 +80,9 @@
       "location": ["outdoor"],
       "category": ["festive"],
       "groupSize": { "min": 1, "max": 10 },
-      "cost": { "min": "$", "max": "$$" }
+      "cost": { "min": "$", "max": "$$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "picnic",
@@ -78,7 +92,9 @@
       "location": ["outdoor"],
       "category": ["romantic", "dining"],
       "groupSize": { "min": 1, "max": 8 },
-      "cost": { "min": "$", "max": "$$" }
+      "cost": { "min": "$", "max": "$$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "polar-plunge",
@@ -88,7 +104,9 @@
       "location": ["outdoor"],
       "category": ["adventure", "romantic"],
       "groupSize": { "min": 1, "max": 8 },
-      "cost": { "min": "$", "max": "$" }
+      "cost": { "min": "$", "max": "$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "crafts-night",
@@ -98,7 +116,9 @@
       "location": ["indoor"],
       "category": ["creative", "romantic"],
       "groupSize": { "min": 1, "max": 8 },
-      "cost": { "min": "$", "max": "$$" }
+      "cost": { "min": "$", "max": "$$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "swimming",
@@ -108,7 +128,9 @@
       "location": ["outdoor"],
       "category": ["active"],
       "groupSize": { "min": 1, "max": 8 },
-      "cost": { "min": "$", "max": "$" }
+      "cost": { "min": "$", "max": "$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "slumber-party",
@@ -118,7 +140,9 @@
       "location": ["indoor"],
       "category": ["romantic", "low-key"],
       "groupSize": { "min": 1, "max": 8 },
-      "cost": { "min": "$", "max": "$" }
+      "cost": { "min": "$", "max": "$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "karaoke",
@@ -128,7 +152,9 @@
       "location": ["indoor"],
       "category": ["adventure", "creative", "romantic"],
       "groupSize": { "min": 1, "max": 10 },
-      "cost": { "min": "$", "max": "$" }
+      "cost": { "min": "$", "max": "$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "homemade-dumplings",
@@ -138,7 +164,9 @@
       "location": ["indoor"],
       "category": ["dining", "creative", "romantic"],
       "groupSize": { "min": 1, "max": 4 },
-      "cost": { "min": "$", "max": "$$" }
+      "cost": { "min": "$", "max": "$$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "homemade-spring-rolls",
@@ -148,7 +176,9 @@
       "location": ["indoor"],
       "category": ["dining", "creative", "romantic"],
       "groupSize": { "min": 1, "max": 4 },
-      "cost": { "min": "$", "max": "$$" }
+      "cost": { "min": "$", "max": "$$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "baking-roulette",
@@ -158,7 +188,9 @@
       "location": ["indoor"],
       "category": ["dining", "creative", "romantic"],
       "groupSize": { "min": 1, "max": 4 },
-      "cost": { "min": "$", "max": "$" }
+      "cost": { "min": "$", "max": "$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "book-club",
@@ -168,7 +200,9 @@
       "location": ["indoor"],
       "category": ["low-key", "romantic"],
       "groupSize": { "min": 2, "max": 6 },
-      "cost": { "min": "$", "max": "$" }
+      "cost": { "min": "$", "max": "$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "puzzle-night",
@@ -178,7 +212,9 @@
       "location": ["indoor"],
       "category": ["low-key", "creative"],
       "groupSize": { "min": 1, "max": 4 },
-      "cost": { "min": "$", "max": "$" }
+      "cost": { "min": "$", "max": "$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "video-games",
@@ -188,7 +224,9 @@
       "location": ["indoor"],
       "category": ["low-key"],
       "groupSize": { "min": 1, "max": 4 },
-      "cost": { "min": "$", "max": "$$" }
+      "cost": { "min": "$", "max": "$$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "topgolf",
@@ -198,7 +236,9 @@
       "location": ["outdoor"],
       "category": ["active"],
       "groupSize": { "min": 1, "max": 6 },
-      "cost": { "min": "$$", "max": "$$" }
+      "cost": { "min": "$$", "max": "$$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "fondue-night",
@@ -208,7 +248,9 @@
       "location": ["indoor"],
       "category": ["dining", "low-key", "romantic"],
       "groupSize": { "min": 1, "max": 4 },
-      "cost": { "min": "$", "max": "$$" }
+      "cost": { "min": "$", "max": "$$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "backyard-bbq",
@@ -218,7 +260,9 @@
       "location": ["outdoor"],
       "category": ["dining", "romantic"],
       "groupSize": { "min": 1, "max": 12 },
-      "cost": { "min": "$", "max": "$$" }
+      "cost": { "min": "$", "max": "$$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "patio-coffee-date",
@@ -228,7 +272,9 @@
       "location": ["outdoor"],
       "category": ["romantic", "low-key"],
       "groupSize": { "min": 2, "max": 4 },
-      "cost": { "min": "$", "max": "$" }
+      "cost": { "min": "$", "max": "$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "homemade-pizza",
@@ -238,7 +284,9 @@
       "location": ["indoor"],
       "category": ["dining", "romantic", "creative"],
       "groupSize": { "min": 1, "max": 4 },
-      "cost": { "min": "$", "max": "$$" }
+      "cost": { "min": "$", "max": "$$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "camping",
@@ -248,7 +296,9 @@
       "location": ["outdoor"],
       "category": ["adventure", "romantic"],
       "groupSize": { "min": 1, "max": 6 },
-      "cost": { "min": "$", "max": "$$" }
+      "cost": { "min": "$", "max": "$$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "play-dress-up",
@@ -258,7 +308,9 @@
       "location": ["outdoor", "indoor"],
       "category": ["romantic"],
       "groupSize": { "min": 2, "max": 2 },
-      "cost": { "min": "$", "max": "$" }
+      "cost": { "min": "$", "max": "$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "play-tourist",
@@ -268,7 +320,9 @@
       "location": ["outdoor", "indoor"],
       "category": ["romantic", "creative", "adventure"],
       "groupSize": { "min": 1, "max": 4 },
-      "cost": { "min": "$", "max": "$$" }
+      "cost": { "min": "$", "max": "$$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "zoo",
@@ -278,7 +332,9 @@
       "location": ["outdoor"],
       "category": ["adventure", "romantic"],
       "groupSize": { "min": 1, "max": 8 },
-      "cost": { "min": "$$", "max": "$$" }
+      "cost": { "min": "$$", "max": "$$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "byow",
@@ -288,7 +344,9 @@
       "location": ["outdoor"],
       "category": ["active", "adventure"],
       "groupSize": { "min": 1, "max": 8 },
-      "cost": { "min": "$", "max": "$" }
+      "cost": { "min": "$", "max": "$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "rock-climbing",
@@ -298,7 +356,9 @@
       "location": ["indoor"],
       "category": ["active"],
       "groupSize": { "min": 1, "max": 4 },
-      "cost": { "min": "$", "max": "$$" }
+      "cost": { "min": "$", "max": "$$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "trader-joes-dinner-date",
@@ -308,7 +368,9 @@
       "location": ["indoor"],
       "category": ["dining", "romantic"],
       "groupSize": { "min": 2, "max": 4 },
-      "cost": { "min": "$", "max": "$$" }
+      "cost": { "min": "$", "max": "$$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "christmas-tree-shopping",
@@ -318,7 +380,9 @@
       "location": ["indoor", "outdoor"],
       "category": ["festive", "romantic"],
       "groupSize": { "min": 1, "max": 2 },
-      "cost": { "min": "$$", "max": "$$$" }
+      "cost": { "min": "$$", "max": "$$$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "christmas-decorating",
@@ -328,7 +392,9 @@
       "location": ["indoor"],
       "category": ["festive", "romantic"],
       "groupSize": { "min": 1, "max": 6 },
-      "cost": { "min": "$", "max": "$$" }
+      "cost": { "min": "$", "max": "$$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "ice-skating",
@@ -338,7 +404,9 @@
       "location": ["indoor", "outdoor"],
       "category": ["festive", "romantic", "active"],
       "groupSize": { "min": 1, "max": 6 },
-      "cost": { "min": "$", "max": "$$" }
+      "cost": { "min": "$", "max": "$$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "snow-day",
@@ -348,7 +416,9 @@
       "location": ["outdoor"],
       "category": ["festive", "active", "romantic", "adventure"],
       "groupSize": { "min": 1, "max": 6 },
-      "cost": { "min": "$", "max": "$" }
+      "cost": { "min": "$", "max": "$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "water-fight",
@@ -358,7 +428,9 @@
       "location": ["outdoor"],
       "category": ["romantic", "active", "adventure"],
       "groupSize": { "min": 2, "max": 6 },
-      "cost": { "min": "$", "max": "$$" }
+      "cost": { "min": "$", "max": "$$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "winter-lights",
@@ -368,7 +440,9 @@
       "location": ["outdoor"],
       "category": ["festive", "romantic", "adventure"],
       "groupSize": { "min": 1, "max": 8 },
-      "cost": { "min": "$", "max": "$$" }
+      "cost": { "min": "$", "max": "$$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "drive-in-movie",
@@ -378,7 +452,9 @@
       "location": ["outdoor"],
       "category": ["adventure", "low-key", "romantic"],
       "groupSize": { "min": 1, "max": 4 },
-      "cost": { "min": "$", "max": "$$" }
+      "cost": { "min": "$", "max": "$$" },
+      "isLiked": false,
+      "isCompleted": false
     },
     {
       "id": "tennis",
@@ -388,7 +464,21 @@
       "location": ["outdoor"],
       "category": ["active"],
       "groupSize": { "min": "2", "max": "4" },
-      "cost": { "min": "$", "max": "$$" }
+      "cost": { "min": "$", "max": "$$" },
+      "isLiked": false,
+      "isCompleted": false
+    },
+    {
+      "id": "paper-snow-flakes",
+      "name": "Paper Snow Flakes",
+      "description": "Grab some paper and scissors and craft some snowflakes to hang around your house.",
+      "seasons": ["winter"],
+      "location": ["indoor"],
+      "category": ["festive", "creative", "low-key"],
+      "groupSize": { "min": "1", "max": "8" },
+      "cost": { "min": "$", "max": "$" },
+      "isLiked": false,
+      "isCompleted": false
     }
   ]
 }

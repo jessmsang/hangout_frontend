@@ -108,7 +108,7 @@
   padding: 0.5rem;
   border-radius: 0.3rem;
   width: 100%;
-  border: none;
+  border: solid 1px #926e00;
 }
 
 .form__reset-btn:hover {

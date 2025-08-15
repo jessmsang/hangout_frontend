@@ -2,6 +2,8 @@ import { useContext, useState, useMemo } from "react";
 import FilterContext from "../../contexts/FilterContext";
 import ActivitiesContext from "../../contexts/ActivitiesContext";
 import WeatherContext from "../../contexts/WeatherContext";
+// TODO: ADD API THINGS
+// import api from "../../utils/api";
 
 export default function FilterContextProvider({ children }) {
   const [seasons, setSeasons] = useState([]);
@@ -15,7 +17,7 @@ export default function FilterContextProvider({ children }) {
   const [isLiked, setIsLiked] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
 
-  const activities = useContext(ActivitiesContext);
+  const { activities, setActivities } = useContext(ActivitiesContext);
   const { weatherData } = useContext(WeatherContext);
 
   const activitiesFilteredByWeather = useMemo(() => {
@@ -107,6 +109,20 @@ export default function FilterContextProvider({ children }) {
     isExactCost,
   ]);
 
+  const handleCardLike = ({ id, isLiked }) => {
+    setActivities((prev) =>
+      prev.map((act) => (act.id === id ? { ...act, isLiked: !isLiked } : act))
+    );
+  };
+
+  const handleCardComplete = ({ id, isCompleted }) => {
+    setActivities((prev) =>
+      prev.map((act) =>
+        act.id === id ? { ...act, isCompleted: !isCompleted } : act
+      )
+    );
+  };
+
   return (
     <FilterContext.Provider
       value={{
@@ -130,6 +146,8 @@ export default function FilterContextProvider({ children }) {
         setIsLiked,
         isCompleted,
         setIsCompleted,
+        handleCardLike,
+        handleCardComplete,
       }}
     >
       {children}

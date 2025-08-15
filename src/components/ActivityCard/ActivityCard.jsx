@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import "./ActivityCard.css";
 
-import UserContext from "../../contexts/UserContext";
+// import UserContext from "../../contexts/UserContext";
 
 import { activityCategoryLabels } from "../../constants/activityCategories";
 import { categoryIcons } from "../../constants/categoryIcons";
@@ -10,21 +10,21 @@ import { activitySeasonsLabels } from "../../constants/activitySeasons";
 import { seasonsIcons } from "../../constants/seasonsIcons";
 
 import FilterContext from "../../contexts/FilterContext";
+import { data } from "react-router-dom";
 
 export default function ActivityCard({ activity }) {
-  const { isLiked, setIsLiked, isCompleted, setIsCompleted } =
-    useContext(FilterContext);
+  const { handleCardLike, handleCardComplete } = useContext(FilterContext);
 
   const toggleIsLiked = () => {
-    setIsLiked((prev) => !prev);
+    handleCardLike({ id: activity.id, isLiked: activity.isLiked });
   };
 
   const toggleIsCompleted = () => {
-    setIsCompleted((prev) => !prev);
+    handleCardComplete({ id: activity.id, isCompleted: activity.isCompleted });
   };
 
   // TODO: ADD USER CONTEXT
-  const { currentUser, isLoggedIn } = useContext(UserContext);
+  // const { currentUser, isLoggedIn } = useContext(UserContext);
 
   const categories = Array.isArray(activity.category)
     ? activity.category
@@ -102,47 +102,35 @@ export default function ActivityCard({ activity }) {
 
   const locationLabel = formatLocation(location);
 
-  // const handleLike = () => {
-  //   onCardLike({ id: activity._id, isLiked });
-  // };
-
-  // const isLiked = currentUser
-  //   ? activity.likes.some((id) => id === currentUser._id)
-  //   : false;
-
-  // const activityLikeBtnClassName = isLiked
-  //   ? "card__like-btn-liked"
-  //   : "card__like-btn-not-liked";
-
   return (
     <li className="card">
       <div className="card__container">
-        {isLoggedIn && (
-          <div className="card__header">
-            <ul className="card__header-list">
-              <li className="card__header-list-item">
-                <button
-                  className={`${
-                    !isLiked
-                      ? "card__like-btn-not-liked"
-                      : "card__like-btn-liked"
-                  }`}
-                  onClick={toggleIsLiked}
-                ></button>
-              </li>
-              <li className="card__header-list-item">
-                <button
-                  className={`${
-                    !isCompleted
-                      ? "card__complete-btn-not-completed"
-                      : "card__complete-btn-completed"
-                  }`}
-                  onClick={toggleIsCompleted}
-                ></button>
-              </li>
-            </ul>
-          </div>
-        )}
+        {/* {isLoggedIn && ( */}
+        <div className="card__header">
+          <ul className="card__header-list">
+            <li className="card__header-list-item">
+              <button
+                className={`${
+                  !activity.isLiked
+                    ? "card__like-btn-not-liked"
+                    : "card__like-btn-liked"
+                }`}
+                onClick={toggleIsLiked}
+              ></button>
+            </li>
+            <li className="card__header-list-item">
+              <button
+                className={`${
+                  !activity.isCompleted
+                    ? "card__complete-btn-not-completed"
+                    : "card__complete-btn-completed"
+                }`}
+                onClick={toggleIsCompleted}
+              ></button>
+            </li>
+          </ul>
+        </div>
+        {/* )} */}
         <div className="card__categories-container">
           {categoriesAlphabetical.map((category) => {
             const Icon = categoryIcons[category] || categoryIcons.default;

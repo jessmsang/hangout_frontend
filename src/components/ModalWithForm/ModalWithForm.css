@@ -29,6 +29,7 @@
   width: 25rem;
   max-height: 100%;
   box-sizing: border-box;
+  border: solid 1px #926e00;
 }
 
 .modal__title {
@@ -69,7 +70,7 @@
   border-radius: 0.3rem;
   background: #f3f4f0;
   padding: 0.6rem;
-  border: none;
+  border: solid 1px #926e00;
   font-size: 0.7rem;
   opacity: 1;
   width: 8rem;

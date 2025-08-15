@@ -31,6 +31,13 @@ export default function App() {
     isDay: true,
     icon: "",
   });
+  const [activities, setActivities] = useState(
+    activitiesData.activities.map((activity) => ({
+      ...activity,
+      isLiked: false,
+      isCompleted: false,
+    }))
+  );
   const [activeModal, setActiveModal] = useState("");
 
   const openModal = (modalName) => setActiveModal(modalName);
@@ -91,7 +98,7 @@ export default function App() {
           // handleLogin,
         }}
       >
-        <ActivitiesContext.Provider value={activitiesData.activities}>
+        <ActivitiesContext.Provider value={{ activities, setActivities }}>
           <FilterContextProvider>
             <div className="page">
               <div className="page__content">

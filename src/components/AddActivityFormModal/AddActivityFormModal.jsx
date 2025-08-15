@@ -47,6 +47,8 @@ export default function AddActivityFormModal({ isOpen, onClose }) {
       category,
       groupSize,
       cost,
+      isLiked: false,
+      isCompleted: false,
     };
 
     console.log("Submitting new activity:", newActivity);
@@ -81,6 +83,7 @@ export default function AddActivityFormModal({ isOpen, onClose }) {
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Describe the activity..."
             rows="3"
+            maxLength={200}
           />
         </label>
         <ActivityCriteriaForm
