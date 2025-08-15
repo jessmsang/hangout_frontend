@@ -9,7 +9,7 @@
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
-  background: #324c5f;
+  background: linear-gradient(#324c5f, #a45f50);
   object-fit: contain;
   object-position: bottom;
   background-size: auto 100%;

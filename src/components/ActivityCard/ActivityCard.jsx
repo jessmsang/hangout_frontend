@@ -1,10 +1,14 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import "./ActivityCard.css";
 
 import UserContext from "../../contexts/UserContext";
 
 import { activityCategoryLabels } from "../../constants/activityCategories";
 import { categoryIcons } from "../../constants/categoryIcons";
+
+import { activitySeasonsLabels } from "../../constants/activitySeasons";
+import { seasonsIcons } from "../../constants/seasonsIcons";
+
 import FilterContext from "../../contexts/FilterContext";
 
 export default function ActivityCard({ activity }) {
@@ -27,6 +31,12 @@ export default function ActivityCard({ activity }) {
     : [activity.category];
 
   const categoriesAlphabetical = categories.sort();
+
+  const seasons = Array.isArray(activity.seasons)
+    ? activity.seasons
+    : [activity.seasons];
+
+  const seasonsAlphabetical = seasons.sort();
 
   const groupSize = activity.groupSize;
 
@@ -70,6 +80,27 @@ export default function ActivityCard({ activity }) {
   }
 
   const costLabel = formatCost(cost);
+
+  const location = activity.location;
+
+  function formatLocation(location) {
+    if (!Array.isArray(location)) return "";
+
+    const normalized = [
+      ...new Set(location.map((loc) => loc.trim().toLowerCase())),
+    ];
+
+    const hasIndoor = normalized.includes("indoor");
+    const hasOutdoor = normalized.includes("outdoor");
+
+    if (hasIndoor && hasOutdoor) return "Indoor/Outdoor";
+    if (hasIndoor) return "Indoor";
+    if (hasOutdoor) return "Outdoor";
+
+    return "";
+  }
+
+  const locationLabel = formatLocation(location);
 
   // const handleLike = () => {
   //   onCardLike({ id: activity._id, isLiked });
@@ -131,8 +162,31 @@ export default function ActivityCard({ activity }) {
           <p className="card__description">{activity.description}</p>
         </div>
         <div className="card__footer">
-          <div className="card__cost">{costLabel}</div>
-          <div className="card__group-size">{groupSizeLabel}</div>
+          <div className="card__footer-first-row">
+            <div className="card__location">{locationLabel}</div>
+            <div className="card__cost">{costLabel}</div>
+          </div>
+          <div className="card__footer-second-row">
+            <div className="card__seasons">
+              {seasonsAlphabetical.map((season) => {
+                const Icon = seasonsIcons[season] || seasonsIcons.default;
+                const label =
+                  activitySeasonsLabels[seasons] + "icon" || "Unknown";
+                return (
+                  <div key={season} className="card__season-item">
+                    {Icon && (
+                      <img
+                        src={Icon}
+                        alt={label}
+                        className="card__season-icon"
+                      />
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+            <div className="card__group-size">{groupSizeLabel}</div>
+          </div>
         </div>
       </div>
     </li>

@@ -6,7 +6,7 @@
   background-color: #f3f4f0;
   padding: 0.5rem;
   width: 8.5rem;
-  height: 11.5rem;
+  height: 12.5rem;
   color: #000;
   box-shadow: 5px 5px 5px #00000034;
   flex: 0 0 auto;
@@ -140,9 +140,16 @@
 
 .card__footer {
   display: flex;
+  flex-direction: column;
+  margin-top: auto;
+  gap: 0.3rem;
+}
+
+.card__footer-first-row {
+  display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: auto;
+  align-items: center;
 }
 
 .card__group-size {
@@ -150,5 +157,27 @@
 }
 
 .card__cost {
+  font-size: 0.6rem;
+}
+
+.card__footer-second-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card__seasons {
+  display: flex;
+  flex-direction: row;
+  gap: 0.1rem;
+}
+
+.card__season-icon {
+  width: 0.8rem;
+  height: 0.8rem;
+}
+
+.card__location {
   font-size: 0.6rem;
 }
