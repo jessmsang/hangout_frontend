@@ -4,7 +4,7 @@ import { useState } from "react";
 import ActivityCriteriaForm from "../ActivityCriteriaForm/ActivityCriteriaForm";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-export default function AddActivityFormModal({ isOpen, onClose }) {
+export default function AddActivityFormModal({ isOpen, onClose, isLoading }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [seasons, setSeasons] = useState([]);
@@ -56,8 +56,9 @@ export default function AddActivityFormModal({ isOpen, onClose }) {
 
   return (
     <ModalWithForm
+      variant="add-activity"
       titleText="Add New Activity"
-      btnText="Add Activity"
+      btnText={isLoading ? "Adding activity..." : "Add Activity"}
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}

@@ -152,7 +152,7 @@
   align-items: center;
 }
 
-.card__group-size {
+.card__location {
   font-size: 0.6rem;
 }
 
@@ -170,7 +170,7 @@
 .card__seasons {
   display: flex;
   flex-direction: row;
-  gap: 0.1rem;
+  gap: 0.15rem;
 }
 
 .card__season-icon {
@@ -178,6 +178,6 @@
   height: 0.8rem;
 }
 
-.card__location {
+.card__group-size {
   font-size: 0.6rem;
 }

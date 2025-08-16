@@ -1,5 +1,5 @@
 import { checkResponse } from "./weatherApi";
-import { BASE_URL } from "./constants";
+import { BASE_URL } from "../constants/apiEndpoints";
 
 export const register = (
   registerEmail,

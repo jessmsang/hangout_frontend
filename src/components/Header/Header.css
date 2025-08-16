@@ -36,7 +36,7 @@
 }
 
 .header__unauthorized-btn:hover {
-  opacity: 0.7;
   transform: scale(1.05);
   cursor: pointer;
+  color: #c0a145;
 }

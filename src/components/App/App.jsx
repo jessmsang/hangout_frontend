@@ -8,6 +8,7 @@ import FilterContextProvider from "../FilterContextProvider/FilterContextProvide
 import AddActivityButton from "../AddActivityButton/AddActivityButton";
 import AddActivityFormModal from "../AddActivityFormModal/AddActivityFormModal";
 import Footer from "../Footer/Footer";
+import RegisterModal from "../RegisterModal/RegisterModal";
 
 import UserContext from "../../contexts/UserContext";
 import WeatherContext from "../../contexts/WeatherContext";
@@ -18,6 +19,8 @@ import activitiesData from "../../../db.json";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import { fetchCoordinatesByCity } from "../../utils/location";
 import { weatherAPIkey } from "../../constants/apiEndpoints";
+
+import * as auth from "../../utils/auth";
 
 export default function App() {
   const [weatherData, setWeatherData] = useState({
@@ -38,7 +41,15 @@ export default function App() {
       isCompleted: false,
     }))
   );
+  const [currentUser, setCurrentUser] = useState({
+    _id: "",
+    name: "",
+    email: "",
+    createdAt: "",
+  });
   const [activeModal, setActiveModal] = useState("");
+  const [isAuthenticating, setIsAuthenticating] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const openModal = (modalName) => setActiveModal(modalName);
   const closeActiveModal = () => setActiveModal("");
@@ -61,12 +72,10 @@ export default function App() {
   useEffect(() => {
     fetchCoordinatesByCity("Cincinnati", weatherAPIkey)
       .then((coordinates) => {
-        // console.log(coordinates);
         return getWeather(coordinates, weatherAPIkey);
       })
       .then((data) => {
         const filteredData = filterWeatherData(data);
-        // console.log(filteredData);
         setWeatherData(filteredData);
       })
       .catch(console.error);
@@ -75,15 +84,77 @@ export default function App() {
   // TODO: SET UP USER CONTEXT
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // const handleSignupClick = () => {
-  //   setActiveModal("register-modal");
-  //   setIsMobileMenuActive(false);
-  // };
+  const handleSignupClick = () => {
+    setActiveModal("register-modal");
+    //TODO: ADD RESPONSIVE DESIGN
+    // setIsMobileMenuActive(false);
+  };
 
   // const handleLoginClick = () => {
   //   setActiveModal("login-modal");
   //   setIsMobileMenuActive(false);
   // };
+
+  const handleSubmit = (request) => {
+    setIsLoading(true);
+    request()
+      .then(closeActiveModal)
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  const handleRegistration = ({
+    registerName,
+    registerEmail,
+    registerPassword,
+    confirmPassword,
+  }) => {
+    if (registerPassword === confirmPassword) {
+      const makeRequest = () => {
+        return auth
+          .register(registerName, registerEmail, registerPassword)
+          .then(() => {
+            closeActiveModal();
+            handleLogin(
+              { loginEmail: registerEmail, loginPassword: registerPassword },
+              resetForm
+            );
+            resetForm();
+          });
+      };
+      handleSubmit(makeRequest);
+    }
+  };
+
+  const handleLogin = ({ loginEmail, loginPassword }, resetForm) => {
+    if (!loginEmail || !loginPassword) {
+      return;
+    }
+
+    const makeRequest = () => {
+      return auth.login(loginEmail, loginPassword).then((data) => {
+        if (data.token) {
+          token.setToken(data.token);
+          setIsLoggedIn(true);
+          const redirectPath = location.state?.from?.pathname || "/";
+          navigate(redirectPath);
+          setCurrentUser(data);
+          closeActiveModal();
+          resetForm();
+        }
+      });
+    };
+    handleSubmit(makeRequest);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setCurrentUser(null);
+    token.removeToken();
+    navigate("/");
+  };
 
   return (
     <WeatherContext.Provider
@@ -91,29 +162,37 @@ export default function App() {
     >
       <UserContext.Provider
         value={{
-          // currentUser,
+          currentUser,
           isLoggedIn,
-          // isAuthenticating,
-          // handleLogout,
-          // handleLogin,
+          isAuthenticating,
+          handleLogout,
+          handleLogin,
         }}
       >
         <ActivitiesContext.Provider value={{ activities, setActivities }}>
           <FilterContextProvider>
             <div className="page">
               <div className="page__content">
-                <Header
-                // handleSignupClick={handleSignupClick}
-                />
+                <Header handleSignupClick={handleSignupClick} />
                 <Main />
                 <AddActivityButton onClick={() => openModal("add-activity")} />
-                {activeModal === "add-activity" && (
-                  <AddActivityFormModal isOpen onClose={closeActiveModal} />
-                )}
+                <AddActivityFormModal
+                  isOpen={activeModal === "add-activity"}
+                  onClose={closeActiveModal}
+                />
                 {/* Future: */}
                 {/* {activeModal === "login" && <LoginModal isOpen onClose={closeActiveModal} />} */}
                 {/* {activeModal === "signup" && <SignupModal isOpen onClose={closeActiveModal} />} */}
                 <Footer />
+
+                <RegisterModal
+                  onClose={closeActiveModal}
+                  isOpen={activeModal === "register-modal"}
+                  activeModal={activeModal}
+                  handleRegistration={handleRegistration}
+                  setActiveModal={setActiveModal}
+                  isLoading={isLoading}
+                />
               </div>
             </div>
           </FilterContextProvider>

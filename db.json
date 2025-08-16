@@ -479,6 +479,30 @@
       "cost": { "min": "$", "max": "$" },
       "isLiked": false,
       "isCompleted": false
+    },
+    {
+      "id": "pumpkin-carving",
+      "name": "Pumpkin-Carving",
+      "description": "Get into the Halloween spirit and carve some pumpkins! Get creative with it! You could even turn it into a fun competition.",
+      "seasons": ["fall"],
+      "location": ["indoor/outdoor"],
+      "category": ["festive", "creative", "low-key"],
+      "groupSize": { "min": "1", "max": "8" },
+      "cost": { "min": "$$", "max": "$$" },
+      "isLiked": false,
+      "isCompleted": false
+    },
+    {
+      "id": "easter-egg-hunt",
+      "name": "Easter Egg Hunt",
+      "description": "Host an easter egg hunt! Appropriate for kids AND adults - get creative in selecting your 'easter egg'.",
+      "seasons": ["spring"],
+      "location": ["indoor", "outdoor"],
+      "category": ["festive", "creative", "adventure"],
+      "groupSize": { "min": "1", "max": "12" },
+      "cost": { "min": "$", "max": "$$" },
+      "isLiked": false,
+      "isCompleted": false
     }
   ]
 }

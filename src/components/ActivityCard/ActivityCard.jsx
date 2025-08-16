@@ -10,7 +10,7 @@ import { activitySeasonsLabels } from "../../constants/activitySeasons";
 import { seasonsIcons } from "../../constants/seasonsIcons";
 
 import FilterContext from "../../contexts/FilterContext";
-import { data } from "react-router-dom";
+// import { data } from "react-router-dom";
 
 export default function ActivityCard({ activity }) {
   const { handleCardLike, handleCardComplete } = useContext(FilterContext);
