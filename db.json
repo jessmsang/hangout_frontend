@@ -1,7 +1,7 @@
 {
   "activities": [
     {
-      "id": "pickleball",
+      "_id": "pickleball",
       "name": "Pickleball",
       "description": "Grab some paddles and play either doubles or singles! Great for all skill levels.",
       "seasons": ["summer", "fall", "spring", "winter"],
@@ -13,7 +13,7 @@
       "isCompleted": false
     },
     {
-      "id": "kayaking",
+      "_id": "kayaking",
       "name": "Kayaking",
       "description": "Enjoy some time on a nearby body of water! Stay safe - always wear a lifejacket.",
       "seasons": ["summer"],
@@ -25,7 +25,7 @@
       "isCompleted": false
     },
     {
-      "id": "movie",
+      "_id": "movie",
       "name": "Movie",
       "description": "Have a relaxing night in or out, and watch a movie you've been meaning to see.",
       "seasons": ["summer", "fall", "spring", "winter"],
@@ -37,7 +37,7 @@
       "isCompleted": false
     },
     {
-      "id": "snowboarding",
+      "_id": "snowboarding",
       "name": "Snowboarding",
       "description": "Looking for a fun winter activity? Try out snowboarding!",
       "seasons": ["winter"],
@@ -49,7 +49,7 @@
       "isCompleted": false
     },
     {
-      "id": "board-game",
+      "_id": "board-game",
       "name": "Board Game",
       "description": "Host a board game night!",
       "seasons": ["summer", "fall", "spring", "winter"],
@@ -61,7 +61,7 @@
       "isCompleted": false
     },
     {
-      "id": "cook-together",
+      "_id": "cook-together",
       "name": "Cook Together",
       "description": "Cook a meal together. Choose something from your travels, or something brand new! This can be as challenging or relaxing as you please.",
       "seasons": ["summer", "fall", "spring", "winter"],
@@ -73,7 +73,7 @@
       "isCompleted": false
     },
     {
-      "id": "pumpkin-patch",
+      "_id": "pumpkin-patch",
       "name": "Pumpkin Patch",
       "description": "Get into the fall season and head on over to a nearby pumpkin patch!",
       "seasons": ["fall"],
@@ -85,7 +85,7 @@
       "isCompleted": false
     },
     {
-      "id": "picnic",
+      "_id": "picnic",
       "name": "Picnic",
       "description": "Enjoy some good weather and prepare a picnic!",
       "seasons": ["summer", "fall", "spring"],
@@ -97,7 +97,7 @@
       "isCompleted": false
     },
     {
-      "id": "polar-plunge",
+      "_id": "polar-plunge",
       "name": "Polar Plunge",
       "description": "Challenge yourself to a polar plunge. Share this experience with people you love, and stay safe!",
       "seasons": ["winter"],
@@ -109,7 +109,7 @@
       "isCompleted": false
     },
     {
-      "id": "crafts-night",
+      "_id": "crafts-night",
       "name": "Crafts Night",
       "description": "Host a crafts night! Create something as challenging or simple as you'd like.",
       "seasons": ["summer", "fall", "spring", "winter"],
@@ -121,7 +121,7 @@
       "isCompleted": false
     },
     {
-      "id": "swimming",
+      "_id": "swimming",
       "name": "Swimming",
       "description": "Enjoy the summer heat and head to the pool, lake, or river!",
       "seasons": ["summer"],
@@ -133,7 +133,7 @@
       "isCompleted": false
     },
     {
-      "id": "slumber-party",
+      "_id": "slumber-party",
       "name": "Slumber Party",
       "description": "Host a slumber party in your living room with your significant other or friends! Stay up late, watch a movie, play some games - the options are endless!",
       "seasons": ["summer", "fall", "spring", "winter"],
@@ -145,7 +145,7 @@
       "isCompleted": false
     },
     {
-      "id": "karaoke",
+      "_id": "karaoke",
       "name": "Karaoke",
       "description": "Either host an at-home karaoke sesh, or find a local karaoke spot, and sing some tunes together!",
       "seasons": ["summer", "fall", "spring", "winter"],
@@ -157,7 +157,7 @@
       "isCompleted": false
     },
     {
-      "id": "homemade-dumplings",
+      "_id": "homemade-dumplings",
       "name": "Homemade Dumplings",
       "description": "Try making some homemade dumplings!",
       "seasons": ["summer", "fall", "spring", "winter"],
@@ -169,7 +169,7 @@
       "isCompleted": false
     },
     {
-      "id": "homemade-spring-rolls",
+      "_id": "homemade-spring-rolls",
       "name": "Homemade Spring Rolls",
       "description": "Try making some homemade spring rolls!",
       "seasons": ["summer", "fall", "spring", "winter"],
@@ -181,7 +181,7 @@
       "isCompleted": false
     },
     {
-      "id": "baking-roulette",
+      "_id": "baking-roulette",
       "name": "Baking Roulette",
       "description": "Use a baking cookbook, website, or instagram account and randomly select something to bake!",
       "seasons": ["summer", "fall", "spring", "winter"],
@@ -193,7 +193,7 @@
       "isCompleted": false
     },
     {
-      "id": "book-club",
+      "_id": "book-club",
       "name": "Book Club",
       "description": "Start a book club with your significant other or a small group of friends.",
       "seasons": ["summer", "fall", "spring", "winter"],
@@ -205,7 +205,7 @@
       "isCompleted": false
     },
     {
-      "id": "puzzle-night",
+      "_id": "puzzle-night",
       "name": "Puzzle Night",
       "description": "Host a puzzle-making party with a small group of friends.",
       "seasons": ["summer", "fall", "spring", "winter"],
@@ -217,7 +217,7 @@
       "isCompleted": false
     },
     {
-      "id": "video-games",
+      "_id": "video-games",
       "name": "Video Games",
       "description": "Organize a night of playing some video games with friends.",
       "seasons": ["summer", "fall", "spring", "winter"],
@@ -229,7 +229,7 @@
       "isCompleted": false
     },
     {
-      "id": "topgolf",
+      "_id": "topgolf",
       "name": "Topgolf",
       "description": "Head to your nearest Topgolf location and have some fun hitting some balls with friends.",
       "seasons": ["summer", "fall", "spring"],
@@ -241,7 +241,7 @@
       "isCompleted": false
     },
     {
-      "id": "fondue-night",
+      "_id": "fondue-night",
       "name": "Fondue Night",
       "description": "This fondue night can be savory or sweet - or both! Make cheese fondue or chocolate fondue.",
       "seasons": ["summer", "fall", "spring", "winter"],
@@ -253,7 +253,7 @@
       "isCompleted": false
     },
     {
-      "id": "backyard-bbq",
+      "_id": "backyard-bbq",
       "name": "Backyard BBQ",
       "description": "Enjoy a backyard party for two with your significant other, or host some friends. Put on some tunes, grill out, play some backyard games. Enjoy time outside in the comfort of your own home!",
       "seasons": ["summer", "fall", "spring"],
@@ -265,7 +265,7 @@
       "isCompleted": false
     },
     {
-      "id": "patio-coffee-date",
+      "_id": "patio-coffee-date",
       "name": "Patio Coffee Date",
       "description": "Choose a morning to enjoy coffee on your front or back porch together! Make sure to be fully present - make a rule to be phone-free during this time",
       "seasons": ["summer", "fall", "spring"],
@@ -277,7 +277,7 @@
       "isCompleted": false
     },
     {
-      "id": "homemade-pizza",
+      "_id": "homemade-pizza",
       "name": "Homemade Pizza",
       "description": "This can be as simple or difficult as you please - handmade dough, pre-made dough, and as many toppings as you'd like!",
       "seasons": ["summer", "fall", "spring", "winter"],
@@ -289,7 +289,7 @@
       "isCompleted": false
     },
     {
-      "id": "camping",
+      "_id": "camping",
       "name": "Camping",
       "description": "Plan a weekend to be in nature together. Tent camp, car camp, hammock camp - as long as you're not indoors! Be one with nature and disconnect from technology.",
       "seasons": ["summer", "fall", "spring"],
@@ -301,7 +301,7 @@
       "isCompleted": false
     },
     {
-      "id": "play-dress-up",
+      "_id": "play-dress-up",
       "name": "Play Dress-Up",
       "description": "Dress each other for a night out together! Can be casual, can be fancy - or both if you want to do this more than once!",
       "seasons": ["summer", "fall", "spring", "winter"],
@@ -313,7 +313,7 @@
       "isCompleted": false
     },
     {
-      "id": "play-tourist",
+      "_id": "play-tourist",
       "name": "Play Tourist",
       "description": "Explore your city together! Pick one or more activities you know your city to be known for.",
       "seasons": ["summer", "fall", "spring", "winter"],
@@ -325,7 +325,7 @@
       "isCompleted": false
     },
     {
-      "id": "zoo",
+      "_id": "zoo",
       "name": "Zoo",
       "description": "Lean into your inner child and have some fun at the zoo!",
       "seasons": ["summer", "fall", "spring"],
@@ -337,7 +337,7 @@
       "isCompleted": false
     },
     {
-      "id": "byow",
+      "_id": "byow",
       "name": "BYOW - Bring Your Own Wheels",
       "description": "Go biking, skateboarding, rollerskating, or any other form of wheels.",
       "seasons": ["summer", "fall", "spring"],
@@ -349,7 +349,7 @@
       "isCompleted": false
     },
     {
-      "id": "rock-climbing",
+      "_id": "rock-climbing",
       "name": "Rock Climbing",
       "description": "Go rock climbing at a local rock climbing gym.",
       "seasons": ["summer", "fall", "spring", "winter"],
@@ -361,7 +361,7 @@
       "isCompleted": false
     },
     {
-      "id": "trader-joes-dinner-date",
+      "_id": "trader-joes-dinner-date",
       "name": "Trader Joe's dinner date",
       "description": "Play rock, paper, scissors to pick each item for a 3-course meal + a beverage",
       "seasons": ["summer", "fall", "spring", "winter"],
@@ -373,7 +373,7 @@
       "isCompleted": false
     },
     {
-      "id": "christmas-tree-shopping",
+      "_id": "christmas-tree-shopping",
       "name": "Christmas Tree Shopping",
       "description": "Pick out a christmas tree.",
       "seasons": ["winter"],
@@ -385,7 +385,7 @@
       "isCompleted": false
     },
     {
-      "id": "christmas-decorating",
+      "_id": "christmas-decorating",
       "name": "Christmas Decorating",
       "description": "Get into the Christmas spirit and begin decorating your home!",
       "seasons": ["winter"],
@@ -397,7 +397,7 @@
       "isCompleted": false
     },
     {
-      "id": "ice-skating",
+      "_id": "ice-skating",
       "name": "Ice Skating",
       "description": "Find an ice rink to go ice skating at.",
       "seasons": ["winter"],
@@ -409,7 +409,7 @@
       "isCompleted": false
     },
     {
-      "id": "snow-day",
+      "_id": "snow-day",
       "name": "Snow Day",
       "description": "Take advantage of the snowy weather and go sledding, build a snow man, make snow angels, have a snowball fight, or simply take a walk in the snow.",
       "seasons": ["winter"],
@@ -421,7 +421,7 @@
       "isCompleted": false
     },
     {
-      "id": "water-fight",
+      "_id": "water-fight",
       "name": "Water Fight",
       "description": "Take advantage of the warm weather and have a water fight!",
       "seasons": ["summer"],
@@ -433,7 +433,7 @@
       "isCompleted": false
     },
     {
-      "id": "winter-lights",
+      "_id": "winter-lights",
       "name": "Winter Lights",
       "description": "Find a light display this winter - weather walking or driving.",
       "seasons": ["winter"],
@@ -445,7 +445,7 @@
       "isCompleted": false
     },
     {
-      "id": "drive-in-movie",
+      "_id": "drive-in-movie",
       "name": "Drive-in Movie",
       "description": "Find a nearby drive-in movie and share this timeless experience with someone you love.",
       "seasons": ["summer", "spring", "fall"],
@@ -457,7 +457,7 @@
       "isCompleted": false
     },
     {
-      "id": "tennis",
+      "_id": "tennis",
       "name": "Tennis",
       "description": "Grab a racket and play some tennis with some friends or your significant other. Have some fun with it!",
       "seasons": ["summer", "fall", "spring"],
@@ -469,7 +469,7 @@
       "isCompleted": false
     },
     {
-      "id": "paper-snow-flakes",
+      "_id": "paper-snow-flakes",
       "name": "Paper Snow Flakes",
       "description": "Grab some paper and scissors and craft some snowflakes to hang around your house.",
       "seasons": ["winter"],
@@ -481,7 +481,7 @@
       "isCompleted": false
     },
     {
-      "id": "pumpkin-carving",
+      "_id": "pumpkin-carving",
       "name": "Pumpkin-Carving",
       "description": "Get into the Halloween spirit and carve some pumpkins! Get creative with it! You could even turn it into a fun competition.",
       "seasons": ["fall"],
@@ -493,7 +493,7 @@
       "isCompleted": false
     },
     {
-      "id": "easter-egg-hunt",
+      "_id": "easter-egg-hunt",
       "name": "Easter Egg Hunt",
       "description": "Host an easter egg hunt! Appropriate for kids AND adults - get creative in selecting your 'easter egg'.",
       "seasons": ["spring"],

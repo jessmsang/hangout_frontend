@@ -7,7 +7,7 @@ import ActivitiesContext from "../../contexts/ActivitiesContext";
 export default function ActivitiesCarousel({ activities }) {
   const activitiesCarouselRef = useRef();
 
-  const allActivities = useContext(ActivitiesContext);
+  const { activities: allActivities } = useContext(ActivitiesContext);
 
   const activitiesToDisplay = activities?.length ? activities : allActivities;
 
@@ -64,7 +64,7 @@ export default function ActivitiesCarousel({ activities }) {
       </button>
       <ul className="activities-carousel__track" ref={activitiesCarouselRef}>
         {activitiesToDisplay.map((activity) => (
-          <ActivityCard key={activity.id} activity={activity} />
+          <ActivityCard key={activity._id} activity={activity} />
         ))}
       </ul>
       <button

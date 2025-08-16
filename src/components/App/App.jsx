@@ -14,12 +14,13 @@ import UserContext from "../../contexts/UserContext";
 import WeatherContext from "../../contexts/WeatherContext";
 import ActivitiesContext from "../../contexts/ActivitiesContext";
 
-import activitiesData from "../../../db.json";
+// import activitiesData from "../../../db.json";
 
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import { fetchCoordinatesByCity } from "../../utils/location";
 import { weatherAPIkey } from "../../constants/apiEndpoints";
 
+import * as activitiesApi from "../../utils/activitiesApi";
 import * as auth from "../../utils/auth";
 
 export default function App() {
@@ -34,13 +35,16 @@ export default function App() {
     isDay: true,
     icon: "",
   });
+
   const [activities, setActivities] = useState(
-    activitiesData.activities.map((activity) => ({
-      ...activity,
-      isLiked: false,
-      isCompleted: false,
-    }))
+    []
+    // activitiesData.activities.map((activity) => ({
+    //   ...activity,
+    //   isLiked: false,
+    //   isCompleted: false,
+    // }))
   );
+
   const [currentUser, setCurrentUser] = useState({
     _id: "",
     name: "",
@@ -68,6 +72,47 @@ export default function App() {
       document.removeEventListener("keydown", handleEscClose);
     };
   }, [activeModal]);
+
+  useEffect(() => {
+    activitiesApi
+      .getActivities()
+      .then((data) =>
+        setActivities(
+          data.map((activity) => ({
+            ...activity,
+            isLiked: activity.isLiked ?? false,
+            isCompleted: activity.isCompleted ?? false,
+          }))
+        )
+      )
+      .catch(console.error);
+  }, []);
+
+  const handleCardLike = ({ id, isLiked }) => {
+    activitiesApi
+      .updateActivity(id, { isLiked: !isLiked })
+      .then((updatedActivity) => {
+        setActivities((prev) =>
+          prev.map((activity) =>
+            activity._id === id ? updatedActivity : activity
+          )
+        );
+      })
+      .catch(console.error);
+  };
+
+  const handleCardComplete = ({ id, isCompleted }) => {
+    activitiesApi
+      .updateActivity(id, { isCompleted: !isCompleted })
+      .then((updatedActivity) => {
+        setActivities((prev) =>
+          prev.map((activity) =>
+            activity._id === id ? updatedActivity : activity
+          )
+        );
+      })
+      .catch(console.error);
+  };
 
   useEffect(() => {
     fetchCoordinatesByCity("Cincinnati", weatherAPIkey)

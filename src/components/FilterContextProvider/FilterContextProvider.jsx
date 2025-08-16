@@ -3,7 +3,7 @@ import FilterContext from "../../contexts/FilterContext";
 import ActivitiesContext from "../../contexts/ActivitiesContext";
 import WeatherContext from "../../contexts/WeatherContext";
 // TODO: ADD API THINGS
-// import api from "../../utils/api";
+import * as activitiesApi from "../../utils/activitiesApi";
 
 export default function FilterContextProvider({ children }) {
   const [seasons, setSeasons] = useState([]);
@@ -14,8 +14,6 @@ export default function FilterContextProvider({ children }) {
 
   const [isExactGroupSize, setIsExactGroupSize] = useState(false);
   const [isExactCost, setIsExactCost] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
-  const [isCompleted, setIsCompleted] = useState(false);
 
   const { activities, setActivities } = useContext(ActivitiesContext);
   const { weatherData } = useContext(WeatherContext);
@@ -40,7 +38,7 @@ export default function FilterContextProvider({ children }) {
     }
 
     return filtered;
-  }, [activities, weatherData, seasons, location]);
+  }, [activities, weatherData]);
 
   const filteredActivities = useMemo(() => {
     let filtered = activities;
@@ -110,17 +108,29 @@ export default function FilterContextProvider({ children }) {
   ]);
 
   const handleCardLike = ({ id, isLiked }) => {
-    setActivities((prev) =>
-      prev.map((act) => (act.id === id ? { ...act, isLiked: !isLiked } : act))
-    );
+    activitiesApi
+      .updateActivity(id, { isLiked: !isLiked })
+      .then((updatedActivity) => {
+        setActivities((prev) =>
+          prev.map((activity) =>
+            activity._id === id ? updatedActivity : activity
+          )
+        );
+      })
+      .catch(console.error);
   };
 
   const handleCardComplete = ({ id, isCompleted }) => {
-    setActivities((prev) =>
-      prev.map((act) =>
-        act.id === id ? { ...act, isCompleted: !isCompleted } : act
-      )
-    );
+    activitiesApi
+      .updateActivity(id, { isCompleted: !isCompleted })
+      .then((updatedActivity) => {
+        setActivities((prev) =>
+          prev.map((activity) =>
+            activity._id === id ? updatedActivity : activity
+          )
+        );
+      })
+      .catch(console.error);
   };
 
   return (
@@ -142,10 +152,6 @@ export default function FilterContextProvider({ children }) {
         setIsExactCost,
         filteredActivities,
         activitiesFilteredByWeather,
-        isLiked,
-        setIsLiked,
-        isCompleted,
-        setIsCompleted,
         handleCardLike,
         handleCardComplete,
       }}

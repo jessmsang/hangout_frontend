@@ -16,11 +16,14 @@ export default function ActivityCard({ activity }) {
   const { handleCardLike, handleCardComplete } = useContext(FilterContext);
 
   const toggleIsLiked = () => {
-    handleCardLike({ id: activity.id, isLiked: activity.isLiked });
+    handleCardLike({ _id: activity._id, isLiked: activity.isLiked });
   };
 
   const toggleIsCompleted = () => {
-    handleCardComplete({ id: activity.id, isCompleted: activity.isCompleted });
+    handleCardComplete({
+      _id: activity._id,
+      isCompleted: activity.isCompleted,
+    });
   };
 
   // TODO: ADD USER CONTEXT
