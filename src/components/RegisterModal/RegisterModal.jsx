@@ -43,8 +43,8 @@ function RegisterModal({ onClose, isOpen, handleRegistration, isLoading }) {
       onClose={onClose}
       isOpen={isOpen}
       onSubmit={handleSubmit}
-      // onNavBtnClick={() => setActiveModal("login-modal")}
-      // navBtnText="or Log In"
+      onNavBtnClick={() => setActiveModal("login-modal")}
+      navBtnText="or Log In"
     >
       <label htmlFor="register-name-input" className="modal__label">
         Name*:

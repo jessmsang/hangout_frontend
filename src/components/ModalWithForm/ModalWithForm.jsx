@@ -8,8 +8,8 @@ function ModalWithForm({
   onClose,
   isOpen,
   onSubmit,
-  // onNavBtnClick,
-  // navBtnText,
+  onNavBtnClick,
+  navBtnText,
 }) {
   const handleModalBackdropClick = (e) => {
     if (e.target.classList.contains("modal")) {
@@ -38,6 +38,15 @@ function ModalWithForm({
           {children}
           <div className="modal__btn-wrapper">
             <button className="modal__submit-btn">{btnText}</button>
+            {navBtnText && (
+              <button
+                className="modal__nav-btn"
+                type="button"
+                onClick={onNavBtnClick}
+              >
+                {navBtnText}
+              </button>
+            )}
           </div>
         </form>
       </div>
