@@ -107,26 +107,26 @@ export default function FilterContextProvider({ children }) {
     isExactCost,
   ]);
 
-  const handleCardLike = ({ id, isLiked }) => {
+  const handleCardLike = ({ _id, isLiked }) => {
     activitiesApi
-      .updateActivity(id, { isLiked: !isLiked })
+      .updateActivity(_id, { isLiked: !isLiked })
       .then((updatedActivity) => {
         setActivities((prev) =>
           prev.map((activity) =>
-            activity._id === id ? updatedActivity : activity
+            activity._id === _id ? updatedActivity : activity
           )
         );
       })
       .catch(console.error);
   };
 
-  const handleCardComplete = ({ id, isCompleted }) => {
+  const handleCardComplete = ({ _id, isCompleted }) => {
     activitiesApi
-      .updateActivity(id, { isCompleted: !isCompleted })
+      .updateActivity(_id, { isCompleted: !isCompleted })
       .then((updatedActivity) => {
         setActivities((prev) =>
           prev.map((activity) =>
-            activity._id === id ? updatedActivity : activity
+            activity._id === _id ? updatedActivity : activity
           )
         );
       })

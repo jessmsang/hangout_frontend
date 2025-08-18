@@ -19,6 +19,8 @@ export function updateActivity(id, updates) {
         ...updates,
       };
 
+      console.log(`Updated ${id} activity:`, activitiesDB[index]);
+
       resolve(activitiesDB[index]);
     }, 300);
   });

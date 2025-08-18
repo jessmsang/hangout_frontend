@@ -10,10 +10,12 @@ import { activitySeasonsLabels } from "../../constants/activitySeasons";
 import { seasonsIcons } from "../../constants/seasonsIcons";
 
 import FilterContext from "../../contexts/FilterContext";
+import UserContext from "../../contexts/UserContext";
 // import { data } from "react-router-dom";
 
 export default function ActivityCard({ activity }) {
   const { handleCardLike, handleCardComplete } = useContext(FilterContext);
+  const { isLoggedIn } = useContext(UserContext);
 
   const toggleIsLiked = () => {
     handleCardLike({ _id: activity._id, isLiked: activity.isLiked });
@@ -108,32 +110,32 @@ export default function ActivityCard({ activity }) {
   return (
     <li className="card">
       <div className="card__container">
-        {/* {isLoggedIn && ( */}
-        <div className="card__header">
-          <ul className="card__header-list">
-            <li className="card__header-list-item">
-              <button
-                className={`${
-                  !activity.isLiked
-                    ? "card__like-btn-not-liked"
-                    : "card__like-btn-liked"
-                }`}
-                onClick={toggleIsLiked}
-              ></button>
-            </li>
-            <li className="card__header-list-item">
-              <button
-                className={`${
-                  !activity.isCompleted
-                    ? "card__complete-btn-not-completed"
-                    : "card__complete-btn-completed"
-                }`}
-                onClick={toggleIsCompleted}
-              ></button>
-            </li>
-          </ul>
-        </div>
-        {/* )} */}
+        {isLoggedIn && (
+          <div className="card__header">
+            <ul className="card__header-list">
+              <li className="card__header-list-item">
+                <button
+                  className={`${
+                    !activity.isLiked
+                      ? "card__like-btn-not-liked"
+                      : "card__like-btn-liked"
+                  }`}
+                  onClick={toggleIsLiked}
+                ></button>
+              </li>
+              <li className="card__header-list-item">
+                <button
+                  className={`${
+                    !activity.isCompleted
+                      ? "card__complete-btn-not-completed"
+                      : "card__complete-btn-completed"
+                  }`}
+                  onClick={toggleIsCompleted}
+                ></button>
+              </li>
+            </ul>
+          </div>
+        )}
         <div className="card__categories-container">
           {categoriesAlphabetical.map((category) => {
             const Icon = categoryIcons[category] || categoryIcons.default;

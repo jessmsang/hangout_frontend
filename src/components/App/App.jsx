@@ -36,14 +36,7 @@ export default function App() {
     icon: "",
   });
 
-  const [activities, setActivities] = useState(
-    []
-    // activitiesData.activities.map((activity) => ({
-    //   ...activity,
-    //   isLiked: false,
-    //   isCompleted: false,
-    // }))
-  );
+  const [activities, setActivities] = useState([]);
 
   const [currentUser, setCurrentUser] = useState({
     _id: "",
@@ -54,6 +47,11 @@ export default function App() {
   const [activeModal, setActiveModal] = useState("");
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+
+  const savedActivities = activities.filter((activity) => activity.isLiked);
+  const completedActivities = activities.filter(
+    (activity) => activity.isCompleted
+  );
 
   const openModal = (modalName) => setActiveModal(modalName);
   const closeActiveModal = () => setActiveModal("");
@@ -150,36 +148,26 @@ export default function App() {
       });
   };
 
-  const handleRegistration = ({
-    registerName,
-    registerEmail,
-    registerPassword,
-    confirmPassword,
-  }) => {
-    if (registerPassword === confirmPassword) {
+  const handleRegistration = ({ email, password, confirmPassword, name }) => {
+    if (password === confirmPassword) {
       const makeRequest = () => {
-        return auth
-          .register(registerName, registerEmail, registerPassword)
-          .then(() => {
-            closeActiveModal();
-            handleLogin(
-              { loginEmail: registerEmail, loginPassword: registerPassword },
-              resetForm
-            );
-            resetForm();
-          });
+        return auth.register(email, password, name).then(() => {
+          closeActiveModal();
+          handleLogin({ email, password }, resetForm);
+          resetForm();
+        });
       };
       handleSubmit(makeRequest);
     }
   };
 
-  const handleLogin = ({ loginEmail, loginPassword }, resetForm) => {
-    if (!loginEmail || !loginPassword) {
+  const handleLogin = ({ email, password }, resetForm) => {
+    if (!email || !password) {
       return;
     }
 
     const makeRequest = () => {
-      return auth.login(loginEmail, loginPassword).then((data) => {
+      return auth.login(email, password).then((data) => {
         if (data.token) {
           token.setToken(data.token);
           setIsLoggedIn(true);
@@ -212,6 +200,9 @@ export default function App() {
           isAuthenticating,
           handleLogout,
           handleLogin,
+          handleRegistration,
+          savedActivities,
+          completedActivities,
         }}
       >
         <ActivitiesContext.Provider value={{ activities, setActivities }}>

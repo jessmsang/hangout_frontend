@@ -4,14 +4,14 @@ import { useForm } from "../../hooks/useForm";
 function RegisterModal({ onClose, isOpen, handleRegistration, isLoading }) {
   const { values, handleChange, setValues, errorMessage } = useForm(
     {
-      registerName: "",
-      registerEmail: "",
-      registerPassword: "",
+      name: "",
+      email: "",
+      password: "",
       confirmPassword: "",
     },
     {
       matchFields: {
-        field: "registerPassword",
+        field: "password",
         confirmField: "confirmPassword",
       },
     }
@@ -20,14 +20,14 @@ function RegisterModal({ onClose, isOpen, handleRegistration, isLoading }) {
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
-    if (values.registerPassword !== values.confirmPassword) {
+    if (values.password !== values.confirmPassword) {
       return;
     } else {
       handleRegistration(values, () => {
         setValues({
-          registerName: "",
-          registerEmail: "",
-          registerPassword: "",
+          name: "",
+          email: "",
+          password: "",
           confirmPassword: "",
         });
       });
@@ -50,53 +50,53 @@ function RegisterModal({ onClose, isOpen, handleRegistration, isLoading }) {
         Name*:
         <input
           type="text"
-          name="registerName"
-          id="register-name-input"
+          name="name"
+          id="name-input"
           className="modal__input"
           placeholder="Name"
           required
           minLength="1"
           maxLength="30"
           onChange={handleChange}
-          value={values.registerName}
+          value={values.name}
         />
         <span className="modal__error" id="register-name-input-error">
-          {errorMessage.registerName}
+          {errorMessage.name}
         </span>
       </label>
       <label htmlFor="register-email-input" className="modal__label">
         Email*:
         <input
           type="email"
-          name="registerEmail"
-          id="register-email-input"
+          name="email"
+          id="email-input"
           className="modal__input"
           placeholder="Email"
           required
           minLength="1"
           maxLength="30"
           onChange={handleChange}
-          value={values.registerEmail}
+          value={values.email}
         />
-        <span className="modal__error" id="register-email-input-error">
-          {errorMessage.registerEmail}
+        <span className="modal__error" id="email-input-error">
+          {errorMessage.email}
         </span>
       </label>
-      <label htmlFor="register-password-input" className="modal__label">
+      <label htmlFor="password-input" className="modal__label">
         Password*:
         <input
           type="password"
-          name="registerPassword"
-          id="register-password-input"
+          name="password"
+          id="password-input"
           className="modal__input"
           placeholder="Password"
           required
           pattern="^(?=.*[A-Z])(?=.*[!@#$%^&*_+-=?]).{8,50}$"
           onChange={handleChange}
-          value={values.registerPassword}
+          value={values.password}
         />
-        <span className="modal__error" id="register-password-input-error">
-          {errorMessage.registerPassword}
+        <span className="modal__error" id="password-input-error">
+          {errorMessage.password}
         </span>
       </label>
       <label htmlFor="confirm-password-input" className="modal__label">
