@@ -47,7 +47,7 @@ export default function AddActivityFormModal({ isOpen, onClose, isLoading }) {
       category,
       groupSize,
       cost,
-      isLiked: false,
+      isSaved: false,
       isCompleted: false,
     };
 

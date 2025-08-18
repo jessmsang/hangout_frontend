@@ -2,22 +2,42 @@ import { useContext, useState, useMemo } from "react";
 import FilterContext from "../../contexts/FilterContext";
 import ActivitiesContext from "../../contexts/ActivitiesContext";
 import WeatherContext from "../../contexts/WeatherContext";
+import UserContext from "../../contexts/UserContext";
+
 // TODO: ADD API THINGS
 import * as activitiesApi from "../../utils/activitiesApi";
 
 export default function FilterContextProvider({ children }) {
-  const [seasons, setSeasons] = useState([]);
-  const [location, setLocation] = useState([]);
-  const [category, setCategory] = useState([]);
-  const [groupSize, setGroupSize] = useState({ min: 1, max: 12 });
-  const [cost, setCost] = useState({ min: "$", max: "$$$" });
-
-  const [isExactGroupSize, setIsExactGroupSize] = useState(false);
-  const [isExactCost, setIsExactCost] = useState(false);
-
-  const { activities, setActivities } = useContext(ActivitiesContext);
+  const { activities } = useContext(ActivitiesContext);
   const { weatherData } = useContext(WeatherContext);
+  const { currentUser, setCurrentUser } = useContext(UserContext);
 
+  // --- Helper to create a blank filter state ---
+  const createFilterState = () => ({
+    seasons: [],
+    location: [],
+    category: [],
+    groupSize: { min: 1, max: 12 },
+    cost: { min: "$", max: "$$$" },
+    isExactGroupSize: false,
+    isExactCost: false,
+  });
+
+  // --- Section-specific filters ---
+  const [filters, setFilters] = useState({
+    search: createFilterState(),
+    saved: createFilterState(),
+  });
+
+  // --- Update filters for a specific section ---
+  const updateFilter = (section, newFilter) => {
+    setFilters((prev) => ({
+      ...prev,
+      [section]: { ...prev[section], ...newFilter },
+    }));
+  };
+
+  // --- Filter activities by weather ---
   const activitiesFilteredByWeather = useMemo(() => {
     let filtered = activities;
 
@@ -30,57 +50,68 @@ export default function FilterContextProvider({ children }) {
 
     const isOutdoor = weatherData?.isOutdoor;
     if (typeof isOutdoor === "boolean") {
-      filtered = filtered.filter((activity) => {
-        return isOutdoor
+      filtered = filtered.filter((activity) =>
+        isOutdoor
           ? activity.location.includes("outdoor")
-          : activity.location.includes("indoor");
-      });
+          : activity.location.includes("indoor")
+      );
     }
 
     return filtered;
   }, [activities, weatherData]);
 
-  const filteredActivities = useMemo(() => {
-    let filtered = activities;
+  // --- Generic activity filter function ---
+  const filterActivities = (activitiesList, filter) => {
+    let filtered = activitiesList;
+    const {
+      seasons,
+      location,
+      category,
+      groupSize,
+      cost,
+      isExactGroupSize,
+      isExactCost,
+    } = filter;
 
-    if (seasons.length > 0) {
+    // Seasons
+    if (seasons.length) {
       filtered = filtered.filter((activity) =>
         seasons.some((season) => activity.seasons.includes(season))
       );
     }
 
-    if (location.length > 0) {
+    // Location
+    if (location.length) {
       filtered = filtered.filter((activity) =>
         location.some((loc) => activity.location.includes(loc))
       );
     }
 
-    if (category.length > 0) {
+    // Category
+    if (category.length) {
       filtered = filtered.filter((activity) =>
         category.some((cat) => activity.category.includes(cat))
       );
     }
 
+    // Cost
     const costLevels = ["$", "$$", "$$$"];
-
     if (isExactCost && cost.min) {
-      const selectedCostIndex = costLevels.indexOf(cost.min);
-      filtered = filtered.filter((activity) => {
-        const activityMinIndex = costLevels.indexOf(activity.cost.min || "$");
-
-        return activityMinIndex <= selectedCostIndex;
-      });
+      const index = costLevels.indexOf(cost.min);
+      filtered = filtered.filter(
+        (activity) => costLevels.indexOf(activity.cost.min || "$") <= index
+      );
     } else if (cost.min && cost.max) {
       const minIndex = costLevels.indexOf(cost.min);
       const maxIndex = costLevels.indexOf(cost.max);
       filtered = filtered.filter((activity) => {
-        const activityMinIndex = costLevels.indexOf(activity.cost.min || "$");
-        const activityMaxIndex = costLevels.indexOf(activity.cost.max || "$$$");
-
-        return activityMaxIndex >= minIndex && activityMinIndex <= maxIndex;
+        const minActivity = costLevels.indexOf(activity.cost.min || "$");
+        const maxActivity = costLevels.indexOf(activity.cost.max || "$$$");
+        return maxActivity >= minIndex && minActivity <= maxIndex;
       });
     }
 
+    // Group size
     if (isExactGroupSize && groupSize.min) {
       filtered = filtered.filter(
         (activity) =>
@@ -96,63 +127,61 @@ export default function FilterContextProvider({ children }) {
     }
 
     return filtered;
-  }, [
-    activities,
-    seasons,
-    category,
-    location,
-    groupSize,
-    isExactGroupSize,
-    cost,
-    isExactCost,
-  ]);
-
-  const handleCardLike = ({ _id, isLiked }) => {
-    activitiesApi
-      .updateActivity(_id, { isLiked: !isLiked })
-      .then((updatedActivity) => {
-        setActivities((prev) =>
-          prev.map((activity) =>
-            activity._id === _id ? updatedActivity : activity
-          )
-        );
-      })
-      .catch(console.error);
   };
 
-  const handleCardComplete = ({ _id, isCompleted }) => {
-    activitiesApi
-      .updateActivity(_id, { isCompleted: !isCompleted })
-      .then((updatedActivity) => {
-        setActivities((prev) =>
-          prev.map((activity) =>
-            activity._id === _id ? updatedActivity : activity
-          )
-        );
-      })
-      .catch(console.error);
+  // --- User-specific activities ---
+  const savedActivities = useMemo(() => {
+    if (!currentUser) return [];
+    return activities.filter((activity) =>
+      currentUser.savedActivities?.includes(activity._id)
+    );
+  }, [activities, currentUser]);
+
+  const completedActivities = useMemo(() => {
+    if (!currentUser) return [];
+    return activities.filter((activity) =>
+      currentUser.completedActivities?.includes(activity._id)
+    );
+  }, [activities, currentUser]);
+
+  // --- Filtered activities by section ---
+  const filteredActivities = useMemo(
+    () => ({
+      search: filterActivities(activities, filters.search),
+      saved: filterActivities(savedActivities, filters.saved),
+    }),
+    [activities, savedActivities, filters]
+  );
+
+  // --- Utility to toggle array items ---
+  const toggleArrayItem = (arr = [], item) =>
+    arr.includes(item) ? arr.filter((i) => i !== item) : [...arr, item];
+
+  const toggleUserActivity = (prop, _id) => {
+    if (!currentUser) return Promise.resolve(null);
+    const updatedUser = {
+      ...currentUser,
+      [prop]: toggleArrayItem(currentUser[prop], _id),
+    };
+    setCurrentUser(updatedUser);
+    return Promise.resolve(updatedUser);
   };
+
+  const handleCardSave = ({ _id }) =>
+    toggleUserActivity("savedActivities", _id);
+  const handleCardComplete = ({ _id }) =>
+    toggleUserActivity("completedActivities", _id);
 
   return (
     <FilterContext.Provider
       value={{
-        seasons,
-        setSeasons,
-        location,
-        setLocation,
-        category,
-        setCategory,
-        groupSize,
-        setGroupSize,
-        cost,
-        setCost,
-        isExactGroupSize,
-        setIsExactGroupSize,
-        isExactCost,
-        setIsExactCost,
+        filters,
+        updateFilter,
         filteredActivities,
+        savedActivities,
+        completedActivities,
         activitiesFilteredByWeather,
-        handleCardLike,
+        handleCardSave,
         handleCardComplete,
       }}
     >

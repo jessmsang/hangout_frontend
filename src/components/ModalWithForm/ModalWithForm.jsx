@@ -37,7 +37,13 @@ function ModalWithForm({
         <form className="modal__form" onSubmit={onSubmit}>
           {children}
           <div className="modal__btn-wrapper">
-            <button className="modal__submit-btn">{btnText}</button>
+            <button
+              className={`modal__submit-btn ${
+                variant ? `modal__submit-btn_${variant}` : ""
+              }`}
+            >
+              {btnText}
+            </button>
             {navBtnText && (
               <button
                 className="modal__nav-btn"

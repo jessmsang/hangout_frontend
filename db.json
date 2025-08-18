@@ -9,7 +9,7 @@
       "category": ["active"],
       "groupSize": { "min": 2, "max": 4 },
       "cost": { "min": "$", "max": "$$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -21,7 +21,7 @@
       "category": ["active", "adventure"],
       "groupSize": { "min": 1, "max": 10 },
       "cost": { "min": "$", "max": "$$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -33,7 +33,7 @@
       "category": ["low-key"],
       "groupSize": { "min": 1, "max": 10 },
       "cost": { "min": "$", "max": "$$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -45,7 +45,7 @@
       "category": ["active"],
       "groupSize": { "min": 1, "max": 6 },
       "cost": { "min": "$$", "max": "$$$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -57,7 +57,7 @@
       "category": ["low-key"],
       "groupSize": { "min": 2, "max": 10 },
       "cost": { "min": "$", "max": "$$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -69,7 +69,7 @@
       "category": ["creative", "dining", "romantic"],
       "groupSize": { "min": 2, "max": 4 },
       "cost": { "min": "$", "max": "$$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -81,7 +81,7 @@
       "category": ["festive"],
       "groupSize": { "min": 1, "max": 10 },
       "cost": { "min": "$", "max": "$$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -93,7 +93,7 @@
       "category": ["romantic", "dining"],
       "groupSize": { "min": 1, "max": 8 },
       "cost": { "min": "$", "max": "$$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -105,7 +105,7 @@
       "category": ["adventure", "romantic"],
       "groupSize": { "min": 1, "max": 8 },
       "cost": { "min": "$", "max": "$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -117,7 +117,7 @@
       "category": ["creative", "romantic"],
       "groupSize": { "min": 1, "max": 8 },
       "cost": { "min": "$", "max": "$$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -129,7 +129,7 @@
       "category": ["active"],
       "groupSize": { "min": 1, "max": 8 },
       "cost": { "min": "$", "max": "$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -141,7 +141,7 @@
       "category": ["romantic", "low-key"],
       "groupSize": { "min": 1, "max": 8 },
       "cost": { "min": "$", "max": "$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -153,7 +153,7 @@
       "category": ["adventure", "creative", "romantic"],
       "groupSize": { "min": 1, "max": 10 },
       "cost": { "min": "$", "max": "$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -165,7 +165,7 @@
       "category": ["dining", "creative", "romantic"],
       "groupSize": { "min": 1, "max": 4 },
       "cost": { "min": "$", "max": "$$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -177,7 +177,7 @@
       "category": ["dining", "creative", "romantic"],
       "groupSize": { "min": 1, "max": 4 },
       "cost": { "min": "$", "max": "$$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -189,7 +189,7 @@
       "category": ["dining", "creative", "romantic"],
       "groupSize": { "min": 1, "max": 4 },
       "cost": { "min": "$", "max": "$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -201,7 +201,7 @@
       "category": ["low-key", "romantic"],
       "groupSize": { "min": 2, "max": 6 },
       "cost": { "min": "$", "max": "$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -213,7 +213,7 @@
       "category": ["low-key", "creative"],
       "groupSize": { "min": 1, "max": 4 },
       "cost": { "min": "$", "max": "$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -225,7 +225,7 @@
       "category": ["low-key"],
       "groupSize": { "min": 1, "max": 4 },
       "cost": { "min": "$", "max": "$$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -237,7 +237,7 @@
       "category": ["active"],
       "groupSize": { "min": 1, "max": 6 },
       "cost": { "min": "$$", "max": "$$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -249,7 +249,7 @@
       "category": ["dining", "low-key", "romantic"],
       "groupSize": { "min": 1, "max": 4 },
       "cost": { "min": "$", "max": "$$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -261,7 +261,7 @@
       "category": ["dining", "romantic"],
       "groupSize": { "min": 1, "max": 12 },
       "cost": { "min": "$", "max": "$$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -273,7 +273,7 @@
       "category": ["romantic", "low-key"],
       "groupSize": { "min": 2, "max": 4 },
       "cost": { "min": "$", "max": "$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -285,7 +285,7 @@
       "category": ["dining", "romantic", "creative"],
       "groupSize": { "min": 1, "max": 4 },
       "cost": { "min": "$", "max": "$$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -297,7 +297,7 @@
       "category": ["adventure", "romantic"],
       "groupSize": { "min": 1, "max": 6 },
       "cost": { "min": "$", "max": "$$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -309,7 +309,7 @@
       "category": ["romantic"],
       "groupSize": { "min": 2, "max": 2 },
       "cost": { "min": "$", "max": "$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -321,7 +321,7 @@
       "category": ["romantic", "creative", "adventure"],
       "groupSize": { "min": 1, "max": 4 },
       "cost": { "min": "$", "max": "$$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -333,7 +333,7 @@
       "category": ["adventure", "romantic"],
       "groupSize": { "min": 1, "max": 8 },
       "cost": { "min": "$$", "max": "$$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -345,7 +345,7 @@
       "category": ["active", "adventure"],
       "groupSize": { "min": 1, "max": 8 },
       "cost": { "min": "$", "max": "$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -357,7 +357,7 @@
       "category": ["active"],
       "groupSize": { "min": 1, "max": 4 },
       "cost": { "min": "$", "max": "$$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -369,7 +369,7 @@
       "category": ["dining", "romantic"],
       "groupSize": { "min": 2, "max": 4 },
       "cost": { "min": "$", "max": "$$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -381,7 +381,7 @@
       "category": ["festive", "romantic"],
       "groupSize": { "min": 1, "max": 2 },
       "cost": { "min": "$$", "max": "$$$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -393,7 +393,7 @@
       "category": ["festive", "romantic"],
       "groupSize": { "min": 1, "max": 6 },
       "cost": { "min": "$", "max": "$$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -405,7 +405,7 @@
       "category": ["festive", "romantic", "active"],
       "groupSize": { "min": 1, "max": 6 },
       "cost": { "min": "$", "max": "$$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -417,7 +417,7 @@
       "category": ["festive", "active", "romantic", "adventure"],
       "groupSize": { "min": 1, "max": 6 },
       "cost": { "min": "$", "max": "$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -429,7 +429,7 @@
       "category": ["romantic", "active", "adventure"],
       "groupSize": { "min": 2, "max": 6 },
       "cost": { "min": "$", "max": "$$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -441,7 +441,7 @@
       "category": ["festive", "romantic", "adventure"],
       "groupSize": { "min": 1, "max": 8 },
       "cost": { "min": "$", "max": "$$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -453,7 +453,7 @@
       "category": ["adventure", "low-key", "romantic"],
       "groupSize": { "min": 1, "max": 4 },
       "cost": { "min": "$", "max": "$$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -465,7 +465,7 @@
       "category": ["active"],
       "groupSize": { "min": "2", "max": "4" },
       "cost": { "min": "$", "max": "$$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -477,7 +477,7 @@
       "category": ["festive", "creative", "low-key"],
       "groupSize": { "min": "1", "max": "8" },
       "cost": { "min": "$", "max": "$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -489,7 +489,7 @@
       "category": ["festive", "creative", "low-key"],
       "groupSize": { "min": "1", "max": "8" },
       "cost": { "min": "$$", "max": "$$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     },
     {
@@ -501,7 +501,7 @@
       "category": ["festive", "creative", "adventure"],
       "groupSize": { "min": "1", "max": "12" },
       "cost": { "min": "$", "max": "$$" },
-      "isLiked": false,
+      "isSaved": false,
       "isCompleted": false
     }
   ]

@@ -6,7 +6,7 @@ Hangout is a full-stack web application built with **React, JavaScript, HTML/CSS
 
 ## Features
 
-- Users can **add, like, and complete activities** through an interactive UI.
+- Users can **add, save, and complete activities** through an interactive UI.
 - Activities are displayed as **responsive cards** and can be filtered by:
   - Weather
   - Season

@@ -9,7 +9,7 @@ import Logo from "../Logo/Logo";
 import UserContext from "../../contexts/UserContext";
 
 export default function Header({ handleSignupClick, handleLoginClick }) {
-  const { isLoggedIn } = useContext(UserContext);
+  const { isLoggedIn, currentUser } = useContext(UserContext);
 
   return (
     <header className="header">
@@ -37,6 +37,18 @@ export default function Header({ handleSignupClick, handleLoginClick }) {
             </button>
           </li>
         </ul>
+      )}
+      {isLoggedIn && (
+        <div className="header__authorized-view">
+          <button
+            className="header__avatar-btn"
+            // onClick={}
+          >
+            <p className="header__avatar-placeholder">
+              {currentUser.name[0].toUpperCase()}
+            </p>
+          </button>
+        </div>
       )}
     </header>
   );

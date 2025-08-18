@@ -37,8 +37,8 @@
   list-style-type: none;
 }
 
-.card__like-btn-not-liked {
-  background: transparent url(../../assets/heart-gray.svg) no-repeat center;
+.card__save-btn-not-saved {
+  background: transparent url(../../assets/save-gray.svg) no-repeat center;
   border: none;
   background-size: contain;
   width: 1rem;
@@ -48,13 +48,13 @@
   margin: 0;
 }
 
-.card__like-btn-not-liked:hover {
+.card__save-btn-not-saved:hover {
   opacity: 0.8;
   cursor: pointer;
 }
 
-.card__like-btn-liked {
-  background: transparent url(../../assets/heart-green.svg) no-repeat center;
+.card__save-btn-saved {
+  background: transparent url(../../assets/save-green.svg) no-repeat center;
   border: none;
   background-size: contain;
   width: 1rem;
@@ -64,7 +64,7 @@
   margin: 0;
 }
 
-.card__like-btn-liked:hover {
+.card__save-btn-saved:hover {
   opacity: 0.8;
   cursor: pointer;
 }

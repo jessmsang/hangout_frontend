@@ -14,18 +14,18 @@ import UserContext from "../../contexts/UserContext";
 // import { data } from "react-router-dom";
 
 export default function ActivityCard({ activity }) {
-  const { handleCardLike, handleCardComplete } = useContext(FilterContext);
-  const { isLoggedIn } = useContext(UserContext);
+  const { handleCardSave, handleCardComplete } = useContext(FilterContext);
+  const { isLoggedIn, currentUser } = useContext(UserContext);
 
-  const toggleIsLiked = () => {
-    handleCardLike({ _id: activity._id, isLiked: activity.isLiked });
+  const isSaved = currentUser?.savedActivities?.includes(activity._id);
+  const isCompleted = currentUser?.completedActivities?.includes(activity._id);
+
+  const toggleIsSaved = () => {
+    handleCardSave({ _id: activity._id });
   };
 
   const toggleIsCompleted = () => {
-    handleCardComplete({
-      _id: activity._id,
-      isCompleted: activity.isCompleted,
-    });
+    handleCardComplete({ _id: activity._id });
   };
 
   // TODO: ADD USER CONTEXT
@@ -116,22 +116,22 @@ export default function ActivityCard({ activity }) {
               <li className="card__header-list-item">
                 <button
                   className={`${
-                    !activity.isLiked
-                      ? "card__like-btn-not-liked"
-                      : "card__like-btn-liked"
+                    !isSaved
+                      ? "card__save-btn-not-saved"
+                      : "card__save-btn-saved"
                   }`}
-                  onClick={toggleIsLiked}
-                ></button>
+                  onClick={toggleIsSaved}
+                />
               </li>
               <li className="card__header-list-item">
                 <button
                   className={`${
-                    !activity.isCompleted
+                    !isCompleted
                       ? "card__complete-btn-not-completed"
                       : "card__complete-btn-completed"
                   }`}
                   onClick={toggleIsCompleted}
-                ></button>
+                />
               </li>
             </ul>
           </div>

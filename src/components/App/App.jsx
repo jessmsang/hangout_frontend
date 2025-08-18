@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import "./App.css";
 
@@ -9,6 +10,7 @@ import AddActivityButton from "../AddActivityButton/AddActivityButton";
 import AddActivityFormModal from "../AddActivityFormModal/AddActivityFormModal";
 import Footer from "../Footer/Footer";
 import RegisterModal from "../RegisterModal/RegisterModal";
+import LoginModal from "../LoginModal/LoginModal";
 
 import UserContext from "../../contexts/UserContext";
 import WeatherContext from "../../contexts/WeatherContext";
@@ -22,6 +24,7 @@ import { weatherAPIkey } from "../../constants/apiEndpoints";
 
 import * as activitiesApi from "../../utils/activitiesApi";
 import * as auth from "../../utils/auth";
+import * as token from "../../utils/token";
 
 export default function App() {
   const [weatherData, setWeatherData] = useState({
@@ -35,20 +38,31 @@ export default function App() {
     isDay: true,
     icon: "",
   });
+  //UNCOMMENT AFTER TESTING PROFILE (NEEDED A USER FOR TESTING)
+  // const [currentUser, setCurrentUser] = useState({
+  //   _id: "",
+  //   name: "",
+  //   email: "",
+  //   createdAt: "",
+  // });
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const [activities, setActivities] = useState([]);
-
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [currentUser, setCurrentUser] = useState({
-    _id: "",
-    name: "",
-    email: "",
+    _id: "dummy-id",
+    name: "Jess Test",
+    email: "jess@example.com",
     createdAt: "",
   });
+
+  const [activities, setActivities] = useState([]);
   const [activeModal, setActiveModal] = useState("");
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
-  const savedActivities = activities.filter((activity) => activity.isLiked);
+  const navigate = useNavigate();
+
+  const savedActivities = activities.filter((activity) => activity.isSaved);
   const completedActivities = activities.filter(
     (activity) => activity.isCompleted
   );
@@ -78,39 +92,13 @@ export default function App() {
         setActivities(
           data.map((activity) => ({
             ...activity,
-            isLiked: activity.isLiked ?? false,
+            isSaved: activity.isSaved ?? false,
             isCompleted: activity.isCompleted ?? false,
           }))
         )
       )
       .catch(console.error);
   }, []);
-
-  const handleCardLike = ({ id, isLiked }) => {
-    activitiesApi
-      .updateActivity(id, { isLiked: !isLiked })
-      .then((updatedActivity) => {
-        setActivities((prev) =>
-          prev.map((activity) =>
-            activity._id === id ? updatedActivity : activity
-          )
-        );
-      })
-      .catch(console.error);
-  };
-
-  const handleCardComplete = ({ id, isCompleted }) => {
-    activitiesApi
-      .updateActivity(id, { isCompleted: !isCompleted })
-      .then((updatedActivity) => {
-        setActivities((prev) =>
-          prev.map((activity) =>
-            activity._id === id ? updatedActivity : activity
-          )
-        );
-      })
-      .catch(console.error);
-  };
 
   useEffect(() => {
     fetchCoordinatesByCity("Cincinnati", weatherAPIkey)
@@ -125,7 +113,6 @@ export default function App() {
   }, []);
 
   // TODO: SET UP USER CONTEXT
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleSignupClick = () => {
     setActiveModal("register-modal");
@@ -133,10 +120,10 @@ export default function App() {
     // setIsMobileMenuActive(false);
   };
 
-  // const handleLoginClick = () => {
-  //   setActiveModal("login-modal");
-  //   setIsMobileMenuActive(false);
-  // };
+  const handleLoginClick = () => {
+    setActiveModal("login-modal");
+    //   setIsMobileMenuActive(false);
+  };
 
   const handleSubmit = (request) => {
     setIsLoading(true);
@@ -153,15 +140,14 @@ export default function App() {
       const makeRequest = () => {
         return auth.register(email, password, name).then(() => {
           closeActiveModal();
-          handleLogin({ email, password }, resetForm);
-          resetForm();
+          handleLogin({ email, password });
         });
       };
       handleSubmit(makeRequest);
     }
   };
 
-  const handleLogin = ({ email, password }, resetForm) => {
+  const handleLogin = ({ email, password }) => {
     if (!email || !password) {
       return;
     }
@@ -173,9 +159,8 @@ export default function App() {
           setIsLoggedIn(true);
           const redirectPath = location.state?.from?.pathname || "/";
           navigate(redirectPath);
-          setCurrentUser(data);
+          setCurrentUser(data.user);
           closeActiveModal();
-          resetForm();
         }
       });
     };
@@ -196,6 +181,7 @@ export default function App() {
       <UserContext.Provider
         value={{
           currentUser,
+          setCurrentUser,
           isLoggedIn,
           isAuthenticating,
           handleLogout,
@@ -209,23 +195,30 @@ export default function App() {
           <FilterContextProvider>
             <div className="page">
               <div className="page__content">
-                <Header handleSignupClick={handleSignupClick} />
+                <Header
+                  handleSignupClick={handleSignupClick}
+                  handleLoginClick={handleLoginClick}
+                />
                 <Main />
                 <AddActivityButton onClick={() => openModal("add-activity")} />
                 <AddActivityFormModal
                   isOpen={activeModal === "add-activity"}
                   onClose={closeActiveModal}
                 />
-                {/* Future: */}
-                {/* {activeModal === "login" && <LoginModal isOpen onClose={closeActiveModal} />} */}
-                {/* {activeModal === "signup" && <SignupModal isOpen onClose={closeActiveModal} />} */}
+
                 <Footer />
 
                 <RegisterModal
                   onClose={closeActiveModal}
                   isOpen={activeModal === "register-modal"}
                   activeModal={activeModal}
-                  handleRegistration={handleRegistration}
+                  setActiveModal={setActiveModal}
+                  isLoading={isLoading}
+                />
+                <LoginModal
+                  onClose={closeActiveModal}
+                  isOpen={activeModal === "login-modal"}
+                  activeModal={activeModal}
                   setActiveModal={setActiveModal}
                   isLoading={isLoading}
                 />

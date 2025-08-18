@@ -1,7 +1,12 @@
-import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
+import { useContext } from "react";
 
-function RegisterModal({ onClose, isOpen, handleRegistration, isLoading }) {
+import UserContext from "../../contexts/UserContext";
+import ModalWithForm from "../ModalWithForm/ModalWithForm";
+
+function RegisterModal({ onClose, isOpen, isLoading, setActiveModal }) {
+  const { handleRegistration } = useContext(UserContext);
+
   const { values, handleChange, setValues, errorMessage } = useForm(
     {
       name: "",

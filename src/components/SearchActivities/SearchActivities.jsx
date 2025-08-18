@@ -5,45 +5,29 @@ import FilterContext from "../../contexts/FilterContext";
 import ActivityCriteriaForm from "../ActivityCriteriaForm/ActivityCriteriaForm";
 
 export default function SearchActivities() {
-  const {
-    seasons,
-    setSeasons,
-    location,
-    setLocation,
-    category,
-    setCategory,
-    groupSize,
-    setGroupSize,
-    cost,
-    setCost,
-    isExactGroupSize,
-    setIsExactGroupSize,
-    isExactCost,
-    setIsExactCost,
-    filteredActivities,
-  } = useContext(FilterContext);
-
-  const handleReset = () => {
-    setSeasons([]);
-    setLocation([]);
-    setCategory([]);
-    setCost({ min: "$", max: "$$$" });
-    setGroupSize({ min: 1, max: 12 });
-    setIsExactCost(false);
-    setIsExactGroupSize(false);
-  };
-
+  const { filters, updateFilter, filteredActivities } =
+    useContext(FilterContext);
   const [formIsVisible, setFormIsVisible] = useState(false);
 
-  const toggleDisplayFilterForm = () => {
-    setFormIsVisible(!formIsVisible);
+  const toggleDisplayFilterForm = () => setFormIsVisible(!formIsVisible);
+
+  const handleReset = () => {
+    updateFilter({
+      seasons: [],
+      location: [],
+      category: [],
+      groupSize: { min: 1, max: 12 },
+      cost: { min: "$", max: "$$$" },
+      isExactGroupSize: false,
+      isExactCost: false,
+    });
   };
 
   return (
     <section className="search-activities">
       <div
         className={`search-activities__header ${
-          formIsVisible ? `search-activities__header-with-padding` : ""
+          formIsVisible ? "search-activities__header-with-padding" : ""
         }`}
       >
         <h2 className="search-activities__title">Search for Activities</h2>
@@ -52,27 +36,17 @@ export default function SearchActivities() {
           onClick={toggleDisplayFilterForm}
         ></button>
       </div>
+
       {formIsVisible && (
         <ActivityCriteriaForm
           variant="search"
-          seasons={seasons}
-          setSeasons={setSeasons}
-          location={location}
-          setLocation={setLocation}
-          category={category}
-          setCategory={setCategory}
-          groupSize={groupSize}
-          setGroupSize={setGroupSize}
-          cost={cost}
-          setCost={setCost}
-          isExactGroupSize={isExactGroupSize}
-          setIsExactGroupSize={setIsExactGroupSize}
-          isExactCost={isExactCost}
-          setIsExactCost={setIsExactCost}
+          filter={filters.search}
+          updateFilter={(newData) => updateFilter("search", newData)}
           onReset={handleReset}
         />
       )}
-      <ActivitiesCarousel activities={filteredActivities} />
+
+      <ActivitiesCarousel activities={filteredActivities.search} />
     </section>
   );
 }
