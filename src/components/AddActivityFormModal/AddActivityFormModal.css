@@ -1,16 +1,32 @@
 .add-activity-form {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   display: flex;
   flex-direction: column;
+  gap: 0.3rem;
 }
 
 .add-activity-form__label {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
-  margin: 0.3rem 0;
+  font-size: 0.7rem;
+}
+
+.add-activity-form__input {
+  padding: 0.3rem;
+  font-size: 0.6rem;
+}
+
+.add-activity-form__input:hover {
+  opacity: 0.8;
 }
 
 .add-activity-form__textarea {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem;
+  padding: 0.3rem;
+  font-size: 0.6rem;
+}
+
+.add-activity-form__textarea:hover {
+  opacity: 0.8;
 }
