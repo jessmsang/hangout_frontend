@@ -6,6 +6,7 @@ export default function AccountDropdown({
   onLogout,
   onDeleteAccount,
   onEditProfileClick,
+  onChangePasswordClick,
 }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -30,7 +31,15 @@ export default function AccountDropdown({
           >
             View/Edit Profile
           </button>
-          <button className="account-dropdown__item">Change Password</button>
+          <button
+            className="account-dropdown__item"
+            onClick={() => {
+              onChangePasswordClick();
+              setIsOpen(false);
+            }}
+          >
+            Change Password
+          </button>
           <hr className="account-dropdown__divider" />
           <button className="account-dropdown__item" onClick={onLogout}>
             Log Out

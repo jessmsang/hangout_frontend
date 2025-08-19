@@ -15,6 +15,27 @@ export default function AddActivityFormModal({ isOpen, onClose, isLoading }) {
   const [isExactGroupSize, setIsExactGroupSize] = useState(false);
   const [isExactCost, setIsExactCost] = useState(false);
 
+  const filter = {
+    seasons,
+    location,
+    category,
+    groupSize,
+    cost,
+    isExactGroupSize,
+    isExactCost,
+  };
+
+  const updateFilter = (updates) => {
+    if (updates.seasons !== undefined) setSeasons(updates.seasons);
+    if (updates.location !== undefined) setLocation(updates.location);
+    if (updates.category !== undefined) setCategory(updates.category);
+    if (updates.groupSize !== undefined) setGroupSize(updates.groupSize);
+    if (updates.cost !== undefined) setCost(updates.cost);
+    if (updates.isExactGroupSize !== undefined)
+      setIsExactGroupSize(updates.isExactGroupSize);
+    if (updates.isExactCost !== undefined) setIsExactCost(updates.isExactCost);
+  };
+
   const handleFormReset = () => {
     setName("");
     setDescription("");
@@ -54,6 +75,13 @@ export default function AddActivityFormModal({ isOpen, onClose, isLoading }) {
     console.log("Submitting new activity:", newActivity);
   };
 
+  const isValid =
+    name.trim() !== "" &&
+    description.trim() !== "" &&
+    seasons.length > 0 &&
+    location.length > 0 &&
+    category.length > 0;
+
   return (
     <ModalWithForm
       variant="add-activity"
@@ -62,6 +90,7 @@ export default function AddActivityFormModal({ isOpen, onClose, isLoading }) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      isDisabled={isLoading || !isValid}
     >
       <section className="add-activity-form">
         <label className="add-activity-form__label">
@@ -85,24 +114,13 @@ export default function AddActivityFormModal({ isOpen, onClose, isLoading }) {
             placeholder="Describe the activity..."
             rows="3"
             maxLength={200}
+            required
           />
         </label>
         <ActivityCriteriaForm
           variant="modal"
-          seasons={seasons}
-          setSeasons={setSeasons}
-          location={location}
-          setLocation={setLocation}
-          category={category}
-          setCategory={setCategory}
-          groupSize={groupSize}
-          setGroupSize={setGroupSize}
-          cost={cost}
-          setCost={setCost}
-          isExactGroupSize={isExactGroupSize}
-          setIsExactGroupSize={setIsExactGroupSize}
-          isExactCost={isExactCost}
-          setIsExactCost={setIsExactCost}
+          filter={filter}
+          updateFilter={updateFilter}
           onReset={handleFormReset}
         />
       </section>

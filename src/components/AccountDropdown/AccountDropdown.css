@@ -17,6 +17,7 @@
 .account-dropdown__btn:hover {
   opacity: 0.8;
   cursor: pointer;
+  transform: scale(1.07);
 }
 
 .account-dropdown__avatar-placeholder {

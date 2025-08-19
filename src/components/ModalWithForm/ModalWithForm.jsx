@@ -10,6 +10,7 @@ function ModalWithForm({
   onSubmit,
   onNavBtnClick,
   navBtnText,
+  isDisabled,
 }) {
   const handleModalBackdropClick = (e) => {
     if (e.target.classList.contains("modal")) {
@@ -41,6 +42,8 @@ function ModalWithForm({
               className={`modal__submit-btn ${
                 variant ? `modal__submit-btn_${variant}` : ""
               }`}
+              type="submit"
+              disabled={isDisabled}
             >
               {btnText}
             </button>

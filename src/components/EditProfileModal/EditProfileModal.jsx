@@ -6,7 +6,7 @@ import UserContext from "../../contexts/UserContext";
 export default function EditProfileModal({ onClose, isOpen, isLoading }) {
   const { currentUser, handleUpdateProfile } = useContext(UserContext);
 
-  const { values, handleChange, setValues } = useForm({
+  const { values, handleChange, setValues, isValid } = useForm({
     name: currentUser?.name || "",
     email: currentUser?.email || "",
   });
@@ -37,6 +37,7 @@ export default function EditProfileModal({ onClose, isOpen, isLoading }) {
       onClose={onClose}
       isOpen={isOpen}
       onSubmit={handleSubmit}
+      isDisabled={isLoading || !isValid}
     >
       <label htmlFor="edit-name-input" className="modal__label">
         Name*

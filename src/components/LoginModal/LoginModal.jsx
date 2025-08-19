@@ -7,7 +7,7 @@ import UserContext from "../../contexts/UserContext";
 function LoginModal({ onClose, isOpen, isLoading, setActiveModal }) {
   const { handleLogin } = useContext(UserContext);
 
-  const { values, handleChange, setValues, errorMessage } = useForm({
+  const { values, handleChange, setValues, errorMessage, isValid } = useForm({
     email: "",
     password: "",
   });
@@ -33,6 +33,7 @@ function LoginModal({ onClose, isOpen, isLoading, setActiveModal }) {
       onSubmit={handleSubmit}
       onNavBtnClick={() => setActiveModal("register-modal")}
       navBtnText="or Sign Up"
+      isDisabled={isLoading || !isValid}
     >
       <label htmlFor="login-email-input" className="modal__label">
         Email*

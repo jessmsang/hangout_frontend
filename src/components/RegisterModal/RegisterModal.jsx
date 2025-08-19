@@ -7,7 +7,7 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 function RegisterModal({ onClose, isOpen, isLoading, setActiveModal }) {
   const { handleRegistration } = useContext(UserContext);
 
-  const { values, handleChange, setValues, errorMessage } = useForm(
+  const { values, handleChange, setValues, errorMessage, isValid } = useForm(
     {
       name: "",
       email: "",
@@ -50,6 +50,7 @@ function RegisterModal({ onClose, isOpen, isLoading, setActiveModal }) {
       onSubmit={handleSubmit}
       onNavBtnClick={() => setActiveModal("login-modal")}
       navBtnText="or Log In"
+      isDisabled={isLoading || !isValid}
     >
       <label htmlFor="register-name-input" className="modal__label">
         Name*:

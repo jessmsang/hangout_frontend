@@ -5,7 +5,7 @@ import "./Header.css";
 import WeatherDisplay from "../WeatherDisplay/WeatherDisplay";
 import LocationDisplay from "../LocationDisplay/LocationDisplay";
 import Logo from "../Logo/Logo";
-import AccountDropdown from "../AvatarDropdown/AccountDropdown";
+import AccountDropdown from "../AccountDropdown/AccountDropdown";
 
 import UserContext from "../../contexts/UserContext";
 
@@ -13,6 +13,7 @@ export default function Header({
   handleSignupClick,
   handleLoginClick,
   openEditProfileModal,
+  openChangePasswordModal,
 }) {
   const { isLoggedIn, currentUser, handleLogout, handleDeleteAccount } =
     useContext(UserContext);
@@ -51,6 +52,7 @@ export default function Header({
             onLogout={handleLogout}
             onDeleteAccount={handleDeleteAccount}
             onEditProfileClick={openEditProfileModal}
+            onChangePasswordClick={openChangePasswordModal}
           />
         </div>
       )}

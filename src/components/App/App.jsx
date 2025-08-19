@@ -26,6 +26,7 @@ import { weatherAPIkey } from "../../constants/apiEndpoints";
 import * as activitiesApi from "../../utils/activitiesApi";
 import * as auth from "../../utils/auth";
 import * as token from "../../utils/token";
+import ChangePasswordModal from "../ChangePasswordModal/ChangePasswordModal";
 
 export default function App() {
   const [weatherData, setWeatherData] = useState({
@@ -61,6 +62,7 @@ export default function App() {
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
+  const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -196,11 +198,22 @@ export default function App() {
   const openEditProfileModal = () => setIsEditProfileOpen(true);
   const closeEditProfileModal = () => setIsEditProfileOpen(false);
 
-  const handleEditProfileSubmit = (updatedValues) => {
-    console.log("Updated values:", updatedValues);
-    // Call your context function to update the user
-    setIsEditProfileOpen(false);
+  const handleUpdatePassword = async (oldPassword, newPassword) => {
+    try {
+      // TODO: Replace with real backend request
+      // await auth.updatePassword(currentUser._id, { oldPassword, newPassword });
+
+      console.log("Password updated:", { oldPassword, newPassword });
+      alert("Password updated successfully (stubbed).");
+    } catch (error) {
+      console.error("Password update failed:", error);
+      alert(`Error updating password: ${error.message}`);
+      throw error;
+    }
   };
+
+  const openChangePasswordModal = () => setIsChangePasswordOpen(true);
+  const closeChangePasswordModal = () => setIsChangePasswordOpen(false);
 
   const handleDeleteAccount = async () => {
     const confirmed = window.confirm(
@@ -238,6 +251,7 @@ export default function App() {
           handleRegistration,
           handleUpdateProfile,
           handleDeleteAccount,
+          handleUpdatePassword,
           savedActivities,
           completedActivities,
         }}
@@ -250,6 +264,7 @@ export default function App() {
                   handleSignupClick={handleSignupClick}
                   handleLoginClick={handleLoginClick}
                   openEditProfileModal={openEditProfileModal}
+                  openChangePasswordModal={openChangePasswordModal}
                 />
                 <Main />
                 <AddActivityButton onClick={() => openModal("add-activity")} />
@@ -277,6 +292,12 @@ export default function App() {
                 <EditProfileModal
                   isOpen={isEditProfileOpen}
                   onClose={closeEditProfileModal}
+                  isLoading={isLoading}
+                />
+                <ChangePasswordModal
+                  isOpen={isChangePasswordOpen}
+                  onClose={closeChangePasswordModal}
+                  isLoading={isLoading}
                 />
               </div>
             </div>
