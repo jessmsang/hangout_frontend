@@ -31,7 +31,7 @@ function LoginModal({ onClose, isOpen, isLoading, setActiveModal }) {
       onClose={onClose}
       isOpen={isOpen}
       onSubmit={handleSubmit}
-      onNavBtnClick={() => setActiveModal("register-modal")}
+      onNavBtnClick={() => setActiveModal("login-modal")}
       navBtnText="or Sign Up"
       isDisabled={isLoading || !isValid}
     >

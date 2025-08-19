@@ -12,6 +12,9 @@ import Footer from "../Footer/Footer";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
+import ChangePasswordModal from "../ChangePasswordModal/ChangePasswordModal";
+import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
+import LogoutConfirmationModal from "../LogoutConfirmationModal/LogoutConfirmationModal";
 
 import UserContext from "../../contexts/UserContext";
 import WeatherContext from "../../contexts/WeatherContext";
@@ -26,7 +29,6 @@ import { weatherAPIkey } from "../../constants/apiEndpoints";
 import * as activitiesApi from "../../utils/activitiesApi";
 import * as auth from "../../utils/auth";
 import * as token from "../../utils/token";
-import ChangePasswordModal from "../ChangePasswordModal/ChangePasswordModal";
 
 export default function App() {
   const [weatherData, setWeatherData] = useState({
@@ -61,8 +63,12 @@ export default function App() {
   const [activeModal, setActiveModal] = useState("");
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
   const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
+  const [isDeleteConfirmationModalOpen, setIsDeleteConfirmationModalOpen] =
+    useState(false);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -178,6 +184,9 @@ export default function App() {
     navigate("/");
   };
 
+  const openLogoutConfirmationModal = () => setIsLogoutModalOpen(true);
+  const closeLogoutConfirmationModal = () => setIsLogoutModalOpen(false);
+
   const handleUpdateProfile = async (updatedValues) => {
     try {
       const updatedUser = { ...currentUser, ...updatedValues };
@@ -236,6 +245,11 @@ export default function App() {
     }
   };
 
+  const openDeleteConfirmationModal = () =>
+    setIsDeleteConfirmationModalOpen(true);
+  const closeDeleteConfirmationModal = () =>
+    setIsDeleteConfirmationModalOpen(false);
+
   return (
     <WeatherContext.Provider
       value={{ weatherData, setWeatherData, weatherAPIkey }}
@@ -265,6 +279,8 @@ export default function App() {
                   handleLoginClick={handleLoginClick}
                   openEditProfileModal={openEditProfileModal}
                   openChangePasswordModal={openChangePasswordModal}
+                  openDeleteConfirmationModal={openDeleteConfirmationModal}
+                  openLogoutConfirmationModal={openLogoutConfirmationModal}
                 />
                 <Main />
                 <AddActivityButton onClick={() => openModal("add-activity")} />
@@ -298,6 +314,21 @@ export default function App() {
                   isOpen={isChangePasswordOpen}
                   onClose={closeChangePasswordModal}
                   isLoading={isLoading}
+                />
+                <LogoutConfirmationModal
+                  isOpen={isLogoutModalOpen}
+                  onClose={closeLogoutConfirmationModal}
+                  onLogout={handleLogout}
+                  isLoading={isLoading}
+                />
+                <DeleteConfirmationModal
+                  isOpen={isDeleteConfirmationModalOpen}
+                  onClose={closeDeleteConfirmationModal}
+                  isLoading={isLoading}
+                  onDelete={() => {
+                    handleDeleteAccount();
+                    closeDeleteAccountModal();
+                  }}
                 />
               </div>
             </div>

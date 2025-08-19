@@ -3,10 +3,10 @@ import "./AccountDropdown.css";
 
 export default function AccountDropdown({
   user,
-  onLogout,
-  onDeleteAccount,
   onEditProfileClick,
   onChangePasswordClick,
+  onDeleteAccountClick,
+  onLogoutClick,
 }) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -41,12 +41,21 @@ export default function AccountDropdown({
             Change Password
           </button>
           <hr className="account-dropdown__divider" />
-          <button className="account-dropdown__item" onClick={onLogout}>
+          <button
+            className="account-dropdown__item"
+            onClick={() => {
+              onLogoutClick();
+              setIsOpen(false);
+            }}
+          >
             Log Out
           </button>
           <button
             className="account-dropdown__item account-dropdown__danger"
-            onClick={onDeleteAccount}
+            onClick={() => {
+              onDeleteAccountClick();
+              setIsOpen(false);
+            }}
           >
             Delete Account
           </button>

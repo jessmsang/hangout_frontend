@@ -79,6 +79,7 @@ export default function ChangePasswordModal({ onClose, isOpen, isLoading }) {
           className="modal__input"
           placeholder="Enter new password"
           required
+          pattern="^(?=.*[A-Z])(?=.*[!@#$%^&*_+\-=?]).{8,50}$"
           onChange={handleChange}
           value={values.newPassword}
         />

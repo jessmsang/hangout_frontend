@@ -89,6 +89,20 @@
   margin: 0;
 }
 
+.modal__title_delete-confirmation {
+  padding: 0;
+  font-size: 1rem;
+  margin: 0;
+  text-align: center;
+}
+
+.modal__title_logout-confirmation {
+  padding: 0;
+  font-size: 1rem;
+  margin: 0;
+  text-align: center;
+}
+
 .modal__close-btn {
   position: absolute;
   top: 1rem;
@@ -144,6 +158,23 @@
   justify-content: flex-start;
   align-items: center;
   margin: 0.5rem 0 0;
+  gap: 0.6rem;
+}
+
+.modal__btn-wrapper_delete-confirmation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem 0 0;
+  gap: 0.6rem;
+}
+
+.modal__btn-wrapper_logout-confirmation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem 0 0;
+  gap: 0.6rem;
 }
 
 .modal__submit-btn {
@@ -171,6 +202,14 @@
   width: 100%;
 }
 
+.modal__submit-btn_delete-confirmation {
+  color: rgba(255, 77, 0, 1);
+  background: #f3f4f0;
+  font-weight: 600;
+  font-size: 0.8rem;
+  margin: 0;
+}
+
 .modal__submit-btn_type_disabled {
   background-color: #f3f4f0;
 }
@@ -186,6 +225,34 @@
 .modal__nav-btn:hover {
   opacity: 0.7;
   cursor: pointer;
+}
+
+.modal__cancel-btn {
+  border-radius: 0.5rem;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 0.6rem 1.5rem;
+  border: solid 1px #00000080;
+  font-size: 0.8rem;
+  opacity: 1;
+  color: #f3f4f0;
+  height: fit-content;
+}
+
+.modal__cancel-btn:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.modal__cancel-btn_delete-confirmation {
+  border-radius: 0.5rem;
+  background: #f3f4f0;
+  padding: 0.6rem 1.5rem;
+  border: solid 1px #00000080;
+  font-size: 0.8rem;
+  font-weight: 500;
+  opacity: 1;
+  color: #3c2d01;
+  height: fit-content;
 }
 
 .modal__error {

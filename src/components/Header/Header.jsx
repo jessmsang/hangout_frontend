@@ -14,6 +14,8 @@ export default function Header({
   handleLoginClick,
   openEditProfileModal,
   openChangePasswordModal,
+  openDeleteConfirmationModal,
+  openLogoutConfirmationModal,
 }) {
   const { isLoggedIn, currentUser, handleLogout, handleDeleteAccount } =
     useContext(UserContext);
@@ -53,6 +55,8 @@ export default function Header({
             onDeleteAccount={handleDeleteAccount}
             onEditProfileClick={openEditProfileModal}
             onChangePasswordClick={openChangePasswordModal}
+            onLogoutClick={openLogoutConfirmationModal}
+            onDeleteAccountClick={openDeleteConfirmationModal}
           />
         </div>
       )}

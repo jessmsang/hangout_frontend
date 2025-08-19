@@ -10,8 +10,11 @@ function ModalWithForm({
   onSubmit,
   onNavBtnClick,
   navBtnText,
-  isDisabled,
+  isDisabled = false,
+  showCancel = false,
 }) {
+  if (!isOpen) return null;
+
   const handleModalBackdropClick = (e) => {
     if (e.target.classList.contains("modal")) {
       onClose();
@@ -29,7 +32,11 @@ function ModalWithForm({
           variant ? `modal__container_${variant}` : ""
         }`}
       >
-        <h2 className="modal__title">{titleText}</h2>
+        <h2
+          className={`modal__title ${variant ? `modal__title_${variant}` : ""}`}
+        >
+          {titleText}
+        </h2>
         <button
           onClick={onClose}
           type="button"
@@ -37,7 +44,11 @@ function ModalWithForm({
         ></button>
         <form className="modal__form" onSubmit={onSubmit}>
           {children}
-          <div className="modal__btn-wrapper">
+          <div
+            className={`modal__btn-wrapper ${
+              variant ? `modal__btn-wrapper_${variant}` : ""
+            }`}
+          >
             <button
               className={`modal__submit-btn ${
                 variant ? `modal__submit-btn_${variant}` : ""
@@ -54,6 +65,17 @@ function ModalWithForm({
                 onClick={onNavBtnClick}
               >
                 {navBtnText}
+              </button>
+            )}
+            {showCancel && (
+              <button
+                type="button"
+                className={`modal__cancel-btn ${
+                  variant ? `modal__cancel-btn_${variant}` : ""
+                }`}
+                onClick={onClose}
+              >
+                Cancel
               </button>
             )}
           </div>
