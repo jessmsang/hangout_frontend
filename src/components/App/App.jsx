@@ -174,6 +174,27 @@ export default function App() {
     navigate("/");
   };
 
+  const handleDeleteAccount = async () => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete your account? This action cannot be undone."
+    );
+    if (!confirmed) return;
+
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      setCurrentUser(null);
+      setIsLoggedIn(false);
+      token.removeToken();
+      navigate("/");
+
+      alert("Your account has been deleted successfully (stubbed).");
+    } catch (error) {
+      console.error("Delete account error:", error);
+      alert(`Error deleting account: ${error.message}`);
+    }
+  };
+
   return (
     <WeatherContext.Provider
       value={{ weatherData, setWeatherData, weatherAPIkey }}
@@ -187,6 +208,7 @@ export default function App() {
           handleLogout,
           handleLogin,
           handleRegistration,
+          handleDeleteAccount,
           savedActivities,
           completedActivities,
         }}
