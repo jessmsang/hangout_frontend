@@ -31,6 +31,19 @@
   opacity: 1;
 }
 
+.modal__container {
+  display: flex;
+  flex-direction: column;
+  background: #c0a145;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  position: relative;
+  width: 23rem;
+  max-height: 100%;
+  box-sizing: border-box;
+  border: solid 1px #926e00;
+}
+
 .modal__container_add-activity {
   display: flex;
   flex-direction: column;

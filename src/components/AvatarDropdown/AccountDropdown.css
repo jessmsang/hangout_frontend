@@ -3,18 +3,18 @@
   display: inline-block;
 }
 
-.account-dropdown__button {
+.account-dropdown__btn {
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 50%;
-  border: 1px solid rgba(0, 0, 0, 0.7);
+  border: 1px solid #926e00;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #c0a145b4;
+  background-color: #c0a145;
 }
 
-.account-dropdown__button:hover {
+.account-dropdown__btn:hover {
   opacity: 0.8;
   cursor: pointer;
 }
@@ -27,7 +27,7 @@
 
 .account-dropdown__menu {
   position: absolute;
-  top: 100%; /* right below the button */
+  top: 100%;
   right: 0;
   margin-top: 0.3rem;
   min-width: 10rem;

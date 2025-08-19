@@ -11,6 +11,7 @@ import AddActivityFormModal from "../AddActivityFormModal/AddActivityFormModal";
 import Footer from "../Footer/Footer";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
 
 import UserContext from "../../contexts/UserContext";
 import WeatherContext from "../../contexts/WeatherContext";
@@ -59,6 +60,7 @@ export default function App() {
   const [activeModal, setActiveModal] = useState("");
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -174,6 +176,32 @@ export default function App() {
     navigate("/");
   };
 
+  const handleUpdateProfile = async (updatedValues) => {
+    try {
+      const updatedUser = { ...currentUser, ...updatedValues };
+      setCurrentUser(updatedUser);
+
+      //TODO: FOR REAL BACKEND:
+      // await auth.updateUser(currentUser._id, updatedValues);
+
+      alert("Profile updated successfully.");
+      return updatedUser;
+    } catch (error) {
+      console.error("Profile update failed:", error);
+      alert(`Error updating profile: ${error.message}`);
+      throw error;
+    }
+  };
+
+  const openEditProfileModal = () => setIsEditProfileOpen(true);
+  const closeEditProfileModal = () => setIsEditProfileOpen(false);
+
+  const handleEditProfileSubmit = (updatedValues) => {
+    console.log("Updated values:", updatedValues);
+    // Call your context function to update the user
+    setIsEditProfileOpen(false);
+  };
+
   const handleDeleteAccount = async () => {
     const confirmed = window.confirm(
       "Are you sure you want to delete your account? This action cannot be undone."
@@ -208,6 +236,7 @@ export default function App() {
           handleLogout,
           handleLogin,
           handleRegistration,
+          handleUpdateProfile,
           handleDeleteAccount,
           savedActivities,
           completedActivities,
@@ -220,6 +249,7 @@ export default function App() {
                 <Header
                   handleSignupClick={handleSignupClick}
                   handleLoginClick={handleLoginClick}
+                  openEditProfileModal={openEditProfileModal}
                 />
                 <Main />
                 <AddActivityButton onClick={() => openModal("add-activity")} />
@@ -243,6 +273,10 @@ export default function App() {
                   activeModal={activeModal}
                   setActiveModal={setActiveModal}
                   isLoading={isLoading}
+                />
+                <EditProfileModal
+                  isOpen={isEditProfileOpen}
+                  onClose={closeEditProfileModal}
                 />
               </div>
             </div>
