@@ -16,6 +16,7 @@ export default function Header({
   openChangePasswordModal,
   openDeleteConfirmationModal,
   openLogoutConfirmationModal,
+  isMobile,
 }) {
   const { isLoggedIn, currentUser, handleLogout, handleDeleteAccount } =
     useContext(UserContext);
@@ -23,9 +24,30 @@ export default function Header({
   return (
     <header className="header">
       <div className="header__left">
-        <Logo />
-        <LocationDisplay />
-        <WeatherDisplay />
+        <div className="header__mobile-top-container">
+          <Logo />
+          {isLoggedIn && isMobile && (
+            <div className="header__mobile-dropdown-location">
+              <AccountDropdown
+                user={currentUser}
+                onLogout={handleLogout}
+                onDeleteAccount={handleDeleteAccount}
+                onEditProfileClick={openEditProfileModal}
+                onChangePasswordClick={openChangePasswordModal}
+                onLogoutClick={openLogoutConfirmationModal}
+                onDeleteAccountClick={openDeleteConfirmationModal}
+              />
+            </div>
+          )}
+        </div>
+
+        <hr className="header__divider" />
+        <div className="header__mobile-middle-container">
+          <LocationDisplay />
+          <hr className="header__divider" />
+          <WeatherDisplay />
+        </div>
+        <hr className="header__divider" />
       </div>
       {!isLoggedIn && (
         <ul className="header__unauthorized-view">
@@ -47,7 +69,7 @@ export default function Header({
           </li>
         </ul>
       )}
-      {isLoggedIn && (
+      {isLoggedIn && !isMobile && (
         <div className="header__authorized-view">
           <AccountDropdown
             user={currentUser}

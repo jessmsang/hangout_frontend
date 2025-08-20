@@ -61,3 +61,35 @@
   font-size: 0.8rem;
   opacity: 0.8;
 }
+
+@media screen and (max-width: 600px) {
+  .saved-activities__header {
+    justify-content: space-between;
+    padding-right: 2rem;
+  }
+
+  .saved-activities__title {
+    font-size: 0.9rem;
+    margin: 0 auto;
+  }
+
+  .saved-activities__filter-btn {
+    position: unset;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .saved-activities {
+    padding: 2rem 0 0 0;
+  }
+
+  .saved-activities__title {
+    font-size: 0.8rem;
+  }
+
+  .saved-activities__empty-text {
+    font-size: 0.7rem;
+  }
+}

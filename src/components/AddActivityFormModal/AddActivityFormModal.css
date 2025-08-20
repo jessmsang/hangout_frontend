@@ -30,3 +30,13 @@
 .add-activity-form__textarea:hover {
   opacity: 0.8;
 }
+
+@media screen and (max-width: 600px) {
+  .add-activity-form {
+    gap: 0.1rem;
+  }
+
+  .add-activity-form__label {
+    gap: 0.1rem;
+  }
+}

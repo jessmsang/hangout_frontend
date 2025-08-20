@@ -11,6 +11,7 @@
   visibility: hidden;
   opacity: 0;
   transition: visibility 0s linear 0.3s, opacity 0.3s linear;
+  z-index: 999;
 }
 
 .modal_opened {
@@ -161,6 +162,14 @@
   gap: 0.6rem;
 }
 
+.modal__btn-wrapper_edit-profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem 0 0;
+  gap: 0.6rem;
+}
+
 .modal__btn-wrapper_delete-confirmation {
   display: flex;
   justify-content: center;
@@ -258,4 +267,63 @@
 .modal__error {
   color: #3c2d01;
   font-size: 0.7rem;
+}
+
+@media screen and (max-width: 600px) {
+  .modal__container {
+    width: 80%;
+    padding: 2rem 1.5rem;
+  }
+
+  .modal__container_add-activity {
+    width: 80%;
+    padding: 1rem;
+  }
+
+  .modal__container_login {
+    width: 80%;
+  }
+
+  .modal__container_register {
+    width: 80%;
+  }
+
+  .modal__title {
+    font-size: 0.85rem;
+  }
+
+  .modal__title_delete-confirmation {
+    font-size: 0.8rem;
+  }
+
+  .modal__close-btn {
+    top: 0.8rem;
+    right: 0.8rem;
+  }
+
+  .modal__label {
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+
+  .modal__input {
+    font-size: 0.6rem;
+  }
+
+  .modal__submit-btn {
+    font-size: 0.65rem;
+    padding: 0.6rem 0.6rem;
+  }
+
+  .modal__cancel-btn {
+    font-size: 0.65rem;
+  }
+
+  .modal__cancel-btn_delete-confirmation {
+    padding: 0.95rem 1.5rem;
+  }
+
+  .modal__btn-wrapper_add-activity {
+    margin: 0;
+  }
 }

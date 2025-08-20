@@ -52,3 +52,9 @@
 .activities-carousel__arrow.right {
   right: 0rem;
 }
+
+@media screen and (max-width: 600px) {
+  .activities-carousel {
+    padding: 0;
+  }
+}

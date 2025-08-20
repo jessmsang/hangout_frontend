@@ -1,14 +1,64 @@
 .footer {
-  display: flex;
-  justify-content: space-between;
   padding: 2rem;
   font-size: 0.8rem;
 }
 
-.footer__author {
+.footer__author,
+.footer__year {
+  margin: 0;
+}
+
+.footer__desktop-view {
+  display: flex;
+  align-items: center;
+}
+
+.footer__left,
+.footer__middle,
+.footer__right {
+  flex: 1;
+}
+
+.footer__middle {
+  text-align: center;
+}
+
+.footer__right {
+  text-align: right;
+}
+
+.footer__mobile-view {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer__mobile-view .footer__author {
   margin: 0 auto;
 }
 
-.footer__year {
+.footer__mobile-view .footer__year {
   margin: 0;
+}
+
+@media screen and (max-width: 700px) {
+  .footer__left {
+    flex: 0.5;
+  }
+
+  .footer__middle {
+    flex: 2;
+  }
+
+  .footer__right {
+    flex: 0.5;
+    white-space: nowrap;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .footer {
+    font-size: 0.6rem;
+    padding: 1rem;
+  }
 }

@@ -16,6 +16,7 @@
 .location-selector__submit-btn {
   font-size: 0.55rem;
   padding: 0.15rem 0;
+  margin: 0;
 }
 
 .location-selector__submit-btn:hover {
@@ -31,4 +32,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media screen and (max-width: 380px) {
+  .location-selector__label {
+    display: flex;
+    flex-direction: column;
+    padding: 0.2rem 0;
+  }
+
+  .location-selector__input {
+    width: 5rem;
+    font-size: 0.5rem;
+    margin: 0.1rem 0 0 0;
+  }
+
+  .location-selector__submit-btn {
+    width: 5.4rem;
+    font-size: 0.5rem;
+  }
 }

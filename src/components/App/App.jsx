@@ -55,7 +55,7 @@ export default function App() {
   const [currentUser, setCurrentUser] = useState({
     _id: "dummy-id",
     name: "Jess Test",
-    email: "jess@example.com",
+    email: "jess@test.com",
     createdAt: "",
   });
 
@@ -69,6 +69,7 @@ export default function App() {
   const [isDeleteConfirmationModalOpen, setIsDeleteConfirmationModalOpen] =
     useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
 
   const navigate = useNavigate();
 
@@ -120,6 +121,15 @@ export default function App() {
         setWeatherData(filteredData);
       })
       .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 600);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   // TODO: SET UP USER CONTEXT
@@ -281,6 +291,7 @@ export default function App() {
                   openChangePasswordModal={openChangePasswordModal}
                   openDeleteConfirmationModal={openDeleteConfirmationModal}
                   openLogoutConfirmationModal={openLogoutConfirmationModal}
+                  isMobile={isMobile}
                 />
                 <Main />
                 <AddActivityButton onClick={() => openModal("add-activity")} />
@@ -289,7 +300,7 @@ export default function App() {
                   onClose={closeActiveModal}
                 />
 
-                <Footer />
+                <Footer isMobile={isMobile} />
 
                 <RegisterModal
                   onClose={closeActiveModal}
@@ -327,7 +338,7 @@ export default function App() {
                   isLoading={isLoading}
                   onDelete={() => {
                     handleDeleteAccount();
-                    closeDeleteAccountModal();
+                    closeDeleteConfirmationModal();
                   }}
                 />
               </div>

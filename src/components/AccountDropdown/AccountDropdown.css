@@ -64,3 +64,17 @@
 .account-dropdown__danger {
   color: red;
 }
+
+@media screen and (max-width: 600px) {
+}
+
+@media screen and (max-width: 380px) {
+  .account-dropdown__btn {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .account-dropdown__avatar-placeholder {
+    font-size: 0.9rem;
+  }
+}

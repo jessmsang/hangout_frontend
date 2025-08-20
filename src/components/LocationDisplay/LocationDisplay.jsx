@@ -8,10 +8,13 @@ export default function LocationDisplay() {
 
   return (
     <div className="location-display">
-      <p className="location-display__title">
-        Current location: {weatherData?.city ? weatherData.city : "Loading..."}
-      </p>
-      <LocationSelector weatherAPIkey={weatherAPIkey} />
+      <div className="location-display__container">
+        <p className="location-display__title">
+          Current location:{" "}
+          {weatherData?.city ? weatherData.city : "Loading..."}
+        </p>
+        <LocationSelector weatherAPIkey={weatherAPIkey} />
+      </div>
     </div>
   );
 }

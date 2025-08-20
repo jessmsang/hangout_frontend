@@ -10,6 +10,7 @@
 .weather-display__title {
   font-size: 0.7rem;
   margin: 0;
+  font-weight: 600;
 }
 
 .weather-display__container {
@@ -27,4 +28,26 @@
 .weather-display__temperature {
   margin: 0;
   font-size: 0.9rem;
+}
+
+@media screen and (max-width: 600px) {
+  .weather-display {
+    border: none;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .weather-display__title {
+    font-size: 0.6rem;
+  }
+
+  .weather-display__temperature {
+    font-size: 0.7rem;
+  }
+}
+
+@media screen and (max-width: 323px) {
+  .weather-display {
+    padding: 0.5rem 0.5rem 0.5rem 0;
+  }
 }

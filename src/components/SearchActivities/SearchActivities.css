@@ -54,3 +54,31 @@
   transform: scale(1.07);
   cursor: pointer;
 }
+
+@media screen and (max-width: 600px) {
+  .search-activities__header {
+    justify-content: space-between;
+    padding-right: 2rem;
+  }
+
+  .search-activities__title {
+    font-size: 0.9rem;
+    margin: 0 auto;
+  }
+
+  .search-activities__filter-btn {
+    position: unset;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .search-activities {
+    padding: 2rem 0 0 0;
+  }
+
+  .search-activities__title {
+    font-size: 0.8rem;
+  }
+}
