@@ -2,9 +2,11 @@ import { useContext, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
 import UserContext from "../../contexts/UserContext";
+import LoadingContext from "../../contexts/LoadingContext";
 
-export default function EditProfileModal({ onClose, isOpen, isLoading }) {
+export default function EditProfileModal({ onClose, isOpen }) {
   const { currentUser, handleUpdateProfile } = useContext(UserContext);
+  const { isLoading, setIsLoading } = useContext(LoadingContext);
 
   const { values, handleChange, setValues, isValid } = useForm({
     name: currentUser?.name || "",

@@ -2,9 +2,11 @@ import "./LocationDisplay.css";
 import LocationSelector from "../LocationSelector/LocationSelector";
 import WeatherContext from "../../contexts/WeatherContext";
 import { useContext } from "react";
+import LoadingContext from "../../contexts/LoadingContext";
 
 export default function LocationDisplay() {
   const { weatherData, weatherAPIkey } = useContext(WeatherContext);
+  const { isLoading, setIsLoading } = useContext(LoadingContext);
 
   return (
     <div className="location-display">

@@ -15,10 +15,12 @@ import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import ChangePasswordModal from "../ChangePasswordModal/ChangePasswordModal";
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
 import LogoutConfirmationModal from "../LogoutConfirmationModal/LogoutConfirmationModal";
+import Preloader from "../Preloader/Preloader";
 
 import UserContext from "../../contexts/UserContext";
 import WeatherContext from "../../contexts/WeatherContext";
 import ActivitiesContext from "../../contexts/ActivitiesContext";
+import LoadingContext from "../../contexts/LoadingContext";
 
 // import activitiesData from "../../../db.json";
 
@@ -132,17 +134,12 @@ export default function App() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // TODO: SET UP USER CONTEXT
-
   const handleSignupClick = () => {
     setActiveModal("register-modal");
-    //TODO: ADD RESPONSIVE DESIGN
-    // setIsMobileMenuActive(false);
   };
 
   const handleLoginClick = () => {
     setActiveModal("login-modal");
-    //   setIsMobileMenuActive(false);
   };
 
   const handleSubmit = (request) => {
@@ -205,7 +202,7 @@ export default function App() {
       //TODO: FOR REAL BACKEND:
       // await auth.updateUser(currentUser._id, updatedValues);
 
-      alert("Profile updated successfully.");
+      console.log("Profile updated successfully.");
       return updatedUser;
     } catch (error) {
       console.error("Profile update failed:", error);
@@ -222,8 +219,8 @@ export default function App() {
       // TODO: Replace with real backend request
       // await auth.updatePassword(currentUser._id, { oldPassword, newPassword });
 
+      console.log("Password updated successfully (stubbed).");
       console.log("Password updated:", { oldPassword, newPassword });
-      alert("Password updated successfully (stubbed).");
     } catch (error) {
       console.error("Password update failed:", error);
       alert(`Error updating password: ${error.message}`);
@@ -261,91 +258,90 @@ export default function App() {
     setIsDeleteConfirmationModalOpen(false);
 
   return (
-    <WeatherContext.Provider
-      value={{ weatherData, setWeatherData, weatherAPIkey }}
-    >
-      <UserContext.Provider
-        value={{
-          currentUser,
-          setCurrentUser,
-          isLoggedIn,
-          isAuthenticating,
-          handleLogout,
-          handleLogin,
-          handleRegistration,
-          handleUpdateProfile,
-          handleDeleteAccount,
-          handleUpdatePassword,
-          savedActivities,
-          completedActivities,
-        }}
+    <LoadingContext.Provider value={{ isLoading, setIsLoading }}>
+      {isLoading && <Preloader />}
+      <WeatherContext.Provider
+        value={{ weatherData, setWeatherData, weatherAPIkey }}
       >
-        <ActivitiesContext.Provider value={{ activities, setActivities }}>
-          <FilterContextProvider>
-            <div className="page">
-              <div className="page__content">
-                <Header
-                  handleSignupClick={handleSignupClick}
-                  handleLoginClick={handleLoginClick}
-                  openEditProfileModal={openEditProfileModal}
-                  openChangePasswordModal={openChangePasswordModal}
-                  openDeleteConfirmationModal={openDeleteConfirmationModal}
-                  openLogoutConfirmationModal={openLogoutConfirmationModal}
-                  isMobile={isMobile}
-                />
-                <Main />
-                <AddActivityButton onClick={() => openModal("add-activity")} />
-                <AddActivityFormModal
-                  isOpen={activeModal === "add-activity"}
-                  onClose={closeActiveModal}
-                />
+        <UserContext.Provider
+          value={{
+            currentUser,
+            setCurrentUser,
+            isLoggedIn,
+            isAuthenticating,
+            handleLogout,
+            handleLogin,
+            handleRegistration,
+            handleUpdateProfile,
+            handleDeleteAccount,
+            handleUpdatePassword,
+            savedActivities,
+            completedActivities,
+          }}
+        >
+          <ActivitiesContext.Provider value={{ activities, setActivities }}>
+            <FilterContextProvider>
+              <div className="page">
+                <div className="page__content">
+                  <Header
+                    handleSignupClick={handleSignupClick}
+                    handleLoginClick={handleLoginClick}
+                    openEditProfileModal={openEditProfileModal}
+                    openChangePasswordModal={openChangePasswordModal}
+                    openDeleteConfirmationModal={openDeleteConfirmationModal}
+                    openLogoutConfirmationModal={openLogoutConfirmationModal}
+                    isMobile={isMobile}
+                  />
+                  <Main />
+                  <AddActivityButton
+                    onClick={() => openModal("add-activity")}
+                  />
+                  <AddActivityFormModal
+                    isOpen={activeModal === "add-activity"}
+                    onClose={closeActiveModal}
+                  />
 
-                <Footer isMobile={isMobile} />
+                  <Footer isMobile={isMobile} />
 
-                <RegisterModal
-                  onClose={closeActiveModal}
-                  isOpen={activeModal === "register-modal"}
-                  activeModal={activeModal}
-                  setActiveModal={setActiveModal}
-                  isLoading={isLoading}
-                />
-                <LoginModal
-                  onClose={closeActiveModal}
-                  isOpen={activeModal === "login-modal"}
-                  activeModal={activeModal}
-                  setActiveModal={setActiveModal}
-                  isLoading={isLoading}
-                />
-                <EditProfileModal
-                  isOpen={isEditProfileOpen}
-                  onClose={closeEditProfileModal}
-                  isLoading={isLoading}
-                />
-                <ChangePasswordModal
-                  isOpen={isChangePasswordOpen}
-                  onClose={closeChangePasswordModal}
-                  isLoading={isLoading}
-                />
-                <LogoutConfirmationModal
-                  isOpen={isLogoutModalOpen}
-                  onClose={closeLogoutConfirmationModal}
-                  onLogout={handleLogout}
-                  isLoading={isLoading}
-                />
-                <DeleteConfirmationModal
-                  isOpen={isDeleteConfirmationModalOpen}
-                  onClose={closeDeleteConfirmationModal}
-                  isLoading={isLoading}
-                  onDelete={() => {
-                    handleDeleteAccount();
-                    closeDeleteConfirmationModal();
-                  }}
-                />
+                  <RegisterModal
+                    onClose={closeActiveModal}
+                    isOpen={activeModal === "register-modal"}
+                    activeModal={activeModal}
+                    setActiveModal={setActiveModal}
+                  />
+                  <LoginModal
+                    onClose={closeActiveModal}
+                    isOpen={activeModal === "login-modal"}
+                    activeModal={activeModal}
+                    setActiveModal={setActiveModal}
+                  />
+                  <EditProfileModal
+                    isOpen={isEditProfileOpen}
+                    onClose={closeEditProfileModal}
+                  />
+                  <ChangePasswordModal
+                    isOpen={isChangePasswordOpen}
+                    onClose={closeChangePasswordModal}
+                  />
+                  <LogoutConfirmationModal
+                    isOpen={isLogoutModalOpen}
+                    onClose={closeLogoutConfirmationModal}
+                    onLogout={handleLogout}
+                  />
+                  <DeleteConfirmationModal
+                    isOpen={isDeleteConfirmationModalOpen}
+                    onClose={closeDeleteConfirmationModal}
+                    onDelete={() => {
+                      handleDeleteAccount();
+                      closeDeleteConfirmationModal();
+                    }}
+                  />
+                </div>
               </div>
-            </div>
-          </FilterContextProvider>
-        </ActivitiesContext.Provider>
-      </UserContext.Provider>
-    </WeatherContext.Provider>
+            </FilterContextProvider>
+          </ActivitiesContext.Provider>
+        </UserContext.Provider>
+      </WeatherContext.Provider>
+    </LoadingContext.Provider>
   );
 }

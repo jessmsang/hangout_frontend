@@ -65,9 +65,6 @@
   color: red;
 }
 
-@media screen and (max-width: 600px) {
-}
-
 @media screen and (max-width: 380px) {
   .account-dropdown__btn {
     width: 2rem;

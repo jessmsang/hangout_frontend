@@ -3,9 +3,11 @@ import { useContext } from "react";
 
 import UserContext from "../../contexts/UserContext";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import LoadingContext from "../../contexts/LoadingContext";
 
-function RegisterModal({ onClose, isOpen, isLoading, setActiveModal }) {
+function RegisterModal({ onClose, isOpen, setActiveModal }) {
   const { handleRegistration } = useContext(UserContext);
+  const { isLoading, setIsLoading } = useContext(LoadingContext);
 
   const { values, handleChange, setValues, errorMessage, isValid } = useForm(
     {

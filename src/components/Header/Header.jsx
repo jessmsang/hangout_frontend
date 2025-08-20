@@ -8,6 +8,7 @@ import Logo from "../Logo/Logo";
 import AccountDropdown from "../AccountDropdown/AccountDropdown";
 
 import UserContext from "../../contexts/UserContext";
+import LoadingContext from "../../contexts/LoadingContext";
 
 export default function Header({
   handleSignupClick,
@@ -20,6 +21,7 @@ export default function Header({
 }) {
   const { isLoggedIn, currentUser, handleLogout, handleDeleteAccount } =
     useContext(UserContext);
+  const { isLoading, setIsLoading } = useContext(LoadingContext);
 
   return (
     <header className="header">

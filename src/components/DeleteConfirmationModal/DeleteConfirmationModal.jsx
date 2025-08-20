@@ -1,12 +1,15 @@
+import { useContext } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import LoadingContext from "../../contexts/LoadingContext";
 
 export default function DeleteConfirmationModal({
   isOpen,
   onClose,
   card,
   onDelete,
-  isLoading,
 }) {
+  const { isLoading, setIsLoading } = useContext(LoadingContext);
+
   const handleDelete = (e) => {
     e.preventDefault();
     onDelete(card);

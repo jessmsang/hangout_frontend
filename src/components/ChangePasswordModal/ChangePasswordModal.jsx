@@ -2,9 +2,11 @@ import { useContext } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
 import UserContext from "../../contexts/UserContext";
+import LoadingContext from "../../contexts/LoadingContext";
 
-export default function ChangePasswordModal({ onClose, isOpen, isLoading }) {
+export default function ChangePasswordModal({ onClose, isOpen }) {
   const { handleUpdatePassword } = useContext(UserContext);
+  const { isLoading, setIsLoading } = useContext(LoadingContext);
 
   const { values, handleChange, setValues, errorMessage, hasErrors, isValid } =
     useForm(

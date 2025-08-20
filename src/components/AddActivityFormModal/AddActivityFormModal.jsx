@@ -1,10 +1,13 @@
 import "./AddActivityFormModal.css";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ActivityCriteriaForm from "../ActivityCriteriaForm/ActivityCriteriaForm";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import LoadingContext from "../../contexts/LoadingContext";
 
-export default function AddActivityFormModal({ isOpen, onClose, isLoading }) {
+export default function AddActivityFormModal({ isOpen, onClose }) {
+  const { isLoading, setIsLoading } = useContext(LoadingContext);
+
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [seasons, setSeasons] = useState([]);

@@ -3,9 +3,11 @@ import { useForm } from "../../hooks/useForm";
 
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import UserContext from "../../contexts/UserContext";
+import LoadingContext from "../../contexts/LoadingContext";
 
-function LoginModal({ onClose, isOpen, isLoading, setActiveModal }) {
+function LoginModal({ onClose, isOpen, setActiveModal }) {
   const { handleLogin } = useContext(UserContext);
+  const { isLoading, setIsLoading } = useContext(LoadingContext);
 
   const { values, handleChange, setValues, errorMessage, isValid } = useForm({
     email: "",
