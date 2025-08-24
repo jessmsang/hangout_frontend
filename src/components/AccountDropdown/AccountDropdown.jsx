@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import "./AccountDropdown.css";
+
+import DeleteContext from "../../contexts/DeleteContext";
 
 export default function AccountDropdown({
   user,
   onEditProfileClick,
   onChangePasswordClick,
-  onDeleteAccountClick,
   onLogoutClick,
 }) {
+  const { openDeleteConfirmationModal } = useContext(DeleteContext);
+
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = () => setIsOpen((prev) => !prev);
@@ -22,6 +26,13 @@ export default function AccountDropdown({
 
       {isOpen && (
         <div className="account-dropdown__menu">
+          <Link
+            to="/my-activities"
+            className="account-dropdown__link"
+            onClick={toggleDropdown}
+          >
+            <button className="account-dropdown__item">My Activities</button>
+          </Link>
           <button
             className="account-dropdown__item"
             onClick={() => {
@@ -53,7 +64,7 @@ export default function AccountDropdown({
           <button
             className="account-dropdown__item account-dropdown__danger"
             onClick={() => {
-              onDeleteAccountClick();
+              openDeleteConfirmationModal("account");
               setIsOpen(false);
             }}
           >

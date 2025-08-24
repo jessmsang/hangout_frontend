@@ -11,7 +11,7 @@
   visibility: hidden;
   opacity: 0;
   transition: visibility 0s linear 0.3s, opacity 0.3s linear;
-  z-index: 999;
+  z-index: 998;
 }
 
 .modal_opened {
@@ -108,7 +108,8 @@
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: transparent url("../../assets/close-icon.svg") center no-repeat;
+  background: transparent url("../../assets/utilityIcons/close.svg") center
+    no-repeat;
   background-size: cover;
   width: 0.9rem;
   height: 0.9rem;

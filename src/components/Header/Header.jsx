@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 
 import "./Header.css";
 
@@ -8,36 +9,32 @@ import Logo from "../Logo/Logo";
 import AccountDropdown from "../AccountDropdown/AccountDropdown";
 
 import UserContext from "../../contexts/UserContext";
-import LoadingContext from "../../contexts/LoadingContext";
 
 export default function Header({
   handleSignupClick,
   handleLoginClick,
   openEditProfileModal,
   openChangePasswordModal,
-  openDeleteConfirmationModal,
   openLogoutConfirmationModal,
   isMobile,
 }) {
-  const { isLoggedIn, currentUser, handleLogout, handleDeleteAccount } =
-    useContext(UserContext);
-  const { isLoading, setIsLoading } = useContext(LoadingContext);
+  const { isLoggedIn, currentUser, handleLogout } = useContext(UserContext);
 
   return (
     <header className="header">
       <div className="header__left">
         <div className="header__mobile-top-container">
-          <Logo />
+          <Link to="/" className="logo-link">
+            <Logo />
+          </Link>
           {isLoggedIn && isMobile && (
             <div className="header__mobile-dropdown-location">
               <AccountDropdown
                 user={currentUser}
                 onLogout={handleLogout}
-                onDeleteAccount={handleDeleteAccount}
                 onEditProfileClick={openEditProfileModal}
                 onChangePasswordClick={openChangePasswordModal}
                 onLogoutClick={openLogoutConfirmationModal}
-                onDeleteAccountClick={openDeleteConfirmationModal}
               />
             </div>
           )}
@@ -76,11 +73,9 @@ export default function Header({
           <AccountDropdown
             user={currentUser}
             onLogout={handleLogout}
-            onDeleteAccount={handleDeleteAccount}
             onEditProfileClick={openEditProfileModal}
             onChangePasswordClick={openChangePasswordModal}
             onLogoutClick={openLogoutConfirmationModal}
-            onDeleteAccountClick={openDeleteConfirmationModal}
           />
         </div>
       )}

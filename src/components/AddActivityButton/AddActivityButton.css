@@ -2,7 +2,8 @@
   position: fixed;
   bottom: 1.5rem;
   left: 1.5rem;
-  background: transparent url("../../assets/add-btn.svg") center no-repeat;
+  background: transparent url("../../assets/utilityIcons/add.svg") center
+    no-repeat;
   background-size: cover;
   width: 3rem;
   height: 3rem;

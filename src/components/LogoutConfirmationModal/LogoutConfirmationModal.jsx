@@ -5,12 +5,23 @@ import LoadingContext from "../../contexts/LoadingContext";
 export default function LogoutConfirmationModal({ isOpen, onClose, onLogout }) {
   const { isLoading, setIsLoading } = useContext(LoadingContext);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (onLogout) {
-      onLogout();
+    if (!onLogout) return;
+
+    setIsLoading(true);
+
+    try {
+      const result = onLogout();
+      if (result instanceof Promise) {
+        await result;
+      }
+    } catch (error) {
+      console.error("Logout failed:", error);
+    } finally {
+      setIsLoading(false);
+      onClose();
     }
-    onClose();
   };
 
   return (

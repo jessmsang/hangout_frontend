@@ -11,14 +11,17 @@ import { seasonsIcons } from "../../constants/seasonsIcons";
 
 import FilterContext from "../../contexts/FilterContext";
 import UserContext from "../../contexts/UserContext";
+import DeleteContext from "../../contexts/DeleteContext";
 // import { data } from "react-router-dom";
 
 export default function ActivityCard({ activity }) {
   const { handleCardSave, handleCardComplete } = useContext(FilterContext);
   const { isLoggedIn, currentUser } = useContext(UserContext);
+  const { openDeleteConfirmationModal } = useContext(DeleteContext);
 
   const isSaved = currentUser?.savedActivities?.includes(activity._id);
   const isCompleted = currentUser?.completedActivities?.includes(activity._id);
+  const isOwner = currentUser ? activity.owner === currentUser._id : false;
 
   const toggleIsSaved = () => {
     handleCardSave({ _id: activity._id });
@@ -27,9 +30,6 @@ export default function ActivityCard({ activity }) {
   const toggleIsCompleted = () => {
     handleCardComplete({ _id: activity._id });
   };
-
-  // TODO: ADD USER CONTEXT
-  // const { currentUser, isLoggedIn } = useContext(UserContext);
 
   const categories = Array.isArray(activity.category)
     ? activity.category
@@ -110,10 +110,20 @@ export default function ActivityCard({ activity }) {
   return (
     <li className="card">
       <div className="card__container">
-        {isLoggedIn && (
+        {isLoggedIn && currentUser && (
           <div className="card__header">
             <ul className="card__header-list">
-              <li className="card__header-list-item">
+              {isOwner && (
+                <li className="card__header-list-item">
+                  <button
+                    className="card__delete-btn"
+                    onClick={() =>
+                      openDeleteConfirmationModal("activity", activity)
+                    }
+                  ></button>
+                </li>
+              )}
+              <li className="card__header-list-item card__header-right">
                 <button
                   className={`${
                     !isSaved
@@ -122,8 +132,6 @@ export default function ActivityCard({ activity }) {
                   }`}
                   onClick={toggleIsSaved}
                 />
-              </li>
-              <li className="card__header-list-item">
                 <button
                   className={`${
                     !isCompleted

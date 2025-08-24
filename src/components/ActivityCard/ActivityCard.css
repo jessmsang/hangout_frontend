@@ -6,7 +6,7 @@
   background-color: #f3f4f0;
   padding: 0.5rem;
   width: 8.5rem;
-  height: 12.5rem;
+  height: 13.5rem;
   color: #000;
   box-shadow: 5px 5px 5px #00000034;
   flex: 0 0 auto;
@@ -25,20 +25,60 @@
 
 .card__header {
   display: flex;
-  justify-content: flex-end;
+  padding: 0 0 0.3rem;
 }
 
 .card__header-list {
   display: flex;
-  gap: 0.3rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  width: 100%;
 }
 
 .card__header-list-item {
-  list-style-type: none;
+  display: flex;
+  align-items: center;
+}
+
+.card__header-right {
+  display: flex;
+  gap: 0.3rem;
+  margin-left: auto;
+}
+
+.card__delete-btn {
+  background: transparent url(../../assets/utilityIcons/delete.svg) no-repeat
+    center;
+  border: none;
+  background-size: contain;
+  width: 1rem;
+  height: 1rem;
+  object-fit: contain;
+  padding: 0;
+  margin: 0;
+  opacity: 0.6;
+}
+
+.card__delete-btn:hover {
+  background: transparent url(../../assets/utilityIcons/delete-hover.svg)
+    no-repeat center;
+  border: none;
+  background-size: contain;
+  width: 1rem;
+  height: 1rem;
+  object-fit: contain;
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  cursor: pointer;
 }
 
 .card__save-btn-not-saved {
-  background: transparent url(../../assets/save-gray.svg) no-repeat center;
+  background: transparent url(../../assets/utilityIcons/save-gray.svg) no-repeat
+    center;
   border: none;
   background-size: contain;
   width: 1rem;
@@ -54,7 +94,8 @@
 }
 
 .card__save-btn-saved {
-  background: transparent url(../../assets/save-green.svg) no-repeat center;
+  background: transparent url(../../assets/utilityIcons/save-green.svg)
+    no-repeat center;
   border: none;
   background-size: contain;
   width: 1rem;
@@ -70,7 +111,8 @@
 }
 
 .card__complete-btn-not-completed {
-  background: transparent url(../../assets/tick-gray.svg) no-repeat center;
+  background: transparent url(../../assets/utilityIcons/tick-gray.svg) no-repeat
+    center;
   border: none;
   background-size: contain;
   width: 1rem;
@@ -86,7 +128,8 @@
 }
 
 .card__complete-btn-completed {
-  background: transparent url(../../assets/tick-green.svg) no-repeat center;
+  background: transparent url(../../assets/utilityIcons/tick-green.svg)
+    no-repeat center;
   border: none;
   background-size: contain;
   width: 1rem;
