@@ -37,7 +37,7 @@
   flex-direction: column;
   background: #c0a145;
   border-radius: 0.5rem;
-  padding: 2rem;
+  padding: 2.5rem 2rem;
   position: relative;
   width: 23rem;
   max-height: 100%;
@@ -92,14 +92,14 @@
 
 .modal__title_delete-confirmation {
   padding: 0;
-  font-size: 1rem;
+  font-size: 0.9rem;
   margin: 0;
   text-align: center;
 }
 
 .modal__title_logout-confirmation {
   padding: 0;
-  font-size: 1rem;
+  font-size: 0.9rem;
   margin: 0;
   text-align: center;
 }

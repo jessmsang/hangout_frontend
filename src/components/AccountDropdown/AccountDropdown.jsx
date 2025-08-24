@@ -33,6 +33,7 @@ export default function AccountDropdown({
           >
             <button className="account-dropdown__item">My Activities</button>
           </Link>
+          <hr className="account-dropdown__divider" />
           <button
             className="account-dropdown__item"
             onClick={() => {

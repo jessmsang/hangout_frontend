@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 
 import "./App.css";
@@ -21,6 +21,7 @@ import LogoutConfirmationModal from "../LogoutConfirmationModal/LogoutConfirmati
 
 import Preloader from "../Preloader/Preloader";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import { useEscClose } from "../../hooks/useEscClose";
 
 import UserContext from "../../contexts/UserContext";
 import WeatherContext from "../../contexts/WeatherContext";
@@ -91,23 +92,20 @@ export default function App() {
     (activity) => activity.isCompleted
   );
 
-  const openModal = (modalName) => setActiveModal(modalName);
-  const closeActiveModal = () => setActiveModal("");
+  // useEffect(() => {
+  //   if (!activeModal) return;
 
-  useEffect(() => {
-    if (!activeModal) return;
+  //   const handleEscClose = (evt) => {
+  //     if (evt.key === "Escape") {
+  //       closeActiveModal();
+  //     }
+  //   };
+  //   document.addEventListener("keydown", handleEscClose);
 
-    const handleEscClose = (evt) => {
-      if (evt.key === "Escape") {
-        closeActiveModal();
-      }
-    };
-    document.addEventListener("keydown", handleEscClose);
-
-    return () => {
-      document.removeEventListener("keydown", handleEscClose);
-    };
-  }, [activeModal]);
+  //   return () => {
+  //     document.removeEventListener("keydown", handleEscClose);
+  //   };
+  // }, [activeModal]);
 
   useEffect(() => {
     activitiesApi
@@ -278,6 +276,42 @@ export default function App() {
 
   const closeDeleteConfirmationModal = () =>
     setDeleteConfig({ isOpen: false, variant: null, card: null });
+
+  const openModal = (modalName) => setActiveModal(modalName);
+  const closeActiveModal = useCallback(() => setActiveModal(""), []);
+  const handleEscClose = useCallback(() => {
+    if (activeModal) {
+      closeActiveModal(); // closes the currently active modal
+    } else if (isEditProfileOpen) {
+      closeEditProfileModal();
+    } else if (isChangePasswordOpen) {
+      closeChangePasswordModal();
+    } else if (isLogoutModalOpen) {
+      closeLogoutConfirmationModal();
+    } else if (deleteConfig.isOpen) {
+      closeDeleteConfirmationModal();
+    }
+  }, [
+    activeModal,
+    isEditProfileOpen,
+    isChangePasswordOpen,
+    isLogoutModalOpen,
+    deleteConfig,
+    closeActiveModal,
+    closeEditProfileModal,
+    closeChangePasswordModal,
+    closeLogoutConfirmationModal,
+    closeDeleteConfirmationModal,
+  ]);
+
+  useEscClose(
+    handleEscClose,
+    activeModal ||
+      isEditProfileOpen ||
+      isChangePasswordOpen ||
+      isLogoutModalOpen ||
+      deleteConfig.isOpen
+  );
 
   return (
     <LoadingContext.Provider value={{ isLoading, setIsLoading }}>
