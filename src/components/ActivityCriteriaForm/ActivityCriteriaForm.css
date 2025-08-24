@@ -129,3 +129,20 @@
   cursor: pointer;
   opacity: 0.8;
 }
+
+@media screen and (max-width: 650px) {
+  .form__sections_search {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "seasons category"
+      "seasons category"
+      "seasons category"
+      "location category"
+      "location cost"
+      "group cost"
+      "group reset";
+    gap: 1rem;
+    align-items: start;
+  }
+}

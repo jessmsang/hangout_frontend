@@ -12,7 +12,7 @@ export default function SavedActivities() {
   const toggleDisplayFilterForm = () => setFormIsVisible(!formIsVisible);
 
   const handleReset = () => {
-    updateFilter({
+    updateFilter("saved", {
       seasons: [],
       location: [],
       category: [],

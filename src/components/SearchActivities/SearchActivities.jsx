@@ -12,7 +12,7 @@ export default function SearchActivities() {
   const toggleDisplayFilterForm = () => setFormIsVisible(!formIsVisible);
 
   const handleReset = () => {
-    updateFilter({
+    updateFilter("search", {
       seasons: [],
       location: [],
       category: [],

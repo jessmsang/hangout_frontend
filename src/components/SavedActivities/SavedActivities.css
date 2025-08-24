@@ -79,11 +79,17 @@
     width: 1.5rem;
     height: 1.5rem;
   }
+
+  .saved-activities__filter-btn:hover {
+    position: unset;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 }
 
 @media screen and (max-width: 380px) {
   .saved-activities {
-    padding: 2rem 0 0 0;
+    padding: 1.5rem 0 0 0;
   }
 
   .saved-activities__title {

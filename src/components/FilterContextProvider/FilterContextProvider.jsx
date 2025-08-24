@@ -4,9 +4,6 @@ import ActivitiesContext from "../../contexts/ActivitiesContext";
 import WeatherContext from "../../contexts/WeatherContext";
 import UserContext from "../../contexts/UserContext";
 
-// TODO: ADD API THINGS
-import * as activitiesApi from "../../utils/activitiesApi";
-
 export default function FilterContextProvider({ children }) {
   const { activities } = useContext(ActivitiesContext);
   const { weatherData } = useContext(WeatherContext);

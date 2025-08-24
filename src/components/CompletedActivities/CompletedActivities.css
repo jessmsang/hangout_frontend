@@ -37,7 +37,7 @@
 
 @media screen and (max-width: 380px) {
   .completed-activities {
-    padding: 2rem 0 0 0;
+    padding: 1rem 0 0 0;
   }
 
   .completed-activities__title {

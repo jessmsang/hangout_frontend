@@ -55,6 +55,6 @@
 
 @media screen and (max-width: 600px) {
   .activities-carousel {
-    padding: 0;
+    padding: 1rem 0;
   }
 }

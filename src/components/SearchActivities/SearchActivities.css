@@ -72,12 +72,22 @@
     width: 1.5rem;
     height: 1.5rem;
   }
+
+  .search-activities__filter-btn:hover {
+    position: unset;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
 }
 
 @media screen and (max-width: 380px) {
   .search-activities {
-    padding: 2rem 0 0 0;
+    padding: 1rem 0 0 0;
   }
+
+  /* .search-activities__header-with-padding {
+    padding: 0 0 2rem;
+  } */
 
   .search-activities__title {
     font-size: 0.8rem;
