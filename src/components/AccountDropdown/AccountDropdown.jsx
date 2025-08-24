@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "./AccountDropdown.css";
 
@@ -13,12 +13,37 @@ export default function AccountDropdown({
   const { openDeleteConfirmationModal } = useContext(DeleteContext);
 
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   const toggleDropdown = () => setIsOpen((prev) => !prev);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
+
   return (
-    <div className="account-dropdown">
-      <button className="account-dropdown__btn" onClick={toggleDropdown}>
+    <div className="account-dropdown" ref={dropdownRef}>
+      <button
+        className="account-dropdown__btn"
+        onClick={(e) => {
+          e.stopPropagation();
+          toggleDropdown();
+        }}
+      >
         <p className="account-dropdown__avatar-placeholder">
           {user.name[0].toUpperCase()}
         </p>
