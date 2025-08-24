@@ -38,6 +38,27 @@ export default function Header({
               />
             </div>
           )}
+
+          {!isLoggedIn && isMobile && (
+            <ul className="header__unauthorized-view-mobile">
+              <li className="header__unauthorized-item-mobile">
+                <button
+                  onClick={handleSignupClick}
+                  className="header__unauthorized-btn-mobile"
+                >
+                  Sign Up
+                </button>
+              </li>
+              <li className="header__unauthorized-item-mobile">
+                <button
+                  onClick={handleLoginClick}
+                  className="header__unauthorized-btn-mobile"
+                >
+                  Log In
+                </button>
+              </li>
+            </ul>
+          )}
         </div>
 
         <hr className="header__divider" />
@@ -48,7 +69,7 @@ export default function Header({
         </div>
         <hr className="header__divider" />
       </div>
-      {!isLoggedIn && (
+      {!isLoggedIn && !isMobile && (
         <ul className="header__unauthorized-view">
           <li className="header__unauthorized-item">
             <button

@@ -372,9 +372,11 @@ export default function App() {
                       ></Route>
                     </Routes>
 
-                    <AddActivityButton
-                      onClick={() => openModal("add-activity")}
-                    />
+                    {isLoggedIn && (
+                      <AddActivityButton
+                        onClick={() => openModal("add-activity")}
+                      />
+                    )}
                     <AddActivityFormModal
                       isOpen={activeModal === "add-activity"}
                       onClose={closeActiveModal}

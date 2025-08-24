@@ -12,6 +12,7 @@
   justify-content: center;
   align-items: center;
   background-color: #c0a145;
+  margin-right: 0.7rem;
 }
 
 .account-dropdown__btn:hover {
@@ -69,6 +70,7 @@
   .account-dropdown__btn {
     width: 2rem;
     height: 2rem;
+    margin-right: 0.2rem;
   }
 
   .account-dropdown__avatar-placeholder {
