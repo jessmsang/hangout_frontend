@@ -92,6 +92,7 @@ export default function App() {
     (activity) => activity.isCompleted
   );
 
+  // TODO: OLD ESC CODE -- DELETE AFTER REVIEW --
   // useEffect(() => {
   //   if (!activeModal) return;
 
@@ -108,6 +109,7 @@ export default function App() {
   // }, [activeModal]);
 
   useEffect(() => {
+    setIsLoading(true);
     activitiesApi
       .getActivities()
       .then((data) =>
@@ -119,10 +121,14 @@ export default function App() {
           }))
         )
       )
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, []);
 
   useEffect(() => {
+    setIsLoading(true);
     fetchCoordinatesByCity("Cincinnati", weatherAPIkey)
       .then((coordinates) => {
         return getWeather(coordinates, weatherAPIkey);
@@ -131,7 +137,10 @@ export default function App() {
         const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, []);
 
   useEffect(() => {
@@ -151,9 +160,9 @@ export default function App() {
     setActiveModal("login-modal");
   };
 
-  const handleSubmit = (request) => {
+  const handleSubmit = (req) => {
     setIsLoading(true);
-    request()
+    req()
       .then(closeActiveModal)
       .catch(console.error)
       .finally(() => {
@@ -162,34 +171,36 @@ export default function App() {
   };
 
   const handleRegistration = ({ email, password, confirmPassword, name }) => {
-    if (password === confirmPassword) {
-      const makeRequest = () => {
-        return auth.register(email, password, name).then(() => {
-          closeActiveModal();
-          handleLogin({ email, password });
-        });
-      };
-      handleSubmit(makeRequest);
+    if (password !== confirmPassword) {
+      return Promise.reject(new Error("Passwords do not match"));
     }
+
+    const makeRequest = () =>
+      auth.register(email, password, name).then((data) => {
+        console.log("Registration successful (stubbed).", data.user);
+        return handleLogin({ email, password });
+      });
+
+    handleSubmit(makeRequest);
   };
 
   const handleLogin = ({ email, password }) => {
-    if (!email || !password) {
-      return;
-    }
+    if (!email || !password)
+      return Promise.reject(new Error("Missing credentials"));
 
-    const makeRequest = () => {
-      return auth.login(email, password).then((data) => {
-        if (data.token) {
-          token.setToken(data.token);
-          setIsLoggedIn(true);
-          const redirectPath = location.state?.from?.pathname || "/";
-          navigate(redirectPath);
-          setCurrentUser(data.user);
-          closeActiveModal();
-        }
+    const makeRequest = () =>
+      auth.login(email, password).then((data) => {
+        token.setToken(data.token);
+        setIsLoggedIn(true);
+        setCurrentUser(data.user);
+
+        const redirectPath = location.state?.from?.pathname || "/";
+        navigate(redirectPath);
+
+        console.log("Login successful (stubbed).", data.user);
+        return data.user;
       });
-    };
+
     handleSubmit(makeRequest);
   };
 
@@ -203,72 +214,111 @@ export default function App() {
   const openLogoutConfirmationModal = () => setIsLogoutModalOpen(true);
   const closeLogoutConfirmationModal = () => setIsLogoutModalOpen(false);
 
-  const handleUpdateProfile = async (updatedValues) => {
-    try {
-      const updatedUser = { ...currentUser, ...updatedValues };
+  const handleUpdateProfile = (updatedValues) => {
+    const updatedUser = { ...currentUser, ...updatedValues };
+
+    const makeRequest = () => {
       setCurrentUser(updatedUser);
+      console.log("Profile updated successfully (stubbed).", updatedUser);
+      return Promise.resolve(updatedUser);
+    };
 
-      //TODO: FOR REAL BACKEND:
-      // await auth.updateUser(currentUser._id, updatedValues);
+    // TODO: ADD REAL BACKEND -- UNCOMMENT CODE BELOW --
+    // return auth
+    //   .updateUser(currentUser._id, updatedValues)
+    //   .then(() => {
+    //     console.log("Profile updated successfully.");
+    //     return updatedUser;
+    //   })
+    //   .catch((error) => {
+    //     console.error("Profile update failed:", error);
+    //     alert(`Error updating profile: ${error.message}`);
+    //     throw error;
+    //   });
 
-      console.log("Profile updated successfully.");
-      return updatedUser;
-    } catch (error) {
-      console.error("Profile update failed:", error);
-      alert(`Error updating profile: ${error.message}`);
-      throw error;
-    }
+    handleSubmit(makeRequest);
   };
 
   const openEditProfileModal = () => setIsEditProfileOpen(true);
   const closeEditProfileModal = () => setIsEditProfileOpen(false);
 
-  const handleUpdatePassword = async (oldPassword, newPassword) => {
-    try {
-      // TODO: Replace with real backend request
-      // await auth.updatePassword(currentUser._id, { oldPassword, newPassword });
+  const handleUpdatePassword = (oldPassword, newPassword) => {
+    const makeRequest = () => {
+      console.log("Password updated successfully (stubbed).", {
+        oldPassword,
+        newPassword,
+      });
+      return Promise.resolve();
+    };
 
-      console.log("Password updated successfully (stubbed).");
-      console.log("Password updated:", { oldPassword, newPassword });
-    } catch (error) {
-      console.error("Password update failed:", error);
-      alert(`Error updating password: ${error.message}`);
-      throw error;
-    }
+    // TODO: ADD REALBACKEND -- UNCOMMENT CODE BELOW
+    // return auth
+    //   .updatePassword(currentUser._id, { oldPassword, newPassword })
+    //   .then(() => {
+    //     console.log("Password updated successfully.");
+    //     console.log("Updated:", { oldPassword, newPassword });
+    //   })
+    //   .catch((error) => {
+    //     console.error("Password update failed:", error);
+    //     alert(`Error updating password: ${error.message}`);
+    //     throw error;
+    //   });
+
+    handleSubmit(makeRequest);
   };
 
   const openChangePasswordModal = () => setIsChangePasswordOpen(true);
   const closeChangePasswordModal = () => setIsChangePasswordOpen(false);
 
-  const handleDeleteAccount = async () => {
-    const confirmed = window.confirm(
-      "Are you sure you want to delete your account? This action cannot be undone."
-    );
-    if (!confirmed) return;
-
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-
+  const handleDeleteAccount = () => {
+    const makeRequest = () => {
       setCurrentUser(null);
       setIsLoggedIn(false);
       token.removeToken();
       navigate("/");
 
-      alert("Your account has been deleted successfully (stubbed).");
-    } catch (error) {
-      console.error("Delete account error:", error);
-      alert(`Error deleting account: ${error.message}`);
-    }
+      console.log("Account deleted successfully (stubbed).");
+      return Promise.resolve();
+    };
+
+    // TODO: ADD REAL BACKEND -- UNCOMMENT CODE BELOW
+    // auth
+    //   .deleteUser(currentUser._id, token.getToken())
+    //   .then(() => {
+    //     setCurrentUser(null);
+    //     setIsLoggedIn(false);
+    //     token.removeToken();
+    //     navigate("/");
+    //     alert("Your account has been deleted successfully.");
+    //   })
+    //   .catch((error) => {
+    //     console.error("Delete account error:", error);
+    //     alert(`Error deleting account: ${error.message}`);
+    //   });
+
+    handleSubmit(makeRequest);
   };
 
-  const handleDeleteActivity = async (activity) => {
-    try {
-      await activitiesApi.deleteActivity(activity._id); // or stub
+  const handleDeleteActivity = (activity) => {
+    const makeRequest = () => {
       setActivities((prev) => prev.filter((a) => a._id !== activity._id));
-    } catch (error) {
-      console.error("Delete activity error:", error);
-      alert(`Error deleting activity: ${error.message}`);
-    }
+      console.log(`Activity ${activity._id} deleted (stubbed).`);
+      return Promise.resolve();
+    };
+
+    // TODO: ADD REAL BACKEND -- UNCOMMENT CODE BELOW
+    // activitiesApi
+    //   .deleteActivity(activity._id, token.getToken())
+    //   .then(() => {
+    //     setActivities((prev) => prev.filter((a) => a._id !== activity._id));
+    //     console.log("Deleted activity:", activity._id);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Delete activity error:", error);
+    //     alert(`Error deleting activity: ${error.message}`);
+    //   });
+
+    handleSubmit(makeRequest);
   };
 
   const openDeleteConfirmationModal = (variant, card = null) =>

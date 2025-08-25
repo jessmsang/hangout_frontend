@@ -103,3 +103,13 @@ export const checkToken = (token) => {
 //     }),
 //   }).then(checkResponse);
 // };
+
+// export const deleteUser = (userId, token) => {
+//   return fetch(`${BASE_URL}/users/${userId}`, {
+//     method: "DELETE",
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//       "Content-Type": "application/json",
+//     },
+//   }).then(checkResponse);
+// };
