@@ -2,7 +2,7 @@
   "name": "hangout",
   "version": "1.0.0",
   "description": "Struggling to pick an activity to do? Hangout can help! This application offers filtered activity options for you to enjoy with friends, family, significant others, or even solo!",
-  "homepage": "https://github.com/jessmsang/hangout#readme",
+  "homepage": "https://jessmsang.github.io/hangout_frontend",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jessmsang/hangout.git"
@@ -16,7 +16,8 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "predeploy": "npm run build"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "react": "^19.1.1",
