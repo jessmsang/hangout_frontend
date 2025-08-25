@@ -35,3 +35,7 @@ Hangout is a full-stack web application built with **React, JavaScript, HTML/CSS
 - **API:** OpenWeather API
 - **State Management:** React Context API
 - **Styling:** CSS, responsive design
+
+## Deployment link:
+
+https://jessmsang.github.io/hangout_frontend/
