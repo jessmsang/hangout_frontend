@@ -5,7 +5,11 @@ import ActivityCriteriaForm from "../ActivityCriteriaForm/ActivityCriteriaForm";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import LoadingContext from "../../contexts/LoadingContext";
 
-export default function AddActivityFormModal({ isOpen, onClose }) {
+export default function AddActivityFormModal({
+  isOpen,
+  onClose,
+  handleAddActivity,
+}) {
   const { isLoading, setIsLoading } = useContext(LoadingContext);
 
   const [name, setName] = useState("");
@@ -51,19 +55,10 @@ export default function AddActivityFormModal({ isOpen, onClose }) {
     setIsExactGroupSize(false);
   };
 
-  const generateIdFromName = (input) => {
-    return input
-      .trim()
-      .toLowerCase()
-      .replace(/[^a-z0-9\s]/g, "")
-      .replace(/\s+/g, "-");
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const newActivity = {
-      id: generateIdFromName(name),
       name,
       description,
       seasons,
@@ -71,11 +66,21 @@ export default function AddActivityFormModal({ isOpen, onClose }) {
       category,
       groupSize,
       cost,
-      isSaved: false,
-      isCompleted: false,
     };
 
-    console.log("Submitting new activity:", newActivity);
+    setIsLoading(true);
+
+    handleAddActivity(newActivity)
+      .then(() => {
+        handleFormReset();
+        onClose();
+      })
+      .catch((err) => {
+        console.error("Failed to add activity:", err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const isValid =

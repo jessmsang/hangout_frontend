@@ -241,6 +241,41 @@ export default function App() {
     handleSubmit(makeRequest);
   };
 
+  // Inside App.jsx
+  const generateIdFromName = (input) => {
+    return input
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9\s]/g, "")
+      .replace(/\s+/g, "-");
+  };
+
+  const handleAddActivity = (activityData) => {
+    const makeRequest = () => {
+      return new Promise((resolve) => {
+        // Create the new activity object
+        const newActivity = {
+          _id: generateIdFromName(activityData.name),
+          owner: currentUser._id,
+          ...activityData,
+          isSaved: false,
+          isCompleted: false,
+        };
+
+        // Update state immediately so the card renders
+        setActivities((prevActivities) => [newActivity, ...prevActivities]);
+
+        console.log("Activity added (stubbed):", newActivity);
+
+        // Resolve the promise immediately
+        resolve(newActivity);
+      });
+    };
+
+    // Use your existing handleSubmit to manage loading & modal close
+    handleSubmit(makeRequest);
+  };
+
   const openEditProfileModal = () => setIsEditProfileOpen(true);
   const closeEditProfileModal = () => setIsEditProfileOpen(false);
 
@@ -432,6 +467,7 @@ export default function App() {
                     <AddActivityFormModal
                       isOpen={activeModal === "add-activity"}
                       onClose={closeActiveModal}
+                      handleAddActivity={handleAddActivity}
                     />
 
                     <Footer isMobile={isMobile} />
