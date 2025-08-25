@@ -5,7 +5,7 @@
   "homepage": "https://jessmsang.github.io/hangout_frontend",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jessmsang/hangout.git"
+    "url": "git+https://github.com/jessmsang/hangout_frontend.git"
   },
   "license": "ISC",
   "author": "Jess Sang",

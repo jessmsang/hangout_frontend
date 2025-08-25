@@ -51,22 +51,24 @@ export default function App() {
     isDay: true,
     icon: "",
   });
-  //UNCOMMENT AFTER TESTING PROFILE (NEEDED A USER FOR TESTING)
-  // const [currentUser, setCurrentUser] = useState({
-  //   _id: "",
-  //   name: "",
-  //   email: "",
-  //   createdAt: "",
-  // });
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  //UNCOMMENT AFTER TESTING PROFILE (NEEDED A USER FOR TESTING)
   const [currentUser, setCurrentUser] = useState({
-    _id: "dummy-id",
-    name: "Jess Test",
-    email: "jess@test.com",
+    _id: "",
+    name: "",
+    email: "",
     createdAt: "",
   });
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  //UNCOMMENT FOR TESTING DUMMY USER
+  // const [isLoggedIn, setIsLoggedIn] = useState(true);
+  // const [currentUser, setCurrentUser] = useState({
+  //   _id: "dummy-id",
+  //   name: "Jess Test",
+  //   email: "jess@test.com",
+  //   createdAt: "",
+  // });
 
   const [activities, setActivities] = useState([]);
   const [activeModal, setActiveModal] = useState("");
