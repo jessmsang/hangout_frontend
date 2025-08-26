@@ -210,12 +210,13 @@ export default function ActivityCriteriaForm({
                   type="number"
                   min="1"
                   max="12"
-                  value={filter.groupSize.min}
+                  value={filter.groupSize.min ?? ""}
                   onChange={(e) =>
                     updateFilter({
                       groupSize: {
                         ...filter.groupSize,
-                        min: Number(e.target.value),
+                        min:
+                          e.target.value === "" ? "" : Number(e.target.value),
                       },
                     })
                   }
@@ -227,14 +228,15 @@ export default function ActivityCriteriaForm({
                 Max:
                 <input
                   type="number"
-                  min={filter.groupSize.min}
+                  min={filter.groupSize.min || 1}
                   max="12"
-                  value={filter.groupSize.max}
+                  value={filter.groupSize.max ?? ""}
                   onChange={(e) =>
                     updateFilter({
                       groupSize: {
                         ...filter.groupSize,
-                        max: Number(e.target.value),
+                        max:
+                          e.target.value === "" ? "" : Number(e.target.value),
                       },
                     })
                   }
