@@ -59,7 +59,7 @@
 @media screen and (max-width: 600px) {
   .search-activities__header {
     justify-content: space-between;
-    padding-right: 2rem;
+    margin-right: 2rem;
   }
 
   .search-activities__title {
