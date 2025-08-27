@@ -94,22 +94,6 @@ export default function App() {
     (activity) => activity.isCompleted
   );
 
-  // TODO: OLD ESC CODE -- DELETE AFTER REVIEW --
-  // useEffect(() => {
-  //   if (!activeModal) return;
-
-  //   const handleEscClose = (evt) => {
-  //     if (evt.key === "Escape") {
-  //       closeActiveModal();
-  //     }
-  //   };
-  //   document.addEventListener("keydown", handleEscClose);
-
-  //   return () => {
-  //     document.removeEventListener("keydown", handleEscClose);
-  //   };
-  // }, [activeModal]);
-
   useEffect(() => {
     setIsLoading(true);
     activitiesApi
