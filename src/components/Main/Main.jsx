@@ -13,7 +13,7 @@ export default function Main() {
   const { isLoggedIn } = useContext(UserContext);
 
   return (
-    <div className="main">
+    <main className="main">
       <RecommendedActivities />
       <SearchActivities />
       {isLoggedIn && (
@@ -22,6 +22,6 @@ export default function Main() {
           <CompletedActivities />
         </div>
       )}
-    </div>
+    </main>
   );
 }
