@@ -459,7 +459,7 @@ export default function App() {
                       ></Route>
                     </Routes>
 
-                    {isLoggedIn && (
+                    {isLoggedIn && activeModal !== "add-activity" && (
                       <AddActivityButton
                         onClick={() => openModal("add-activity")}
                       />

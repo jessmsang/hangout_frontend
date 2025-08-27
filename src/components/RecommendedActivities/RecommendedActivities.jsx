@@ -10,9 +10,9 @@ export default function RecommendedActivities() {
   return (
     <section className="recommended-activities">
       <div className="recommended-activities__header">
-        <h2 className="recommended-activities__title">
+        <h1 className="recommended-activities__title">
           Recommended Activities
-        </h2>
+        </h1>
       </div>
       <ActivitiesCarousel activities={activitiesFilteredByWeather} />
     </section>

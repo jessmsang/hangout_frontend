@@ -1,4 +1,4 @@
-.add-activity-button {
+.add-activity-btn {
   position: fixed;
   bottom: 1.5rem;
   left: 1.5rem;
@@ -16,14 +16,14 @@
   z-index: 999;
 }
 
-.add-activity-button:hover {
+.add-activity-btn:hover {
   opacity: 1;
   transform: scale(1.07);
   cursor: pointer;
 }
 
 @media screen and (max-width: 380px) {
-  .add-activity-button {
+  .add-activity-btn {
     bottom: 0.7rem;
     left: 0.7rem;
     width: 2.2rem;
