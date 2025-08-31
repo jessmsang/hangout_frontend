@@ -3,7 +3,7 @@ import "./LocationSelector.css";
 import { useState, useContext } from "react";
 import WeatherContext from "../../contexts/WeatherContext";
 import { fetchCoordinatesByCity } from "../../utils/location";
-import { getWeather, filterWeatherData } from "../../utils/weatherApi";
+import { getWeather, filterWeatherData } from "../../api/weatherApi";
 import LoadingContext from "../../contexts/LoadingContext";
 
 export default function LocationSelector() {

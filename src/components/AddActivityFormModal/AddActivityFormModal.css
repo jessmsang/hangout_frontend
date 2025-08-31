@@ -31,6 +31,12 @@
   opacity: 0.8;
 }
 
+.add-activity-form__error {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 8px;
+}
+
 @media screen and (max-width: 600px) {
   .add-activity-form {
     gap: 0.1rem;

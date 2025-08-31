@@ -21,6 +21,7 @@ export default function AddActivityFormModal({
   const [cost, setCost] = useState({ min: "$", max: "$$$" });
   const [isExactGroupSize, setIsExactGroupSize] = useState(false);
   const [isExactCost, setIsExactCost] = useState(false);
+  const [formError, setFormError] = useState("");
 
   const filter = {
     seasons,
@@ -69,6 +70,7 @@ export default function AddActivityFormModal({
     };
 
     setIsLoading(true);
+    setFormError("");
 
     handleAddActivity(newActivity)
       .then(() => {
@@ -77,6 +79,7 @@ export default function AddActivityFormModal({
       })
       .catch((err) => {
         console.error("Failed to add activity:", err);
+        setFormError(err.message || "Something went wrong");
       })
       .finally(() => {
         setIsLoading(false);
@@ -131,6 +134,7 @@ export default function AddActivityFormModal({
           updateFilter={updateFilter}
           onReset={handleFormReset}
         />
+        {formError && <p className="add-activity-form__error">{formError}</p>}
       </section>
     </ModalWithForm>
   );
