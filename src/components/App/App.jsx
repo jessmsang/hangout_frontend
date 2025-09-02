@@ -67,9 +67,6 @@ export default function App() {
     variant: null,
     card: null,
   });
-  const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
-  const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
-  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
 
   const location = useLocation();
@@ -159,70 +156,60 @@ export default function App() {
   }, []);
 
   // --- UI HANDLERS ---
-  const handleSignupClick = () => {
-    setActiveModal("register-modal");
-  };
-  const handleLoginClick = () => {
-    setActiveModal("login-modal");
-  };
 
   const openModal = (modalName) => setActiveModal(modalName);
   const closeActiveModal = useCallback(() => setActiveModal(""), []);
 
-  const openLogoutConfirmationModal = () => setIsLogoutModalOpen(true);
-  const closeLogoutConfirmationModal = () => setIsLogoutModalOpen(false);
+  // const openRegisterModal = () => {
+  //   setActiveModal("register-modal");
+  // };
+  // const openLoginModal = () => {
+  //   setActiveModal("login-modal");
+  // };
 
-  const openEditProfileModal = () => setIsEditProfileOpen(true);
-  const closeEditProfileModal = () => setIsEditProfileOpen(false);
+  // const openAddActivityModal = () => {
+  //   setActiveModal("add-activity");
+  // };
+
+  // const openLogoutConfirmationModal = () =>
+  //   setActiveModal("logout-confirmation");
+
+  // const openEditProfileModal = () => setActiveModal("edit-profile");
+
+  // const openChangePasswordModal = () => setActiveModal("change-password");
 
   const openDeleteConfirmationModal = (variant, card = null) =>
     setDeleteConfig({ isOpen: true, variant, card });
   const closeDeleteConfirmationModal = () =>
     setDeleteConfig({ isOpen: false, variant: null, card: null });
 
-  const openChangePasswordModal = () => setIsChangePasswordOpen(true);
-  const closeChangePasswordModal = () => setIsChangePasswordOpen(false);
-
   const handleEscClose = useCallback(() => {
     if (activeModal) {
       closeActiveModal();
-    } else if (isEditProfileOpen) {
-      closeEditProfileModal();
-    } else if (isChangePasswordOpen) {
-      closeChangePasswordModal();
-    } else if (isLogoutModalOpen) {
-      closeLogoutConfirmationModal();
     } else if (deleteConfig.isOpen) {
       closeDeleteConfirmationModal();
     }
   }, [
     activeModal,
-    isEditProfileOpen,
-    isChangePasswordOpen,
-    isLogoutModalOpen,
     deleteConfig,
     closeActiveModal,
-    closeEditProfileModal,
-    closeChangePasswordModal,
-    closeLogoutConfirmationModal,
     closeDeleteConfirmationModal,
   ]);
 
-  useEscClose(
-    handleEscClose,
-    activeModal ||
-      isEditProfileOpen ||
-      isChangePasswordOpen ||
-      isLogoutModalOpen ||
-      deleteConfig.isOpen
-  );
+  useEscClose(handleEscClose, activeModal || deleteConfig.isOpen);
 
   // --- ACTION FUNCTIONS ---
   const handleSubmit = (req) => {
     setIsLoading(true);
     req()
-      .then(closeActiveModal)
-      .catch(console.error)
+      .then((res) => {
+        closeActiveModal();
+        return res;
+      })
+      .catch((error) => {
+        console.error(error);
+        throw error;
+      })
       .finally(() => {
         setIsLoading(false);
       });
@@ -325,17 +312,18 @@ export default function App() {
     handleSubmit(makeRequest);
   };
 
-  const handleUpdatePassword = (oldPassword, newPassword) => {
+  const handleUpdatePassword = ({ oldPassword, newPassword }) => {
     const makeRequest = () => {
-      return auth
-        .updatePassword(currentUser._id, { oldPassword, newPassword })
+      return usersApi
+        .updatePassword({ oldPassword, newPassword })
         .then(() => {
           console.log("Password updated successfully.");
-          alert("Password updated successfully.");
         })
         .catch((error) => {
-          console.error("Password update failed:", error);
-          alert(`Error updating password: ${error.message}`);
+          if (error.message === "No authentication token found") {
+          } else {
+            console.error("Password update failed:", error);
+          }
           throw error;
         });
     };
@@ -380,7 +368,7 @@ export default function App() {
   };
 
   return (
-    <LoadingContext.Provider value={{ isLoading, setIsLoading }}>
+    <LoadingContext.Provider value={{ isLoading, setIsLoading, handleSubmit }}>
       {(isLoading || isAuthenticating) && <Preloader />}
       {!isAuthenticating && (
         <WeatherContext.Provider
@@ -414,15 +402,9 @@ export default function App() {
                   <div className="page">
                     <div className="page__content">
                       <Header
-                        handleSignupClick={handleSignupClick}
-                        handleLoginClick={handleLoginClick}
-                        openEditProfileModal={openEditProfileModal}
-                        openChangePasswordModal={openChangePasswordModal}
+                        openModal={openModal}
                         onDeleteAccountClick={() =>
                           openDeleteConfirmationModal("account")
-                        }
-                        openLogoutConfirmationModal={
-                          openLogoutConfirmationModal
                         }
                         isMobile={isMobile}
                         isMyActivitiesPage={isMyActivitiesPage}
@@ -446,42 +428,50 @@ export default function App() {
                           onClick={() => openModal("add-activity")}
                         />
                       )}
+
+                      <Footer isMobile={isMobile} />
+
                       <AddActivityFormModal
                         isOpen={activeModal === "add-activity"}
                         onClose={closeActiveModal}
                         handleAddActivity={handleAddActivity}
                       />
 
-                      <Footer isMobile={isMobile} />
-
                       <RegisterModal
-                        onClose={closeActiveModal}
                         isOpen={activeModal === "register-modal"}
+                        onClose={closeActiveModal}
                         activeModal={activeModal}
                         setActiveModal={setActiveModal}
                       />
                       <LoginModal
-                        onClose={closeActiveModal}
                         isOpen={activeModal === "login-modal"}
+                        onClose={closeActiveModal}
                         activeModal={activeModal}
                         setActiveModal={setActiveModal}
                       />
                       <EditProfileModal
-                        isOpen={isEditProfileOpen}
-                        onClose={closeEditProfileModal}
+                        isOpen={activeModal === "edit-profile"}
+                        onClose={closeActiveModal}
+                        activeModal={activeModal}
+                        setActiveModal={setActiveModal}
                       />
                       <ChangePasswordModal
-                        isOpen={isChangePasswordOpen}
-                        onClose={closeChangePasswordModal}
+                        isOpen={activeModal === "change-password"}
+                        onClose={closeActiveModal}
+                        activeModal={activeModal}
+                        setActiveModal={setActiveModal}
                       />
                       <LogoutConfirmationModal
-                        isOpen={isLogoutModalOpen}
-                        onClose={closeLogoutConfirmationModal}
-                        onLogout={handleLogout}
+                        isOpen={activeModal === "logout-confirmation"}
+                        onClose={closeActiveModal}
+                        activeModal={activeModal}
+                        setActiveModal={setActiveModal}
                       />
                       <DeleteConfirmationModal
                         isOpen={deleteConfig.isOpen}
                         onClose={closeDeleteConfirmationModal}
+                        activeModal={activeModal}
+                        setActiveModal={setActiveModal}
                         card={deleteConfig.card}
                         variant={deleteConfig.variant}
                         onDelete={(card) => {

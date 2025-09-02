@@ -56,8 +56,21 @@ export default function AddActivityFormModal({
     setIsExactGroupSize(false);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleAddActivitySubmit = (evt) => {
+    evt.preventDefault();
+
+    if (
+      !name.trim() ||
+      !description.trim() ||
+      !seasons.length ||
+      !location.length ||
+      !category.length
+    ) {
+      setFormError("Please fill out all required fields.");
+      return;
+    }
+
+    setFormError("");
 
     const newActivity = {
       name,
@@ -78,11 +91,7 @@ export default function AddActivityFormModal({
         onClose();
       })
       .catch((err) => {
-        console.error("Failed to add activity:", err);
         setFormError(err.message || "Something went wrong");
-      })
-      .finally(() => {
-        setIsLoading(false);
       });
   };
 
@@ -100,7 +109,7 @@ export default function AddActivityFormModal({
       btnText={isLoading ? "Adding activity..." : "Add Activity"}
       isOpen={isOpen}
       onClose={onClose}
-      onSubmit={handleSubmit}
+      onSubmit={handleAddActivitySubmit}
       isDisabled={isLoading || !isValid}
     >
       <section className="add-activity-form">

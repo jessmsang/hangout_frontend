@@ -32,3 +32,17 @@ export const deleteUser = (userId) => {
     },
   }).then(checkResponse);
 };
+
+export const updatePassword = ({ oldPassword, newPassword }) => {
+  const token = getToken();
+  if (!token) return Promise.reject(new Error("No authentication token found"));
+
+  return fetch(`${BASE_URL}/users/me/password`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ oldPassword, newPassword }),
+  }).then(checkResponse);
+};

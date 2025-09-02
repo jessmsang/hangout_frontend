@@ -26,22 +26,14 @@ export default function ChangePasswordModal({ onClose, isOpen }) {
       }
     );
 
-  const handleFormSubmit = async (evt) => {
+  const handleChangePasswordSubmit = (evt) => {
     evt.preventDefault();
-
     if (hasErrors) return;
 
-    try {
-      await handleUpdatePassword(values.currentPassword, values.newPassword);
-      setValues({
-        currentPassword: "",
-        newPassword: "",
-        confirmNewPassword: "",
-      });
-      onClose();
-    } catch (error) {
-      console.error(error);
-    }
+    handleUpdatePassword({
+      oldPassword: values.currentPassword,
+      newPassword: values.newPassword,
+    });
   };
 
   return (
@@ -52,7 +44,7 @@ export default function ChangePasswordModal({ onClose, isOpen }) {
       btnText={isLoading ? "Saving..." : "Update Password"}
       onClose={onClose}
       isOpen={isOpen}
-      onSubmit={handleFormSubmit}
+      onSubmit={handleChangePasswordSubmit}
       isDisabled={isLoading || !isValid}
     >
       <label htmlFor="current-password-input" className="modal__label">

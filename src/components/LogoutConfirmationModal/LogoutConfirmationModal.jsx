@@ -1,18 +1,20 @@
 import { useContext } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import LoadingContext from "../../contexts/LoadingContext";
+import UserContext from "../../contexts/UserContext";
 
-export default function LogoutConfirmationModal({ isOpen, onClose, onLogout }) {
+export default function LogoutConfirmationModal({ isOpen, onClose }) {
   const { isLoading, setIsLoading } = useContext(LoadingContext);
+  const { handleLogout } = useContext(UserContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!onLogout) return;
+    if (!handleLogout) return;
 
     setIsLoading(true);
 
     try {
-      const result = onLogout();
+      const result = handleLogout();
       if (result instanceof Promise) {
         await result;
       }

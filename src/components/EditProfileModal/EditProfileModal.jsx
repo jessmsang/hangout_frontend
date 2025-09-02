@@ -18,16 +18,12 @@ export default function EditProfileModal({ onClose, isOpen }) {
       name: currentUser?.name || "",
       email: currentUser?.email || "",
     });
-  }, [currentUser]);
+  }, [currentUser, setValues]);
 
-  const handleSubmit = async (evt) => {
+  const handleEditProfileSubmit = (evt) => {
     evt.preventDefault();
-    try {
-      await handleUpdateProfile(values);
-      onClose();
-    } catch (error) {
-      console.error(error);
-    }
+    handleUpdateProfile(values);
+    onClose();
   };
 
   return (
@@ -38,7 +34,7 @@ export default function EditProfileModal({ onClose, isOpen }) {
       btnText={isLoading ? "Saving..." : "Save changes"}
       onClose={onClose}
       isOpen={isOpen}
-      onSubmit={handleSubmit}
+      onSubmit={handleEditProfileSubmit}
       isDisabled={isLoading || !isValid}
     >
       <label htmlFor="edit-name-input" className="modal__label">

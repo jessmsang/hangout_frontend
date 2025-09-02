@@ -10,14 +10,7 @@ import AccountDropdown from "../AccountDropdown/AccountDropdown";
 
 import UserContext from "../../contexts/UserContext";
 
-export default function Header({
-  handleSignupClick,
-  handleLoginClick,
-  openEditProfileModal,
-  openChangePasswordModal,
-  openLogoutConfirmationModal,
-  isMobile,
-}) {
+export default function Header({ openModal, isMobile }) {
   const { isLoggedIn, handleLogout } = useContext(UserContext);
 
   return (
@@ -30,10 +23,9 @@ export default function Header({
           {isLoggedIn && isMobile && (
             <div className="header__mobile-dropdown-location">
               <AccountDropdown
-                onLogout={handleLogout}
-                onEditProfileClick={openEditProfileModal}
-                onChangePasswordClick={openChangePasswordModal}
-                onLogoutClick={openLogoutConfirmationModal}
+                onEditProfileClick={openModal("edit-profile")}
+                onChangePasswordClick={openModal("change-password")}
+                onLogoutClick={openModal("logout-confirmation")}
               />
             </div>
           )}
@@ -42,7 +34,7 @@ export default function Header({
             <ul className="header__unauthorized-view-mobile">
               <li className="header__unauthorized-item-mobile">
                 <button
-                  onClick={handleSignupClick}
+                  onClick={() => openModal("register-modal")}
                   className="header__unauthorized-btn-mobile"
                 >
                   Sign Up
@@ -50,7 +42,7 @@ export default function Header({
               </li>
               <li className="header__unauthorized-item-mobile">
                 <button
-                  onClick={handleLoginClick}
+                  onClick={() => openModal("login-modal")}
                   className="header__unauthorized-btn-mobile"
                 >
                   Log In
@@ -72,7 +64,7 @@ export default function Header({
         <ul className="header__unauthorized-view">
           <li className="header__unauthorized-item">
             <button
-              onClick={handleSignupClick}
+              onClick={() => openModal("register-modal")}
               className="header__unauthorized-btn"
             >
               Sign Up
@@ -80,7 +72,7 @@ export default function Header({
           </li>
           <li className="header__unauthorized-item">
             <button
-              onClick={handleLoginClick}
+              onClick={() => openModal("login-modal")}
               className="header__unauthorized-btn"
             >
               Log In
@@ -92,9 +84,9 @@ export default function Header({
         <div className="header__authorized-view">
           <AccountDropdown
             onLogout={handleLogout}
-            onEditProfileClick={openEditProfileModal}
-            onChangePasswordClick={openChangePasswordModal}
-            onLogoutClick={openLogoutConfirmationModal}
+            onEditProfileClick={() => openModal("edit-profile")}
+            onChangePasswordClick={() => openModal("change-password")}
+            onLogoutClick={() => openModal("logout-confirmation")}
           />
         </div>
       )}
