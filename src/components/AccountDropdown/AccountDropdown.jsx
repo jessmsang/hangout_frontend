@@ -46,7 +46,7 @@ export default function AccountDropdown({
         }}
       >
         <p className="account-dropdown__avatar-placeholder">
-          {currentUser.name ? currentUser.name[0].toUpperCase() : "?"}
+          {currentUser?.name ? currentUser.name[0].toUpperCase() : "?"}
         </p>
       </button>
 

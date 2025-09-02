@@ -92,9 +92,7 @@ export default function App() {
 
     token
       .tokenValidation(tokenValue)
-      .then(() => {
-        return usersApi.getCurrentUser();
-      })
+      .then(() => usersApi.getCurrentUser())
       .then((user) => {
         setCurrentUser(user);
         setIsLoggedIn(true);
@@ -102,13 +100,13 @@ export default function App() {
       .catch((err) => {
         console.error("Auth check failed:", err);
         token.removeToken();
-        setIsLoggedIn(false);
         setCurrentUser({
           _id: "",
           name: "",
           email: "",
           createdAt: "",
         });
+        setIsLoggedIn(false);
       })
       .finally(() => {
         setIsAuthenticating(false);
@@ -262,17 +260,18 @@ export default function App() {
     if (!email || !password)
       return Promise.reject(new Error("Missing credentials"));
 
-    const makeRequest = () =>
-      auth.login(email, password).then((data) => {
-        token.setToken(data.token);
-        setIsLoggedIn(true);
-        setCurrentUser(data.user);
-
-        const redirectPath = location.state?.from?.pathname || "/";
-        navigate(redirectPath);
-
-        return data.user;
+    const makeRequest = () => {
+      return auth.login(email, password).then((data) => {
+        if (data.token) {
+          token.setToken(data.token);
+          const redirectPath = location.state?.from?.pathname || "/";
+          navigate(redirectPath);
+          setCurrentUser(data);
+          setIsLoggedIn(true);
+          closeActiveModal();
+        }
       });
+    };
 
     handleSubmit(makeRequest);
   };
