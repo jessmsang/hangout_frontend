@@ -58,16 +58,6 @@ export default function App() {
     createdAt: "",
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  //UNCOMMENT FOR TESTING DUMMY USER
-  // const [isLoggedIn, setIsLoggedIn] = useState(true);
-  // const [currentUser, setCurrentUser] = useState({
-  //   _id: "dummy-id",
-  //   name: "Jess Test",
-  //   email: "jess@test.com",
-  //   createdAt: "",
-  // });
-
   const [activities, setActivities] = useState([]);
   const [activeModal, setActiveModal] = useState("");
   const [isAuthenticating, setIsAuthenticating] = useState(true);
@@ -77,7 +67,6 @@ export default function App() {
     variant: null,
     card: null,
   });
-
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
   const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
@@ -92,33 +81,46 @@ export default function App() {
     (activity) => activity.isCompleted
   );
 
+  // --- AUTHENTICATION ---
   useEffect(() => {
     const tokenValue = token.getToken();
     if (!tokenValue) {
       setIsAuthenticating(false);
+      setIsLoggedIn(false);
       return;
     }
 
-    setIsLoading(true);
-    usersApi
-      .getCurrentUser()
+    token
+      .tokenValidation(tokenValue)
+      .then(() => {
+        return usersApi.getCurrentUser();
+      })
       .then((user) => {
         setCurrentUser(user);
         setIsLoggedIn(true);
       })
       .catch((err) => {
-        console.error("Failed to fetch current user:", err);
+        console.error("Auth check failed:", err);
         token.removeToken();
+        setIsLoggedIn(false);
+        setCurrentUser({
+          _id: "",
+          name: "",
+          email: "",
+          createdAt: "",
+        });
       })
-      .finally(() => setIsAuthenticating(false));
+      .finally(() => {
+        setIsAuthenticating(false);
+      });
   }, []);
 
+  // --- FETCH ACTIVITIES ---
   useEffect(() => {
     setIsLoading(true);
     activitiesApi
       .getActivities()
       .then((data) => {
-        console.log("Fetched activities:", data);
         setActivities(
           data.map((activity) => ({
             ...activity,
@@ -133,12 +135,11 @@ export default function App() {
       });
   }, []);
 
+  // --- FETCH WEATHER ---
   useEffect(() => {
     setIsLoading(true);
     fetchCoordinatesByCity("Cincinnati", weatherAPIkey)
-      .then((coordinates) => {
-        return getWeather(coordinates, weatherAPIkey);
-      })
+      .then((coordinates) => getWeather(coordinates, weatherAPIkey))
       .then((data) => {
         const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
@@ -149,6 +150,7 @@ export default function App() {
       });
   }, []);
 
+  // --- RESPONSIVE DESIGN ---
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 600);
@@ -158,14 +160,66 @@ export default function App() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // --- UI HANDLERS ---
   const handleSignupClick = () => {
     setActiveModal("register-modal");
   };
-
   const handleLoginClick = () => {
     setActiveModal("login-modal");
   };
 
+  const openModal = (modalName) => setActiveModal(modalName);
+  const closeActiveModal = useCallback(() => setActiveModal(""), []);
+
+  const openLogoutConfirmationModal = () => setIsLogoutModalOpen(true);
+  const closeLogoutConfirmationModal = () => setIsLogoutModalOpen(false);
+
+  const openEditProfileModal = () => setIsEditProfileOpen(true);
+  const closeEditProfileModal = () => setIsEditProfileOpen(false);
+
+  const openDeleteConfirmationModal = (variant, card = null) =>
+    setDeleteConfig({ isOpen: true, variant, card });
+  const closeDeleteConfirmationModal = () =>
+    setDeleteConfig({ isOpen: false, variant: null, card: null });
+
+  const openChangePasswordModal = () => setIsChangePasswordOpen(true);
+  const closeChangePasswordModal = () => setIsChangePasswordOpen(false);
+
+  const handleEscClose = useCallback(() => {
+    if (activeModal) {
+      closeActiveModal();
+    } else if (isEditProfileOpen) {
+      closeEditProfileModal();
+    } else if (isChangePasswordOpen) {
+      closeChangePasswordModal();
+    } else if (isLogoutModalOpen) {
+      closeLogoutConfirmationModal();
+    } else if (deleteConfig.isOpen) {
+      closeDeleteConfirmationModal();
+    }
+  }, [
+    activeModal,
+    isEditProfileOpen,
+    isChangePasswordOpen,
+    isLogoutModalOpen,
+    deleteConfig,
+    closeActiveModal,
+    closeEditProfileModal,
+    closeChangePasswordModal,
+    closeLogoutConfirmationModal,
+    closeDeleteConfirmationModal,
+  ]);
+
+  useEscClose(
+    handleEscClose,
+    activeModal ||
+      isEditProfileOpen ||
+      isChangePasswordOpen ||
+      isLogoutModalOpen ||
+      deleteConfig.isOpen
+  );
+
+  // --- ACTION FUNCTIONS ---
   const handleSubmit = (req) => {
     setIsLoading(true);
     req()
@@ -217,7 +271,6 @@ export default function App() {
         const redirectPath = location.state?.from?.pathname || "/";
         navigate(redirectPath);
 
-        console.log("Login successful (stubbed).", data.user);
         return data.user;
       });
 
@@ -226,13 +279,15 @@ export default function App() {
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    setCurrentUser(null);
+    setCurrentUser({
+      _id: "",
+      name: "",
+      email: "",
+      createdAt: "",
+    });
     token.removeToken();
     navigate("/");
   };
-
-  const openLogoutConfirmationModal = () => setIsLogoutModalOpen(true);
-  const closeLogoutConfirmationModal = () => setIsLogoutModalOpen(false);
 
   const handleUpdateProfile = (updatedValues) => {
     const makeRequest = () =>
@@ -271,9 +326,6 @@ export default function App() {
     handleSubmit(makeRequest);
   };
 
-  const openEditProfileModal = () => setIsEditProfileOpen(true);
-  const closeEditProfileModal = () => setIsEditProfileOpen(false);
-
   const handleUpdatePassword = (oldPassword, newPassword) => {
     const makeRequest = () => {
       return auth
@@ -292,13 +344,15 @@ export default function App() {
     handleSubmit(makeRequest);
   };
 
-  const openChangePasswordModal = () => setIsChangePasswordOpen(true);
-  const closeChangePasswordModal = () => setIsChangePasswordOpen(false);
-
   const handleDeleteAccount = () => {
     const makeRequest = () =>
       usersApi.deleteUser(currentUser._id).then(() => {
-        setCurrentUser(null);
+        setCurrentUser({
+          _id: "",
+          name: "",
+          email: "",
+          createdAt: "",
+        });
         setIsLoggedIn(false);
         token.removeToken();
         navigate("/");
@@ -326,166 +380,128 @@ export default function App() {
     handleSubmit(makeRequest);
   };
 
-  const openDeleteConfirmationModal = (variant, card = null) =>
-    setDeleteConfig({ isOpen: true, variant, card });
-
-  const closeDeleteConfirmationModal = () =>
-    setDeleteConfig({ isOpen: false, variant: null, card: null });
-
-  const openModal = (modalName) => setActiveModal(modalName);
-  const closeActiveModal = useCallback(() => setActiveModal(""), []);
-  const handleEscClose = useCallback(() => {
-    if (activeModal) {
-      closeActiveModal();
-    } else if (isEditProfileOpen) {
-      closeEditProfileModal();
-    } else if (isChangePasswordOpen) {
-      closeChangePasswordModal();
-    } else if (isLogoutModalOpen) {
-      closeLogoutConfirmationModal();
-    } else if (deleteConfig.isOpen) {
-      closeDeleteConfirmationModal();
-    }
-  }, [
-    activeModal,
-    isEditProfileOpen,
-    isChangePasswordOpen,
-    isLogoutModalOpen,
-    deleteConfig,
-    closeActiveModal,
-    closeEditProfileModal,
-    closeChangePasswordModal,
-    closeLogoutConfirmationModal,
-    closeDeleteConfirmationModal,
-  ]);
-
-  useEscClose(
-    handleEscClose,
-    activeModal ||
-      isEditProfileOpen ||
-      isChangePasswordOpen ||
-      isLogoutModalOpen ||
-      deleteConfig.isOpen
-  );
-
   return (
     <LoadingContext.Provider value={{ isLoading, setIsLoading }}>
-      {isLoading && <Preloader />}
-      <WeatherContext.Provider
-        value={{ weatherData, setWeatherData, weatherAPIkey }}
-      >
-        <UserContext.Provider
-          value={{
-            currentUser,
-            setCurrentUser,
-            isLoggedIn,
-            isAuthenticating,
-            handleLogout,
-            handleLogin,
-            handleRegistration,
-            handleUpdateProfile,
-            handleDeleteAccount,
-            handleUpdatePassword,
-            savedActivities,
-            completedActivities,
-          }}
+      {(isLoading || isAuthenticating) && <Preloader />}
+      {!isAuthenticating && (
+        <WeatherContext.Provider
+          value={{ weatherData, setWeatherData, weatherAPIkey }}
         >
-          <ActivitiesContext.Provider value={{ activities, setActivities }}>
-            <FilterContextProvider>
-              <DeleteContext.Provider
-                value={{
-                  deleteConfig,
-                  openDeleteConfirmationModal,
-                  closeDeleteConfirmationModal,
-                }}
-              >
-                <div className="page">
-                  <div className="page__content">
-                    <Header
-                      handleSignupClick={handleSignupClick}
-                      handleLoginClick={handleLoginClick}
-                      openEditProfileModal={openEditProfileModal}
-                      openChangePasswordModal={openChangePasswordModal}
-                      onDeleteAccountClick={() =>
-                        openDeleteConfirmationModal("account")
-                      }
-                      openLogoutConfirmationModal={openLogoutConfirmationModal}
-                      isMobile={isMobile}
-                      isMyActivitiesPage={isMyActivitiesPage}
-                    />
-
-                    <Routes>
-                      <Route path="/" element={<Main />} />
-
-                      <Route
-                        path="/my-activities"
-                        element={
-                          <ProtectedRoute setActiveModal={setActiveModal}>
-                            <MyActivities />
-                          </ProtectedRoute>
+          <UserContext.Provider
+            value={{
+              currentUser,
+              setCurrentUser,
+              isLoggedIn,
+              isAuthenticating,
+              handleLogout,
+              handleLogin,
+              handleRegistration,
+              handleUpdateProfile,
+              handleDeleteAccount,
+              handleUpdatePassword,
+              savedActivities,
+              completedActivities,
+            }}
+          >
+            <ActivitiesContext.Provider value={{ activities, setActivities }}>
+              <FilterContextProvider>
+                <DeleteContext.Provider
+                  value={{
+                    deleteConfig,
+                    openDeleteConfirmationModal,
+                    closeDeleteConfirmationModal,
+                  }}
+                >
+                  <div className="page">
+                    <div className="page__content">
+                      <Header
+                        handleSignupClick={handleSignupClick}
+                        handleLoginClick={handleLoginClick}
+                        openEditProfileModal={openEditProfileModal}
+                        openChangePasswordModal={openChangePasswordModal}
+                        onDeleteAccountClick={() =>
+                          openDeleteConfirmationModal("account")
                         }
-                      ></Route>
-                    </Routes>
-
-                    {isLoggedIn && activeModal !== "add-activity" && (
-                      <AddActivityButton
-                        onClick={() => openModal("add-activity")}
+                        openLogoutConfirmationModal={
+                          openLogoutConfirmationModal
+                        }
+                        isMobile={isMobile}
+                        isMyActivitiesPage={isMyActivitiesPage}
                       />
-                    )}
-                    <AddActivityFormModal
-                      isOpen={activeModal === "add-activity"}
-                      onClose={closeActiveModal}
-                      handleAddActivity={handleAddActivity}
-                    />
 
-                    <Footer isMobile={isMobile} />
+                      <Routes>
+                        <Route path="/" element={<Main />} />
 
-                    <RegisterModal
-                      onClose={closeActiveModal}
-                      isOpen={activeModal === "register-modal"}
-                      activeModal={activeModal}
-                      setActiveModal={setActiveModal}
-                    />
-                    <LoginModal
-                      onClose={closeActiveModal}
-                      isOpen={activeModal === "login-modal"}
-                      activeModal={activeModal}
-                      setActiveModal={setActiveModal}
-                    />
-                    <EditProfileModal
-                      isOpen={isEditProfileOpen}
-                      onClose={closeEditProfileModal}
-                    />
-                    <ChangePasswordModal
-                      isOpen={isChangePasswordOpen}
-                      onClose={closeChangePasswordModal}
-                    />
-                    <LogoutConfirmationModal
-                      isOpen={isLogoutModalOpen}
-                      onClose={closeLogoutConfirmationModal}
-                      onLogout={handleLogout}
-                    />
-                    <DeleteConfirmationModal
-                      isOpen={deleteConfig.isOpen}
-                      onClose={closeDeleteConfirmationModal}
-                      card={deleteConfig.card}
-                      variant={deleteConfig.variant}
-                      onDelete={(card) => {
-                        if (deleteConfig.variant === "account") {
-                          handleDeleteAccount();
-                        } else if (deleteConfig.variant === "activity") {
-                          handleDeleteActivity(card);
-                        }
-                        closeDeleteConfirmationModal();
-                      }}
-                    />
+                        <Route
+                          path="/my-activities"
+                          element={
+                            <ProtectedRoute setActiveModal={setActiveModal}>
+                              <MyActivities />
+                            </ProtectedRoute>
+                          }
+                        ></Route>
+                      </Routes>
+
+                      {isLoggedIn && activeModal !== "add-activity" && (
+                        <AddActivityButton
+                          onClick={() => openModal("add-activity")}
+                        />
+                      )}
+                      <AddActivityFormModal
+                        isOpen={activeModal === "add-activity"}
+                        onClose={closeActiveModal}
+                        handleAddActivity={handleAddActivity}
+                      />
+
+                      <Footer isMobile={isMobile} />
+
+                      <RegisterModal
+                        onClose={closeActiveModal}
+                        isOpen={activeModal === "register-modal"}
+                        activeModal={activeModal}
+                        setActiveModal={setActiveModal}
+                      />
+                      <LoginModal
+                        onClose={closeActiveModal}
+                        isOpen={activeModal === "login-modal"}
+                        activeModal={activeModal}
+                        setActiveModal={setActiveModal}
+                      />
+                      <EditProfileModal
+                        isOpen={isEditProfileOpen}
+                        onClose={closeEditProfileModal}
+                      />
+                      <ChangePasswordModal
+                        isOpen={isChangePasswordOpen}
+                        onClose={closeChangePasswordModal}
+                      />
+                      <LogoutConfirmationModal
+                        isOpen={isLogoutModalOpen}
+                        onClose={closeLogoutConfirmationModal}
+                        onLogout={handleLogout}
+                      />
+                      <DeleteConfirmationModal
+                        isOpen={deleteConfig.isOpen}
+                        onClose={closeDeleteConfirmationModal}
+                        card={deleteConfig.card}
+                        variant={deleteConfig.variant}
+                        onDelete={(card) => {
+                          if (deleteConfig.variant === "account") {
+                            handleDeleteAccount();
+                          } else if (deleteConfig.variant === "activity") {
+                            handleDeleteActivity(card);
+                          }
+                          closeDeleteConfirmationModal();
+                        }}
+                      />
+                    </div>
                   </div>
-                </div>
-              </DeleteContext.Provider>
-            </FilterContextProvider>
-          </ActivitiesContext.Provider>
-        </UserContext.Provider>
-      </WeatherContext.Provider>
+                </DeleteContext.Provider>
+              </FilterContextProvider>
+            </ActivitiesContext.Provider>
+          </UserContext.Provider>
+        </WeatherContext.Provider>
+      )}
     </LoadingContext.Provider>
   );
 }

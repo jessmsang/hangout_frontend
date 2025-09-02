@@ -6,7 +6,7 @@ import { getToken } from "../utils/token";
 export const getCurrentUser = () => {
   return fetch(`${BASE_URL}/users/me`, {
     headers: {
-      Authorization: `Bearer ${getToken}`,
+      Authorization: `Bearer ${getToken()}`,
       "Content-Type": "application/json",
     },
   }).then(checkResponse);
@@ -16,7 +16,7 @@ export const updateUser = (user) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: "PATCH",
     headers: {
-      Authorization: `Bearer ${getToken}`,
+      Authorization: `Bearer ${getToken()}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify(user),
@@ -27,7 +27,7 @@ export const deleteUser = (userId) => {
   return fetch(`${BASE_URL}/users/${userId}`, {
     method: "DELETE",
     headers: {
-      Authorization: `Bearer ${getToken}`,
+      Authorization: `Bearer ${getToken()}`,
       "Content-Type": "application/json",
     },
   }).then(checkResponse);

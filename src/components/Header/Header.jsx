@@ -18,7 +18,7 @@ export default function Header({
   openLogoutConfirmationModal,
   isMobile,
 }) {
-  const { isLoggedIn, currentUser, handleLogout } = useContext(UserContext);
+  const { isLoggedIn, handleLogout } = useContext(UserContext);
 
   return (
     <header className="header">
@@ -30,7 +30,6 @@ export default function Header({
           {isLoggedIn && isMobile && (
             <div className="header__mobile-dropdown-location">
               <AccountDropdown
-                user={currentUser}
                 onLogout={handleLogout}
                 onEditProfileClick={openEditProfileModal}
                 onChangePasswordClick={openChangePasswordModal}
@@ -92,7 +91,6 @@ export default function Header({
       {isLoggedIn && !isMobile && (
         <div className="header__authorized-view">
           <AccountDropdown
-            user={currentUser}
             onLogout={handleLogout}
             onEditProfileClick={openEditProfileModal}
             onChangePasswordClick={openChangePasswordModal}

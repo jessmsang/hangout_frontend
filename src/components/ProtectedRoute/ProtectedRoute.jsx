@@ -7,12 +7,20 @@ function ProtectedRoute({ children, anonymous = false }) {
   const from = location.state?.from || "/";
   const { isLoggedIn, isAuthenticating } = useContext(UserContext);
 
+  if (isAuthenticating) return null;
+
   if (anonymous && isLoggedIn) {
-    return <Navigate to={from} />;
+    return <Navigate to={from} replace />;
   }
 
-  if (!isLoggedIn && !isAuthenticating) {
-    return <Navigate to="/" state={{ from: location, openLoginModal: true }} />;
+  if (!isLoggedIn) {
+    return (
+      <Navigate
+        to="/"
+        state={{ from: location, openLoginModal: true }}
+        replace
+      />
+    );
   }
 
   return children;

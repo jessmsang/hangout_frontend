@@ -3,14 +3,15 @@ import { Link } from "react-router-dom";
 import "./AccountDropdown.css";
 
 import DeleteContext from "../../contexts/DeleteContext";
+import UserContext from "../../contexts/UserContext";
 
 export default function AccountDropdown({
-  user,
   onEditProfileClick,
   onChangePasswordClick,
   onLogoutClick,
 }) {
   const { openDeleteConfirmationModal } = useContext(DeleteContext);
+  const { currentUser } = useContext(UserContext);
 
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -45,7 +46,7 @@ export default function AccountDropdown({
         }}
       >
         <p className="account-dropdown__avatar-placeholder">
-          {user.name[0].toUpperCase()}
+          {currentUser.name ? currentUser.name[0].toUpperCase() : "?"}
         </p>
       </button>
 
