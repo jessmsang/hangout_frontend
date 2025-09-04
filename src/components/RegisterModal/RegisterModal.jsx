@@ -9,7 +9,14 @@ function RegisterModal({ onClose, isOpen, setActiveModal }) {
   const { handleRegistration } = useContext(UserContext);
   const { isLoading, setIsLoading } = useContext(LoadingContext);
 
-  const { values, handleChange, setValues, errorMessage, isValid } = useForm(
+  const {
+    values,
+    handleChange,
+    errorMessage,
+    setErrorMessage,
+    isValid,
+    resetForm,
+  } = useForm(
     {
       name: "",
       email: "",
@@ -30,13 +37,9 @@ function RegisterModal({ onClose, isOpen, setActiveModal }) {
     if (values.password !== values.confirmPassword) {
       return;
     } else {
-      handleRegistration(values, () => {
-        setValues({
-          name: "",
-          email: "",
-          password: "",
-          confirmPassword: "",
-        });
+      handleRegistration(values, setErrorMessage).then(() => {
+        resetForm();
+        onClose();
       });
     }
   };
@@ -125,6 +128,11 @@ function RegisterModal({ onClose, isOpen, setActiveModal }) {
           {errorMessage.confirmPassword}
         </span>
       </label>
+      {errorMessage.general && (
+        <span className="modal__error modal__error_general">
+          {errorMessage.general}
+        </span>
+      )}
     </ModalWithForm>
   );
 }

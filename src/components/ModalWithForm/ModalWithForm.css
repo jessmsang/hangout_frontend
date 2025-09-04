@@ -274,6 +274,12 @@
   font-size: 0.7rem;
 }
 
+.modal__error_general {
+  margin-top: 1rem;
+  font-weight: bold;
+  text-align: center;
+}
+
 @media screen and (max-width: 600px) {
   .modal__container {
     width: 80%;

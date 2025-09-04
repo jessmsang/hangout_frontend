@@ -14,19 +14,59 @@ export const createActivity = (activity) => {
   return fetch(`${BASE_URL}/activities`, {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${getToken}`,
+      Authorization: `Bearer ${getToken()}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify(activity),
   }).then(checkResponse);
 };
 
-export const deleteActivity = (id) => {
-  return fetch(`${BASE_URL}/activities/${id}`, {
+export const deleteActivity = (activityId) => {
+  return fetch(`${BASE_URL}/activities/${activityId}`, {
     method: "DELETE",
     headers: {
-      Authorization: `Bearer ${getToken}`,
+      Authorization: `Bearer ${getToken()}`,
       "Content-Type": "application/json",
     },
   }).then(checkResponse);
 };
+
+export function addCardSave({ activityId }) {
+  return fetch(`${BASE_URL}/activities/${activityId}/save`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
+  }).then(checkResponse);
+}
+
+export function removeCardSave({ activityId }) {
+  return fetch(`${BASE_URL}/activities/${activityId}/save`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
+  }).then(checkResponse);
+}
+
+export function addCardComplete({ activityId }) {
+  return fetch(`${BASE_URL}/activities/${activityId}/complete`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
+  }).then(checkResponse);
+}
+
+export function removeCardComplete({ activityId }) {
+  return fetch(`${BASE_URL}/activities/${activityId}/complete`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
+  }).then(checkResponse);
+}

@@ -9,18 +9,24 @@ function LoginModal({ onClose, isOpen, setActiveModal }) {
   const { handleLogin } = useContext(UserContext);
   const { isLoading, setIsLoading } = useContext(LoadingContext);
 
-  const { values, handleChange, setValues, errorMessage, isValid } = useForm({
+  const {
+    values,
+    handleChange,
+    errorMessage,
+    setErrorMessage,
+    isValid,
+    resetForm,
+  } = useForm({
     email: "",
     password: "",
   });
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    handleLogin(values, () => {
-      setValues({
-        email: "",
-        password: "",
-      });
+
+    handleLogin(values, setErrorMessage).then(() => {
+      resetForm();
+      onClose();
     });
   };
 
@@ -73,6 +79,11 @@ function LoginModal({ onClose, isOpen, setActiveModal }) {
           {errorMessage.password}
         </span>
       </label>
+      {errorMessage.general && (
+        <span className="modal__error modal__error_general">
+          {errorMessage.general}
+        </span>
+      )}
     </ModalWithForm>
   );
 }

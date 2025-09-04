@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+// TODO: ADD VALIDATION/ERROR MESSAGES FOR REGISTER AND LOGIN MODALS
+
 export function useForm(inputValues, { matchFields = {} } = {}) {
   const [values, setValues] = useState(inputValues);
   const [errorMessage, setErrorMessage] = useState({});
@@ -54,9 +56,15 @@ export function useForm(inputValues, { matchFields = {} } = {}) {
     });
   };
 
+  const resetForm = () => {
+    setValues(inputValues);
+    setErrorMessage({});
+  };
+
   const hasErrors =
-    Object.values(errorMessage).some((msg) => msg && msg.length > 0) ||
-    Object.values(values).some((val) => val === "");
+    Object.entries(errorMessage).some(
+      ([key, msg]) => key !== "general" && msg && msg.length > 0
+    ) || Object.values(values).some((val) => val === "");
 
   const isValid = !hasErrors;
 
@@ -68,5 +76,6 @@ export function useForm(inputValues, { matchFields = {} } = {}) {
     errorMessage,
     hasErrors,
     isValid,
+    resetForm,
   };
 }

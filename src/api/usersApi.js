@@ -23,8 +23,8 @@ export const updateUser = (user) => {
   }).then(checkResponse);
 };
 
-export const deleteUser = (userId) => {
-  return fetch(`${BASE_URL}/users/${userId}`, {
+export const deleteUser = () => {
+  return fetch(`${BASE_URL}/users/me`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${getToken()}`,

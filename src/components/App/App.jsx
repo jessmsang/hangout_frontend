@@ -56,7 +56,10 @@ export default function App() {
     name: "",
     email: "",
     createdAt: "",
+    savedActivities: [],
+    completedActivities: [],
   });
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [activities, setActivities] = useState([]);
   const [activeModal, setActiveModal] = useState("");
@@ -201,7 +204,7 @@ export default function App() {
   // --- ACTION FUNCTIONS ---
   const handleSubmit = (req) => {
     setIsLoading(true);
-    req()
+    return req()
       .then((res) => {
         closeActiveModal();
         return res;
@@ -215,19 +218,32 @@ export default function App() {
       });
   };
 
-  const handleRegistration = ({ email, password, confirmPassword, name }) => {
+  const handleRegistration = (formValues, setErrorMessage) => {
+    const { email, password, confirmPassword, name } = formValues;
     if (password !== confirmPassword) {
+      setErrorMessage((prev) => ({
+        ...prev,
+        confirmPassword: "Passwords do not match",
+      }));
       return Promise.reject(new Error("Passwords do not match"));
     }
 
-    const makeRequest = () =>
-      auth
+    const makeRequest = () => {
+      return auth
         .register(email, password, name)
         .then((data) => {
-          console.log("Registration successful:", data.user);
+          console.log("Registration successful:", data);
           token.setToken(data.token);
           setIsLoggedIn(true);
-          setCurrentUser(data.user);
+          setCurrentUser({
+            _id: data._id || "",
+            name: data.name || "",
+            email: data.email || "",
+            createdAt: data.createdAt || "",
+            savedActivities: data.savedActivities || [],
+            completedActivities: data.completedActivities || [],
+          });
+          setErrorMessage({});
 
           const redirectPath = location.state?.from?.pathname || "/";
           navigate(redirectPath);
@@ -235,32 +251,67 @@ export default function App() {
           return data.user;
         })
         .catch((error) => {
-          console.error("Registration failed:", error);
-          alert(`Error registering: ${error.message}`);
+          if (error.status === 409) {
+            setErrorMessage((prev) => ({
+              ...prev,
+              email: "This email is already registered.",
+            }));
+          } else {
+            setErrorMessage((prev) => ({
+              ...prev,
+              general: error.message || "Registration failed",
+            }));
+          }
           throw error;
         });
-
-    handleSubmit(makeRequest);
+    };
+    return handleSubmit(makeRequest);
   };
 
-  const handleLogin = ({ email, password }) => {
-    if (!email || !password)
+  const handleLogin = (formValues, setErrorMessage) => {
+    const { email, password } = formValues;
+
+    if (!email || !password) {
+      setErrorMessage((prev) => ({
+        ...prev,
+        general: "Please fill out all fields",
+      }));
       return Promise.reject(new Error("Missing credentials"));
+    }
 
     const makeRequest = () => {
-      return auth.login(email, password).then((data) => {
-        if (data.token) {
-          token.setToken(data.token);
-          const redirectPath = location.state?.from?.pathname || "/";
-          navigate(redirectPath);
-          setCurrentUser(data);
-          setIsLoggedIn(true);
-          closeActiveModal();
-        }
-      });
-    };
+      return auth
+        .login(email, password)
+        .then((data) => {
+          if (data.token) {
+            token.setToken(data.token);
 
-    handleSubmit(makeRequest);
+            setCurrentUser({
+              _id: data._id || "",
+              name: data.name || "",
+              email: data.email || "",
+              createdAt: data.createdAt || "",
+              savedActivities: data.savedActivities || [],
+              completedActivities: data.completedActivities || [],
+            });
+
+            setIsLoggedIn(true);
+            setErrorMessage({});
+            closeActiveModal();
+
+            const redirectPath = location.state?.from?.pathname || "/";
+            navigate(redirectPath);
+          }
+        })
+        .catch((error) => {
+          setErrorMessage((prev) => ({
+            ...prev,
+            general: "Incorrect email or password",
+          }));
+          throw error;
+        });
+    };
+    return handleSubmit(makeRequest);
   };
 
   const handleLogout = () => {
@@ -269,7 +320,9 @@ export default function App() {
       _id: "",
       name: "",
       email: "",
-      createdAt: "",
+      createdAt: currentUser.createdAt,
+      savedActivities: currentUser.savedActivities,
+      completedActivities: currentUser.completedActivities,
     });
     token.removeToken();
     navigate("/");
@@ -296,7 +349,7 @@ export default function App() {
       };
 
       return activitiesApi
-        .addActivity(newActivity)
+        .createActivity(newActivity)
         .then((savedActivity) => {
           setActivities((prev) => [savedActivity, ...prev]);
           console.log("Activity added successfully:", savedActivity);

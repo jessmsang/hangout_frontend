@@ -3,6 +3,12 @@ import FilterContext from "../../contexts/FilterContext";
 import ActivitiesContext from "../../contexts/ActivitiesContext";
 import WeatherContext from "../../contexts/WeatherContext";
 import UserContext from "../../contexts/UserContext";
+import {
+  addCardSave,
+  removeCardSave,
+  addCardComplete,
+  removeCardComplete,
+} from "../../api/activitiesApi";
 
 export default function FilterContextProvider({ children }) {
   const { activities } = useContext(ActivitiesContext);
@@ -164,10 +170,45 @@ export default function FilterContextProvider({ children }) {
     return Promise.resolve(updatedUser);
   };
 
-  const handleCardSave = ({ _id }) =>
-    toggleUserActivity("savedActivities", _id);
-  const handleCardComplete = ({ _id }) =>
-    toggleUserActivity("completedActivities", _id);
+  // const handleCardSave = ({ _id }) =>
+  //   toggleUserActivity("savedActivities", _id);
+
+  // const handleCardComplete = ({ _id }) =>
+  //   toggleUserActivity("completedActivities", _id);
+
+  const handleCardSave = ({ _id }) => {
+    if (!currentUser) return;
+
+    const action = currentUser.savedActivities.includes(_id)
+      ? removeCardSave({ activityId: _id })
+      : addCardSave({ activityId: _id });
+
+    return action
+      .then((updatedUser) => {
+        setCurrentUser(updatedUser);
+        return updatedUser;
+      })
+      .catch((err) => {
+        console.error("Error toggling saved activity:", err);
+      });
+  };
+
+  const handleCardComplete = ({ _id }) => {
+    if (!currentUser) return;
+
+    const action = currentUser.completedActivities.includes(_id)
+      ? removeCardComplete({ activityId: _id })
+      : addCardComplete({ activityId: _id });
+
+    return action
+      .then((updatedUser) => {
+        setCurrentUser(updatedUser);
+        return updatedUser;
+      })
+      .catch((err) => {
+        console.error("Error toggling completed activity:", err);
+      });
+  };
 
   return (
     <FilterContext.Provider
