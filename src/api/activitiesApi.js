@@ -11,7 +11,6 @@ export function getActivities() {
 
 //Private
 export const createActivity = (activity) => {
-  console.log(activity);
   return fetch(`${BASE_URL}/activities`, {
     method: "POST",
     headers: {

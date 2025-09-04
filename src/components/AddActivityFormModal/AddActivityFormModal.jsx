@@ -87,7 +87,6 @@ export default function AddActivityFormModal({
     setIsLoading(true);
     setFormError("");
 
-    console.log("Submitting new activity:", newActivity);
     handleAddActivity(newActivity)
       .then(() => {
         handleFormReset();
