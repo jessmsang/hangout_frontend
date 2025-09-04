@@ -32,9 +32,10 @@
 }
 
 .add-activity-form__error {
-  color: red;
-  font-size: 0.9rem;
-  margin-top: 8px;
+  color: #3c2d01;
+  font-size: 0.7rem;
+  text-align: center;
+  margin: 0.8rem 0 0;
 }
 
 @media screen and (max-width: 600px) {

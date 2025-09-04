@@ -1,8 +1,19 @@
+// TODO: DELETE IF CHECKRESPONSE() BELOW DOESN'T WORK
+// export const checkResponse = (res) => {
+//   if (res.ok) {
+//     return res.json();
+//   }
+//   return Promise.reject(`Error: ${res.status}`);
+// };
+
 export const checkResponse = (res) => {
   if (res.ok) {
     return res.json();
   }
-  return Promise.reject(`Error: ${res.status}`);
+  return res.json().then((err) => {
+    console.error("Celebrate validation error:", err);
+    return Promise.reject(new Error(`${res.status}: ${JSON.stringify(err)}`));
+  });
 };
 
 export const getWeather = ({ latitude, longitude }, weatherAPIkey) => {

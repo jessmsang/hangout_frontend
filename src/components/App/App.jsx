@@ -232,7 +232,6 @@ export default function App() {
       return auth
         .register(email, password, name)
         .then((data) => {
-          console.log("Registration successful:", data);
           token.setToken(data.token);
           setIsLoggedIn(true);
           setCurrentUser({
@@ -332,17 +331,15 @@ export default function App() {
     const makeRequest = () =>
       usersApi.updateUser(updatedValues).then((updatedUser) => {
         setCurrentUser(updatedUser);
-        console.log("Profile updated successfully.", updatedUser);
         return updatedUser;
       });
 
-    handleSubmit(makeRequest);
+    return handleSubmit(makeRequest);
   };
 
   const handleAddActivity = (activityData) => {
     const makeRequest = () => {
       const newActivity = {
-        owner: currentUser._id,
         ...activityData,
         isSaved: false,
         isCompleted: false,
@@ -352,7 +349,6 @@ export default function App() {
         .createActivity(newActivity)
         .then((savedActivity) => {
           setActivities((prev) => [savedActivity, ...prev]);
-          console.log("Activity added successfully:", savedActivity);
           return savedActivity;
         })
         .catch((error) => {
@@ -361,17 +357,14 @@ export default function App() {
           throw error;
         });
     };
-
-    handleSubmit(makeRequest);
+    return handleSubmit(makeRequest);
   };
 
   const handleUpdatePassword = ({ oldPassword, newPassword }) => {
     const makeRequest = () => {
       return usersApi
         .updatePassword({ oldPassword, newPassword })
-        .then(() => {
-          console.log("Password updated successfully.");
-        })
+        .then(() => {})
         .catch((error) => {
           if (error.message === "No authentication token found") {
           } else {
@@ -381,7 +374,7 @@ export default function App() {
         });
     };
 
-    handleSubmit(makeRequest);
+    return handleSubmit(makeRequest);
   };
 
   const handleDeleteAccount = () => {
@@ -396,10 +389,9 @@ export default function App() {
         setIsLoggedIn(false);
         token.removeToken();
         navigate("/");
-        console.log("Account deleted successfully.");
       });
 
-    handleSubmit(makeRequest);
+    return handleSubmit(makeRequest);
   };
 
   const handleDeleteActivity = (activity) => {
@@ -408,7 +400,6 @@ export default function App() {
         .deleteActivity(activity._id)
         .then(() => {
           setActivities((prev) => prev.filter((a) => a._id !== activity._id));
-          console.log(`Activity ${activity._id} deleted successfully.`);
         })
         .catch((error) => {
           console.error("Delete activity error:", error);
@@ -417,7 +408,7 @@ export default function App() {
         });
     };
 
-    handleSubmit(makeRequest);
+    return handleSubmit(makeRequest);
   };
 
   return (

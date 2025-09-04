@@ -80,11 +80,14 @@ export default function AddActivityFormModal({
       category,
       groupSize,
       cost,
+      isSaved: false,
+      isCompleted: false,
     };
 
     setIsLoading(true);
     setFormError("");
 
+    console.log("Submitting new activity:", newActivity);
     handleAddActivity(newActivity)
       .then(() => {
         handleFormReset();

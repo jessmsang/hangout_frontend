@@ -46,10 +46,20 @@ export default function FilterContextProvider({ children }) {
 
     const currentSeason = weatherData?.season;
     if (currentSeason) {
-      filtered = filtered.filter((activity) =>
-        activity.seasons.includes(currentSeason)
-      );
+      filtered = filtered.filter((activity) => {
+        if (!Array.isArray(activity.seasons)) {
+          console.warn("Activity missing seasons array:", activity);
+          return false;
+        }
+        return activity.seasons.includes(currentSeason);
+      });
     }
+
+    //   {
+    //   filtered = filtered.filter((activity) =>
+    //     activity.seasons.includes(currentSeason)
+    //   );
+    // }
 
     const isOutdoor = weatherData?.isOutdoor;
     if (typeof isOutdoor === "boolean") {
@@ -134,18 +144,35 @@ export default function FilterContextProvider({ children }) {
 
   // --- User-specific activities ---
   const savedActivities = useMemo(() => {
-    if (!currentUser) return [];
-    return activities.filter((activity) =>
-      currentUser.savedActivities?.includes(activity._id)
+    if (!currentUser || !Array.isArray(currentUser.savedActivities)) return [];
+    return activities.filter(
+      (activity) =>
+        activity._id && currentUser.savedActivities.includes(activity._id)
     );
   }, [activities, currentUser]);
 
   const completedActivities = useMemo(() => {
-    if (!currentUser) return [];
-    return activities.filter((activity) =>
-      currentUser.completedActivities?.includes(activity._id)
+    if (!currentUser || !Array.isArray(currentUser.completedActivities))
+      return [];
+    return activities.filter(
+      (activity) =>
+        activity._id && currentUser.completedActivities.includes(activity._id)
     );
   }, [activities, currentUser]);
+
+  // const savedActivities = useMemo(() => {
+  //   if (!currentUser) return [];
+  //   return activities.filter((activity) =>
+  //     currentUser.savedActivities?.includes(activity._id)
+  //   );
+  // }, [activities, currentUser]);
+
+  // const completedActivities = useMemo(() => {
+  //   if (!currentUser) return [];
+  //   return activities.filter((activity) =>
+  //     currentUser.completedActivities?.includes(activity._id)
+  //   );
+  // }, [activities, currentUser]);
 
   // --- Filtered activities by section ---
   const filteredActivities = useMemo(
@@ -169,12 +196,6 @@ export default function FilterContextProvider({ children }) {
     setCurrentUser(updatedUser);
     return Promise.resolve(updatedUser);
   };
-
-  // const handleCardSave = ({ _id }) =>
-  //   toggleUserActivity("savedActivities", _id);
-
-  // const handleCardComplete = ({ _id }) =>
-  //   toggleUserActivity("completedActivities", _id);
 
   const handleCardSave = ({ _id }) => {
     if (!currentUser) return;
