@@ -32,7 +32,7 @@ export const deleteActivity = (activityId) => {
 };
 
 export function addCardSave({ activityId }) {
-  return fetch(`${BASE_URL}/activities/${activityId}/save`, {
+  return fetch(`${BASE_URL}/activities/${activityId}/saved`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -42,7 +42,7 @@ export function addCardSave({ activityId }) {
 }
 
 export function removeCardSave({ activityId }) {
-  return fetch(`${BASE_URL}/activities/${activityId}/save`, {
+  return fetch(`${BASE_URL}/activities/${activityId}/saved`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -52,7 +52,7 @@ export function removeCardSave({ activityId }) {
 }
 
 export function addCardComplete({ activityId }) {
-  return fetch(`${BASE_URL}/activities/${activityId}/complete`, {
+  return fetch(`${BASE_URL}/activities/${activityId}/completed`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -62,7 +62,7 @@ export function addCardComplete({ activityId }) {
 }
 
 export function removeCardComplete({ activityId }) {
-  return fetch(`${BASE_URL}/activities/${activityId}/complete`, {
+  return fetch(`${BASE_URL}/activities/${activityId}/completed`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

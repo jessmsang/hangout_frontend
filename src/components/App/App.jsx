@@ -90,11 +90,14 @@ export default function App() {
       return;
     }
 
-    token
-      .tokenValidation(tokenValue)
-      .then(() => usersApi.getCurrentUser())
+    usersApi
+      .getCurrentUser()
       .then((user) => {
-        setCurrentUser(user);
+        setCurrentUser({
+          ...user,
+          savedActivities: user.savedActivities || [],
+          completedActivities: user.completedActivities || [],
+        });
         setIsLoggedIn(true);
       })
       .catch((err) => {
@@ -115,6 +118,8 @@ export default function App() {
 
   // --- FETCH ACTIVITIES ---
   useEffect(() => {
+    if (!currentUser._id) return;
+
     setIsLoading(true);
     activitiesApi
       .getActivities()
@@ -122,16 +127,20 @@ export default function App() {
         setActivities(
           data.map((activity) => ({
             ...activity,
-            isSaved: activity.isSaved ?? false,
-            isCompleted: activity.isCompleted ?? false,
+            isSaved:
+              currentUser.savedActivities?.some(
+                (saved) => saved._id === activity._id
+              ) ?? false,
+            isCompleted:
+              currentUser.completedActivities?.some(
+                (completed) => completed._id === activity._id
+              ) ?? false,
           }))
         );
       })
       .catch(console.error)
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
+      .finally(() => setIsLoading(false));
+  }, [currentUser]);
 
   // --- FETCH WEATHER ---
   useEffect(() => {
@@ -162,24 +171,6 @@ export default function App() {
 
   const openModal = (modalName) => setActiveModal(modalName);
   const closeActiveModal = useCallback(() => setActiveModal(""), []);
-
-  // const openRegisterModal = () => {
-  //   setActiveModal("register-modal");
-  // };
-  // const openLoginModal = () => {
-  //   setActiveModal("login-modal");
-  // };
-
-  // const openAddActivityModal = () => {
-  //   setActiveModal("add-activity");
-  // };
-
-  // const openLogoutConfirmationModal = () =>
-  //   setActiveModal("logout-confirmation");
-
-  // const openEditProfileModal = () => setActiveModal("edit-profile");
-
-  // const openChangePasswordModal = () => setActiveModal("change-password");
 
   const openDeleteConfirmationModal = (variant, card = null) =>
     setDeleteConfig({ isOpen: true, variant, card });
@@ -330,7 +321,12 @@ export default function App() {
   const handleUpdateProfile = (updatedValues) => {
     const makeRequest = () =>
       usersApi.updateUser(updatedValues).then((updatedUser) => {
-        setCurrentUser(updatedUser);
+        setCurrentUser({
+          ...updatedUser,
+          savedActivities: updatedUser.savedActivities || [],
+          completedActivities: updatedUser.completedActivities || [],
+        });
+
         return updatedUser;
       });
 

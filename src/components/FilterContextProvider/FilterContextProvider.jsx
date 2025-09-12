@@ -160,20 +160,6 @@ export default function FilterContextProvider({ children }) {
     );
   }, [activities, currentUser]);
 
-  // const savedActivities = useMemo(() => {
-  //   if (!currentUser) return [];
-  //   return activities.filter((activity) =>
-  //     currentUser.savedActivities?.includes(activity._id)
-  //   );
-  // }, [activities, currentUser]);
-
-  // const completedActivities = useMemo(() => {
-  //   if (!currentUser) return [];
-  //   return activities.filter((activity) =>
-  //     currentUser.completedActivities?.includes(activity._id)
-  //   );
-  // }, [activities, currentUser]);
-
   // --- Filtered activities by section ---
   const filteredActivities = useMemo(
     () => ({
@@ -205,9 +191,12 @@ export default function FilterContextProvider({ children }) {
       : addCardSave({ activityId: _id });
 
     return action
-      .then((updatedUser) => {
-        setCurrentUser(updatedUser);
-        return updatedUser;
+      .then(({ savedActivities }) => {
+        setCurrentUser((prev) => ({
+          ...prev,
+          savedActivities,
+        }));
+        return savedActivities;
       })
       .catch((err) => {
         console.error("Error toggling saved activity:", err);
@@ -222,9 +211,12 @@ export default function FilterContextProvider({ children }) {
       : addCardComplete({ activityId: _id });
 
     return action
-      .then((updatedUser) => {
-        setCurrentUser(updatedUser);
-        return updatedUser;
+      .then(({ completedActivities }) => {
+        setCurrentUser((prev) => ({
+          ...prev,
+          completedActivities,
+        }));
+        return completedActivities;
       })
       .catch((err) => {
         console.error("Error toggling completed activity:", err);
