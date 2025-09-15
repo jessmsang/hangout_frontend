@@ -164,7 +164,7 @@ export default function FilterContextProvider({ children }) {
     [activities, savedActivities, completedActivities, filters]
   );
 
-  // --- Utility to toggle array items ---
+  // --- Saving and Completing Activities ---
 
   const handleCardSave = ({ _id }) => {
     if (!currentUser) return;
