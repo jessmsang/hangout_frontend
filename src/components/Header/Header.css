@@ -90,6 +90,17 @@
   margin: 0;
 }
 
+@media screen and (max-width: 710px) {
+  .header__unauthorized-view {
+    gap: 0.5rem;
+    padding: 0.7rem;
+  }
+
+  .header__unauthorized-btn {
+    font-size: 0.8rem;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .header {
     flex-direction: column;

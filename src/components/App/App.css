@@ -1,5 +1,5 @@
 .page {
-  max-width: 100%;
+  width: 100%;
   min-height: 100vh;
   font-family: "Raleway", Arial, Helvetica, sans-serif;
   font-weight: 400;
@@ -14,4 +14,8 @@
   object-position: bottom;
   background-size: auto 100%;
   color: #f3f4f0;
+}
+
+* {
+  outline: 1px solid red;
 }

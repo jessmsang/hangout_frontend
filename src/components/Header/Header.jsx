@@ -23,9 +23,9 @@ export default function Header({ openModal, isMobile }) {
           {isLoggedIn && isMobile && (
             <div className="header__mobile-dropdown-location">
               <AccountDropdown
-                onEditProfileClick={openModal("edit-profile")}
-                onChangePasswordClick={openModal("change-password")}
-                onLogoutClick={openModal("logout-confirmation")}
+                onEditProfileClick={() => openModal("edit-profile")}
+                onChangePasswordClick={() => openModal("change-password")}
+                onLogoutClick={() => openModal("logout-confirmation")}
               />
             </div>
           )}
@@ -60,6 +60,7 @@ export default function Header({ openModal, isMobile }) {
         </div>
         <hr className="header__divider" />
       </div>
+
       {!isLoggedIn && !isMobile && (
         <ul className="header__unauthorized-view">
           <li className="header__unauthorized-item">
@@ -80,6 +81,7 @@ export default function Header({ openModal, isMobile }) {
           </li>
         </ul>
       )}
+
       {isLoggedIn && !isMobile && (
         <div className="header__authorized-view">
           <AccountDropdown

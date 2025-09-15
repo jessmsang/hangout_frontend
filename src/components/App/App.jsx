@@ -93,7 +93,6 @@ export default function App() {
     usersApi
       .getCurrentUser()
       .then((user) => {
-        console.log("Fetched user:", user);
         setCurrentUser({
           ...user,
           savedActivities: user.savedActivities || [],
@@ -125,15 +124,6 @@ export default function App() {
     activitiesApi
       .getActivities()
       .then((data) => {
-        console.log("Fetched activities:", data);
-        console.log(
-          "Current user's savedActivities:",
-          currentUser.savedActivities
-        );
-        console.log(
-          "Current user's completedActivities:",
-          currentUser.completedActivities
-        );
         setActivities(
           data.map((activity) => ({
             ...activity,
