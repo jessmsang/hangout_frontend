@@ -11,6 +11,7 @@ import {
 } from "../../api/activitiesApi";
 
 export default function FilterContextProvider({ children }) {
+  // Use activities from ActivitiesContext, which already have isSaved and isCompleted flags set in App.jsx
   const { activities } = useContext(ActivitiesContext);
   const { weatherData } = useContext(WeatherContext);
   const { currentUser, setCurrentUser } = useContext(UserContext);
@@ -30,6 +31,7 @@ export default function FilterContextProvider({ children }) {
   const [filters, setFilters] = useState({
     search: createFilterState(),
     saved: createFilterState(),
+    completed: createFilterState(),
   });
 
   // --- Update filters for a specific section ---
@@ -143,60 +145,48 @@ export default function FilterContextProvider({ children }) {
   };
 
   // --- User-specific activities ---
+  // Use activities directly for filtering
   const savedActivities = useMemo(() => {
-    if (!currentUser || !Array.isArray(currentUser.savedActivities)) return [];
-    return activities.filter(
-      (activity) =>
-        activity._id && currentUser.savedActivities.includes(activity._id)
-    );
-  }, [activities, currentUser]);
+    return activities.filter((activity) => activity.isSaved);
+  }, [activities]);
 
   const completedActivities = useMemo(() => {
-    if (!currentUser || !Array.isArray(currentUser.completedActivities))
-      return [];
-    return activities.filter(
-      (activity) =>
-        activity._id && currentUser.completedActivities.includes(activity._id)
-    );
-  }, [activities, currentUser]);
+    return activities.filter((activity) => activity.isCompleted);
+  }, [activities]);
 
   // --- Filtered activities by section ---
   const filteredActivities = useMemo(
     () => ({
       search: filterActivities(activities, filters.search),
       saved: filterActivities(savedActivities, filters.saved),
+      completed: filterActivities(completedActivities, filters.completed),
     }),
-    [activities, savedActivities, filters]
+    [activities, savedActivities, completedActivities, filters]
   );
 
   // --- Utility to toggle array items ---
-  const toggleArrayItem = (arr = [], item) =>
-    arr.includes(item) ? arr.filter((i) => i !== item) : [...arr, item];
-
-  const toggleUserActivity = (prop, _id) => {
-    if (!currentUser) return Promise.resolve(null);
-    const updatedUser = {
-      ...currentUser,
-      [prop]: toggleArrayItem(currentUser[prop], _id),
-    };
-    setCurrentUser(updatedUser);
-    return Promise.resolve(updatedUser);
-  };
 
   const handleCardSave = ({ _id }) => {
     if (!currentUser) return;
 
-    const action = currentUser.savedActivities.includes(_id)
+    const savedIds = Array.isArray(currentUser.savedActivities)
+      ? currentUser.savedActivities.map((a) => a._id)
+      : [];
+
+    const toggleSavedActivity = savedIds.includes(_id)
       ? removeCardSave({ activityId: _id })
       : addCardSave({ activityId: _id });
 
-    return action
+    return toggleSavedActivity
       .then(({ savedActivities }) => {
+        const normalized = savedActivities.map((a) =>
+          typeof a === "string" ? { _id: a } : a
+        );
         setCurrentUser((prev) => ({
           ...prev,
-          savedActivities,
+          savedActivities: normalized,
         }));
-        return savedActivities;
+        return normalized;
       })
       .catch((err) => {
         console.error("Error toggling saved activity:", err);
@@ -206,17 +196,24 @@ export default function FilterContextProvider({ children }) {
   const handleCardComplete = ({ _id }) => {
     if (!currentUser) return;
 
-    const action = currentUser.completedActivities.includes(_id)
+    const completedIds = Array.isArray(currentUser.completedActivities)
+      ? currentUser.completedActivities.map((a) => a._id)
+      : [];
+
+    const toggleCompletedActivity = completedIds.includes(_id)
       ? removeCardComplete({ activityId: _id })
       : addCardComplete({ activityId: _id });
 
-    return action
+    return toggleCompletedActivity
       .then(({ completedActivities }) => {
+        const normalized = completedActivities.map((a) =>
+          typeof a === "string" ? { _id: a } : a
+        );
         setCurrentUser((prev) => ({
           ...prev,
-          completedActivities,
+          completedActivities: normalized,
         }));
-        return completedActivities;
+        return normalized;
       })
       .catch((err) => {
         console.error("Error toggling completed activity:", err);

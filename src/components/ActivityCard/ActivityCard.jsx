@@ -19,8 +19,8 @@ export default function ActivityCard({ activity }) {
   const { isLoggedIn, currentUser } = useContext(UserContext);
   const { openDeleteConfirmationModal } = useContext(DeleteContext);
 
-  const isSaved = currentUser?.savedActivities?.includes(activity._id);
-  const isCompleted = currentUser?.completedActivities?.includes(activity._id);
+  const isSaved = activity.isSaved;
+  const isCompleted = activity.isCompleted;
   const isOwner = currentUser ? activity.owner === currentUser._id : false;
 
   const toggleIsSaved = () => {
