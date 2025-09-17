@@ -93,6 +93,7 @@ export default function App() {
     usersApi
       .getCurrentUser()
       .then((user) => {
+        console.log("Fetched user:", user);
         setCurrentUser({
           ...user,
           savedActivities: user.savedActivities || [],
@@ -118,12 +119,19 @@ export default function App() {
 
   // --- FETCH ACTIVITIES ---
   useEffect(() => {
-    if (!currentUser._id) return;
-
     setIsLoading(true);
     activitiesApi
       .getActivities()
       .then((data) => {
+        console.log("Fetched activities:", data);
+        console.log(
+          "Current user's savedActivities:",
+          currentUser.savedActivities
+        );
+        console.log(
+          "Current user's completedActivities:",
+          currentUser.completedActivities
+        );
         setActivities(
           data.map((activity) => ({
             ...activity,
@@ -244,7 +252,7 @@ export default function App() {
           if (error.status === 409) {
             setErrorMessage((prev) => ({
               ...prev,
-              email: "This email is already registered.",
+              email: error.message,
             }));
           } else {
             setErrorMessage((prev) => ({

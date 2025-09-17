@@ -6,14 +6,15 @@
 //   return Promise.reject(`Error: ${res.status}`);
 // };
 
-export const checkResponse = (res) => {
+export const checkResponse = async (res) => {
   if (res.ok) {
     return res.json();
   }
-  return res.json().then((err) => {
-    console.error("Celebrate validation error:", err);
-    return Promise.reject(new Error(`${res.status}: ${JSON.stringify(err)}`));
-  });
+
+  const errorData = await res.json().catch(() => ({}));
+  const error = new Error(errorData.message || "Something went wrong");
+  error.status = res.status;
+  throw error;
 };
 
 export const getWeather = ({ latitude, longitude }, weatherAPIkey) => {
