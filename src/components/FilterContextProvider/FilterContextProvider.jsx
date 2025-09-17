@@ -146,15 +146,6 @@ export default function FilterContextProvider({ children }) {
 
   // --- User-specific activities ---
 
-  // const savedActivities = useMemo(() => {
-  //   console.log("FilterContext savedActivities recalculated", activities);
-  //   return activities.filter((activity) => activity.isSaved);
-  // }, [activities]);
-
-  // const completedActivities = useMemo(() => {
-  //   return activities.filter((activity) => activity.isCompleted);
-  // }, [activities]);
-
   const savedActivities = useMemo(() => {
     const savedList = Array.isArray(currentUser?.savedActivities)
       ? currentUser.savedActivities
