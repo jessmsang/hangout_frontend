@@ -145,14 +145,38 @@ export default function FilterContextProvider({ children }) {
   };
 
   // --- User-specific activities ---
-  // Use activities directly for filtering
+
+  // const savedActivities = useMemo(() => {
+  //   console.log("FilterContext savedActivities recalculated", activities);
+  //   return activities.filter((activity) => activity.isSaved);
+  // }, [activities]);
+
+  // const completedActivities = useMemo(() => {
+  //   return activities.filter((activity) => activity.isCompleted);
+  // }, [activities]);
+
   const savedActivities = useMemo(() => {
-    return activities.filter((activity) => activity.isSaved);
-  }, [activities]);
+    const savedList = Array.isArray(currentUser?.savedActivities)
+      ? currentUser.savedActivities
+      : [];
+    return activities.filter((activity) =>
+      savedList.some(
+        (saved) => saved._id === activity._id || saved === activity._id
+      )
+    );
+  }, [activities, currentUser?.savedActivities]);
 
   const completedActivities = useMemo(() => {
-    return activities.filter((activity) => activity.isCompleted);
-  }, [activities]);
+    const completedList = Array.isArray(currentUser?.completedActivities)
+      ? currentUser.completedActivities
+      : [];
+    return activities.filter((activity) =>
+      completedList.some(
+        (completed) =>
+          completed._id === activity._id || completed === activity._id
+      )
+    );
+  }, [activities, currentUser?.completedActivities]);
 
   // --- Filtered activities by section ---
   const filteredActivities = useMemo(

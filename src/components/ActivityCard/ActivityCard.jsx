@@ -19,8 +19,13 @@ export default function ActivityCard({ activity }) {
   const { isLoggedIn, currentUser } = useContext(UserContext);
   const { openDeleteConfirmationModal } = useContext(DeleteContext);
 
-  const isSaved = activity.isSaved;
-  const isCompleted = activity.isCompleted;
+  const isSaved = currentUser?.savedActivities?.some(
+    (a) => a._id === activity._id || a === activity._id
+  );
+
+  const isCompleted = currentUser?.completedActivities?.some(
+    (a) => a._id === activity._id || a === activity._id
+  );
   const isOwner = currentUser ? activity.owner === currentUser._id : false;
 
   const toggleIsSaved = () => {
@@ -172,7 +177,7 @@ export default function ActivityCard({ activity }) {
               {seasonsAlphabetical.map((season) => {
                 const Icon = seasonsIcons[season] || seasonsIcons.default;
                 const label =
-                  activitySeasonsLabels[seasons] + "icon" || "Unknown";
+                  activitySeasonsLabels[season] + "icon" || "Unknown";
                 return (
                   <div key={season} className="card__season-item">
                     {Icon && (

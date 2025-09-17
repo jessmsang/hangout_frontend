@@ -241,6 +241,7 @@ export default function App() {
             savedActivities: data.savedActivities || [],
             completedActivities: data.completedActivities || [],
           });
+
           setErrorMessage({});
 
           const redirectPath = location.state?.from?.pathname || "/";
