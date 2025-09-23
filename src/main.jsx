@@ -6,7 +6,7 @@ import App from "./components/App/App";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter basename="/hangout_frontend/">
+    <BrowserRouter basename="/">
       <App />
     </BrowserRouter>
   </StrictMode>
