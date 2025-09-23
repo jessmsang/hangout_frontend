@@ -2,7 +2,7 @@
   "name": "hangout",
   "version": "1.0.0",
   "description": "Struggling to pick an activity to do? Hangout can help! This application offers filtered activity options for you to enjoy with friends, family, significant others, or even solo!",
-  "homepage": "https://jessmsang.github.io/hangout_frontend",
+  "homepage": "https://hangout.devbyjess.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jessmsang/hangout_frontend.git"
