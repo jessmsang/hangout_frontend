@@ -1,3 +1,22 @@
+.location-selector__geolocation-btn {
+  width: 100%;
+  border: none;
+  border-radius: 0.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 0.55rem;
+  padding: 0.15rem 0;
+  margin: 0;
+}
+
+.location-selector__geolocation-btn:hover:not(:disabled) {
+  background-color: white;
+}
+
+.location-selector__geolocation-btn:disabled {
+  cursor: not-allowed;
+}
+
 .location-selector__form {
   display: flex;
   flex-direction: column;
@@ -11,12 +30,16 @@
 .location-selector__input {
   margin-left: 0.15rem;
   width: 5rem;
+  border: none;
+  border-radius: 0.1rem;
 }
 
 .location-selector__submit-btn {
   font-size: 0.55rem;
   padding: 0.15rem 0;
   margin: 0;
+  border: none;
+  border-radius: 0.1rem;
 }
 
 .location-selector__submit-btn:hover {
@@ -35,6 +58,11 @@
 }
 
 @media screen and (max-width: 380px) {
+  .location-selector__geolocation-btn {
+    width: 5.4rem;
+    font-size: 0.5rem;
+  }
+
   .location-selector__label {
     display: flex;
     flex-direction: column;

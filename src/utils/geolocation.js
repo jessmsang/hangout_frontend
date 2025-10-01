@@ -6,9 +6,9 @@ export const getCurrentPosition = () => {
     }
 
     const options = {
-      enableHighAccuracy: false, // Faster, less battery drain
-      timeout: 10000, // 10 second timeout
-      maximumAge: 300000, // Accept cached position up to 5 minutes old
+      enableHighAccuracy: false,
+      timeout: 10000,
+      maximumAge: 300000,
     };
 
     navigator.geolocation.getCurrentPosition(
