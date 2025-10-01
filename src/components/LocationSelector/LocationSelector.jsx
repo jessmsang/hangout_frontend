@@ -47,7 +47,7 @@ export default function LocationSelector() {
       const filteredData = filterWeatherData(weather);
       setWeatherData(filteredData);
     } catch (err) {
-      setError(err.message || "Unable to get your location");
+      setError("Unable to get your location");
     } finally {
       setIsLoading(false);
     }
