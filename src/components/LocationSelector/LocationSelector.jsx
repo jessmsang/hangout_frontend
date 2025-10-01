@@ -61,7 +61,7 @@ export default function LocationSelector() {
         disabled={isLoading}
         className="location-selector__geolocation-btn"
       >
-        📍 Use My Location
+        Use My Location
       </button>
       <form className="location-selector__form" onSubmit={handleSubmit}>
         <label className="location-selector__label">
