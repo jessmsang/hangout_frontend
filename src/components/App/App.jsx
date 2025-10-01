@@ -30,6 +30,7 @@ import LoadingContext from "../../contexts/LoadingContext";
 import DeleteContext from "../../contexts/DeleteContext";
 
 import { getWeather, filterWeatherData } from "../../api/weatherApi";
+import { getCurrentPosition } from "../../utils/geolocation";
 import { fetchCoordinatesByCity } from "../../utils/location";
 import { weatherAPIkey } from "../../constants/apiEndpoints";
 
@@ -141,15 +142,42 @@ export default function App() {
   }, [currentUser]);
 
   // --- FETCH WEATHER ---
+  // useEffect(() => {
+  //   setIsLoading(true);
+  //   fetchCoordinatesByCity("Cincinnati", weatherAPIkey)
+  //     .then((coordinates) => getWeather(coordinates, weatherAPIkey))
+  //     .then((data) => {
+  //       const filteredData = filterWeatherData(data);
+  //       setWeatherData(filteredData);
+  //     })
+  //     .catch(console.error)
+  //     .finally(() => {
+  //       setIsLoading(false);
+  //     });
+  // }, []);
+
   useEffect(() => {
     setIsLoading(true);
-    fetchCoordinatesByCity("Cincinnati", weatherAPIkey)
+
+    getCurrentPosition()
       .then((coordinates) => getWeather(coordinates, weatherAPIkey))
       .then((data) => {
         const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
       })
-      .catch(console.error)
+      .catch((geoError) => {
+        // Geolocation failed, fall back to Cincinnati
+        console.log("Using default location:", geoError.message);
+        return fetchCoordinatesByCity("Cincinnati", weatherAPIkey)
+          .then((coordinates) => getWeather(coordinates, weatherAPIkey))
+          .then((data) => {
+            const filteredData = filterWeatherData(data);
+            setWeatherData(filteredData);
+          });
+      })
+      .catch((weatherError) => {
+        console.error("Failed to fetch weather:", weatherError);
+      })
       .finally(() => {
         setIsLoading(false);
       });
