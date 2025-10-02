@@ -7,19 +7,14 @@ function Footer({ isMobile }) {
     <footer className="footer">
       {!isMobile && (
         <div className="footer__desktop-view">
-          <div className="footer__left"></div>
-          <div className="footer__middle">
-            <p className="footer__author">Developed by Jess Sang</p>
-          </div>
-          <div className="footer__right">
-            <p className="footer__year">{currentYear}</p>
-          </div>
+          <p className="footer__author">Developed by Jess Sang</p>
+          <p className="footer__year">&nbsp; &copy; {currentYear}</p>
         </div>
       )}
       {isMobile && (
         <div className="footer__mobile-view">
           <p className="footer__author">Developed by Jess Sang</p>
-          <p className="footer__year">{currentYear}</p>
+          <p className="footer__year">&nbsp; &copy; {currentYear}</p>
         </div>
       )}
     </footer>
